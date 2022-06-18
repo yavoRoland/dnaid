@@ -57,7 +57,7 @@
 
 		public function liste($page, $quantite){
 			try{
-				$total=$this->_bdd->query('SELECT COUNT(*) FROM service');
+				$total=$this->_bdd->query('SELECT COUNT(*) AS S_TOTAL FROM service');
 
 				$req=$this->_bdd->prepare('SELECT * FROM service ORDER BY nomservice ASC LIMIT :page,:quantite');
 				$req->bindValue(':page',($page*$quantite), PDO::PARAM_INT);
@@ -72,7 +72,7 @@
 
 		public function listeGroupe($service, $page, $quantite){
 			try{
-				$total=$this->_bdd->prepare('SELECT COUNT(*) FROM groupe WHERE idservicegroupe=?');
+				$total=$this->_bdd->prepare('SELECT COUNT(*) AS S_TOTAL FROM groupe WHERE idservicegroupe=?');
 				$total->execute(array($service));
 
 

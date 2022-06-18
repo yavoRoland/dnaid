@@ -43,6 +43,14 @@
 			return $appartenir->modifier($juste,$groupe,$role,$statut,$dateDebut,$dateFin,$description,$id);
 		}
 
+		public function rechercherAppartenir($id){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$appartenir=new Appartenir($this->_bdd);
+			return $appartenir->rechercher($id);
+		}
+
 		public function supprimerAppartenir($id){
 			if(!$this->_bdd){
 				throw new Exception('Echec de connexion à la base de données');
@@ -55,23 +63,25 @@
 
 
 
+
+
 		/**************************************************************************/
 		/**************************************************************************/
 		//GESTION ASSEMBLEE
-		public function ajouterAssemblee($matricule, $nom, $pays, $region, $departement, $ville, $commune, $quartier, $fullText){
+		public function ajouterAssemblee($matricule, $nom, $pays, $region, $departement, $ville, $commune, $quartier, $description, $fullText){
 			if(!$this->_bdd){
 				throw new Exception('Echec de connexion à la base de données');
 			}
 			$assemblee=new Assemblee($this->_bdd);
-			return $assemblee->ajouter($matricule, $nom, $pays, $region, $departement, $ville, $commune, $quartier, $fullText);
+			return $assemblee->ajouter($matricule, $nom, $pays, $region, $departement, $ville, $commune, $quartier, $description, $fullText);
 		}
 
-		public function modifierAssemblee($nom, $pays, $region, $departement, $ville, $commune, $quartier, $id){
+		public function modifierAssemblee($nom, $pays, $region, $departement, $ville, $commune, $quartier, $description, $fullText, $id){
 			if(!$this->_bdd){
 				throw new Exception('Echec de connexion à la base de données');
 			}
 			$assemblee=new Assemblee($this->_bdd);
-			return $assemblee->modifer($nom, $pays, $region, $departement, $ville, $commune, $quartier, $id);
+			return $assemblee->modifer($nom, $pays, $region, $departement, $ville, $commune, $quartier, $description, $fullText, $id);
 		}
 
 		public function rechercherAssemblee($id){
@@ -88,6 +98,14 @@
 			}
 			$assemblee=new Assemblee($this->_bdd);
 			return $assemblee->rechercherParMatricule($matricule);
+		}
+
+		public function rechercherAssembleeParFullText($text, $page, $quantite){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$assemblee=new Assemblee($this->_bdd);
+			return $assemblee->rechercherParFullText($text, $page, $quantite);
 		}
 
 		public function supprimerAssemblee($id){
@@ -112,6 +130,13 @@
 			}
 			$assemblee=new Assemblee($this->_bdd);
 			return $assemblee->listeJuste($id, $page, $quantite);
+		}
+		public function listeTotalJusteAssemble($id){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$assemblee=new Assemblee($this->_bdd);
+			return $assemblee->listeTotalJuste($id);
 		}
 
 
@@ -174,6 +199,13 @@
 			$groupe=new Groupe($this->_bdd);
 			return $groupe->listeJuste($id, $page, $quantite);
 		}
+		public function listeTotalJusteGroupe($id){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$groupe=new Groupe($this->_bdd);
+			return $groupe->listeTotalJuste($id);
+		}
 
 
 
@@ -189,12 +221,21 @@
 			return $juste->ajouter($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $fullText);
 		}
 
-		public function modifierJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $id, $fullText){
+		public function modifierJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $fullText, $id){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+				
+			$juste=new Juste($this->_bdd);
+			return $juste->modifier($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $fullText, $id);
+		}
+
+		public function modifierNiveauJuste($niveau, $login, $mdp, $id){
 			if(!$this->_bdd){
 				throw new Exception('Echec de connexion à la base de données');
 			}
 			$juste=new Juste($this->_bdd);
-			return $juste->modifier($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $id, $fullText);
+			return $juste->modifierNiveau($niveau, $login, $mdp, $id);
 		}
 
 		public function rechercherJuste($id){
@@ -203,6 +244,29 @@
 			}
 			$juste=new Juste($this->_bdd);
 			return $juste->rechercher($id);
+		}
+		
+		public function rechercheProfondeJuste($id){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$juste=new Juste($this->_bdd);
+			return $juste->rechercheProfonde($id);
+		}
+		public function rechercherJusteParFulltext($text, $page, $quantite){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$juste=new Juste($this->_bdd);
+			return $juste->rechercherParFullText($text, $page, $quantite);
+		}
+
+		public function rechercherJusteParLogin($login){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$juste=new Juste($this->_bdd);
+			return $juste->rechercherParLogin($login);
 		}
 
 		public function supprimerJuste($id){
@@ -228,7 +292,13 @@
 			$juste=new Juste($this->_bdd);
 			return $juste->listeGroupe($id,$page,$quantite);
 		}
-
+		public function listeTotalGroupeJuste($id){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$juste=new Juste($this->_bdd);
+			return $juste->listeTotalGroupe($id);
+		}
 		public function listeAssembleeJuste($id, $page, $quantite){
 			if(!$this->_bdd){
 				throw new Exception('Echec de connexion à la base de données');
@@ -256,6 +326,13 @@
 			}
 			$rattacher=new Rattacher($this->_bdd);
 			return $rattacher->modifier($juste, $assemble, $fonction, $statut, $dateDebut, $dateFin, $description, $id);
+		}
+		public function rechercherRattacher($id){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$rattacher=new Rattacher($this->_bdd);
+			return $rattacher->rechercher($id);
 		}
 		public function supprimerRattacher($id){
 			if(!$this->_bdd){

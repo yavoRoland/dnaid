@@ -55,7 +55,7 @@
 
 		public function liste($page, $quantite){
 			try{
-				$total=$this->_bdd->query('SELECT COUNT(*) FROM groupe');
+				$total=$this->_bdd->query('SELECT COUNT(*) AS G_TOTAL FROM groupe');
 
 				$req=$this->_bdd->prepare('SELECT * FROM groupe ORDER BY nomgroupe ASC LIMIT :page,:quantite');
 				$req->bindValue(':page',($page*$quantite), PDO::PARAM_INT);
@@ -71,7 +71,7 @@
 		public function listeJuste($groupe, $page, $quantite){
 			try{
 				$APPARTENIR_ACTIF=1;
-				$total=$this->_bdd->prepare('SELECT COUNT(*) FROM appartenir WHERE groupeappartenir=? AND statutappartnir=?');
+				$total=$this->_bdd->prepare('SELECT COUNT(*) AS G_TOTAL FROM appartenir WHERE groupeappartenir=? AND statutappartnir=?');
 				$total->execute(array($groupe,$APPARTENIR_ACTIF));
 
 				$req=$this->_bdd->prepare('SELECT * FROM appartenir, juste WHERE groupeappartenir=:groupe AND statutappartenir=:statut AND justeappartenir=idjuste');
@@ -85,6 +85,16 @@
 	        }catch(Exception $e){
 	            return false;
 	        }
+		}
+		public function listeTotalJuste($groupe){
+			try{
+				$APPARTENIR_ACTIF=1;
+				$req=$this->_bdd->prepare('SELECT * FROM appartenir, juste WHERE groupeappartenir=? AND statutappartnir=? AND justeappartenir=idjuste');
+				$req->execute(array($groupe,$APPARTENIR_ACTIF));
+				return $req;
+			}catch(Exception $e){
+				return false;
+			}
 		}
 	}
 

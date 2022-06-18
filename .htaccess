@@ -1,0 +1,4 @@
+ReWriteEngine On
+
+RewriteRule ^system$ API/ApiSystem.php [L]
+RewriteRule ^test$ API/ApiTest.php [L]

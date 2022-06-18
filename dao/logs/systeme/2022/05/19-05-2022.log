@@ -1,0 +1,32 @@
+19-05-2022 13:22 >>>> Connexion par login éffectuée. user : 
+19-05-2022 13:35 >>>> Requête REST echouée; Accès refusé.
+19-05-2022 13:59 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+19-05-2022 13:59 >>>> Connexion par login éffectuée. user : {"userid":"1","userlevel":"2","exp":1652970557}
+19-05-2022 14:13 >>>> Nouveau service enregistré! user : {"userid":"1","userlevel":"2","exp":1652970557}
+19-05-2022 14:16 >>>> Nouveau service enregistré! user : {"userid":"1","userlevel":"2","exp":1652970557}
+19-05-2022 14:42 >>>> Connexion par login éffectuée. user : {"userid":"1","userlevel":"2","exp":1652973126}
+19-05-2022 14:42 >>>> Requête REST echouée; Requête mal formée.
+19-05-2022 14:45 >>>> Echec d'enregistrement de l'assemblée 
+19-05-2022 14:46 >>>> Echec d'enregistrement de l'assemblée 
+19-05-2022 14:46 >>>> Echec d'enregistrement de l'assemblée 
+19-05-2022 14:46 >>>> Echec d'enregistrement de l'assemblée 
+19-05-2022 14:52 >>>> Assemblée enregistré. user : {"userid":"1","userlevel":"2","exp":1652973126}
+19-05-2022 15:19 >>>> Requête REST echouée; code inconnu.
+19-05-2022 15:19 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+19-05-2022 15:20 >>>> Connexion par login éffectuée. user : {"userid":"1","userlevel":"2","exp":1652975405}
+19-05-2022 15:20 >>>> Echec de l'enregistrement du juste 
+19-05-2022 15:23 >>>> Echec de l'enregistrement du juste 
+19-05-2022 15:24 >>>> Echec de l'enregistrement du juste 
+19-05-2022 15:24 >>>> Echec de l'enregistrement du juste 
+19-05-2022 15:25 >>>> Echec de l'enregistrement du juste 
+19-05-2022 15:26 >>>> Echec de l'enregistrement du juste 
+19-05-2022 15:31 >>>> Echec de l'enregistrement du juste 
+19-05-2022 15:31 >>>> Echec de l'enregistrement du juste 
+19-05-2022 15:31 >>>> Echec de l'enregistrement du juste 
+19-05-2022 15:32 >>>> Echec de l'enregistrement du juste 
+19-05-2022 15:32 >>>> Echec de l'enregistrement du juste 
+19-05-2022 15:32 >>>> Echec de l'enregistrement du juste 
+19-05-2022 15:32 >>>> Juste enregistré user : {"userid":"1","userlevel":"2","exp":1652975405}
+19-05-2022 15:33 >>>> Requête REST echouée; code inconnu.
+19-05-2022 15:34 >>>> Niveau du juste modifié! user : {"userid":"1","userlevel":"2","exp":1652975405}
+19-05-2022 15:35 >>>> Connexion par login éffectuée. user : {"userid":"14","userlevel":"2","exp":1652976352}

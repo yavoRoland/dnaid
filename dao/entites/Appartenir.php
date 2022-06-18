@@ -23,6 +23,16 @@
 			}
 		}
 
+		public function rechercher($id){
+			try{
+				$req=$this->_bdd->prepare('SELECT * FROM appartenir WHERE idappartenir=?');
+				$req->execute(array($id));
+				return $req;
+			}catch(Exception $e){
+				return false;
+			}
+		}
+
 		public function supprimer($id){
 			try{
 				$req=$this->_bdd->prepare('DELETE FROM appartenir WHERE idappartenir=?');
@@ -31,5 +41,6 @@
 				return false;
 			}
 		}
+
 	}
  ?>

@@ -1,0 +1,157 @@
+18-06-2022 04:37 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 04:38 >>>> Connexion par login éffectuée. user : {"userid":"14","userlevel":"2","exp":1655528886}
+18-06-2022 04:38 >>>> Requête de recherche de juste par identifiant échouée; juste introuvable 
+18-06-2022 04:39 >>>> Requête de recherche de juste par identifiant échouée; juste introuvable 
+18-06-2022 04:56 >>>> Recherche profonde juste par identifiant effectuée; juste trouvé user : {"userid":"14","userlevel":"2","exp":1655528886}
+18-06-2022 05:02 >>>> Recherche profonde juste par identifiant effectuée; juste trouvé user : {"userid":"14","userlevel":"2","exp":1655528886}
+18-06-2022 05:08 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 05:08 >>>> Connexion par login éffectuée. user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:08 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:15 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:15 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:16 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:16 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:17 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:18 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:19 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:26 >>>> Cache nettoyer
+18-06-2022 05:26 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:26 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:26 >>>> Cache nettoyer
+18-06-2022 05:26 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:26 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:29 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:29 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:29 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:31 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:31 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:31 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:31 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:32 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:34 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:34 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:34 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:35 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655530703}
+18-06-2022 05:39 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 05:40 >>>> Connexion par login éffectuée. user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:40 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:41 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:45 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:45 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:45 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:45 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:45 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:49 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:50 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:50 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:51 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:51 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:51 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:52 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:53 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:54 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:54 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:54 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:54 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:55 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:55 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:55 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:55 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:55 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 05:55 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655532604}
+18-06-2022 06:22 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 06:22 >>>> Connexion par login éffectuée. user : {"userid":"14","userlevel":"2","exp":1655535162}
+18-06-2022 06:23 >>>> Requête de juste par full text éffectuée! Liste des justes obtenus. user : {"userid":"14","userlevel":"2","exp":1655535162}
+18-06-2022 06:23 >>>> Requête de juste par full text éffectuée! Liste des justes obtenus. user : {"userid":"14","userlevel":"2","exp":1655535162}
+18-06-2022 06:24 >>>> Requête de juste par full text éffectuée! Liste des justes obtenus. user : {"userid":"14","userlevel":"2","exp":1655535162}
+18-06-2022 06:24 >>>> Requête de juste par full text éffectuée! Liste des justes obtenus. user : {"userid":"14","userlevel":"2","exp":1655535162}
+18-06-2022 06:24 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655535162}
+18-06-2022 06:26 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655535162}
+18-06-2022 06:26 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655535162}
+18-06-2022 06:26 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655535162}
+18-06-2022 06:26 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655535162}
+18-06-2022 06:27 >>>> Requête de juste par full text éffectuée! Liste des justes obtenus. user : {"userid":"14","userlevel":"2","exp":1655535162}
+18-06-2022 06:38 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 06:38 >>>> Connexion par login éffectuée. user : {"userid":"14","userlevel":"2","exp":1655536105}
+18-06-2022 06:38 >>>> Rattachement impossible! Juste inexistant.
+18-06-2022 06:39 >>>> Rattachement effectué! user : {"userid":"14","userlevel":"2","exp":1655536105}
+18-06-2022 06:40 >>>> Rattachement effectué! user : {"userid":"14","userlevel":"2","exp":1655536105}
+18-06-2022 06:43 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 06:43 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 06:43 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 06:44 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 06:46 >>>> Modification de rattachement impossible! Juste inexistant.
+18-06-2022 07:03 >>>> Rattachement modifié user : {"userid":"14","userlevel":"2","exp":1655536248}
+18-06-2022 07:03 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 07:03 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655537586}
+18-06-2022 07:16 >>>> Rattachement modifié user : {"userid":"14","userlevel":"2","exp":1655537586}
+18-06-2022 07:33 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 07:37 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 07:38 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 07:41 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 07:41 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 07:45 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 07:46 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 07:47 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 07:47 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 07:48 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 07:48 >>>> Requête REST echouée; Requête mal formée.
+18-06-2022 07:50 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 07:54 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 07:55 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 07:55 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 07:57 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 07:58 >>>> Connexion par login éffectuée. user : {"userid":"14","userlevel":"2","exp":1655540886}
+18-06-2022 07:58 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 07:59 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 08:00 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 08:00 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+18-06-2022 08:01 >>>> 
+18-06-2022 08:46 >>>> Connexion par login éffectuée. user : {"userid":"14","userlevel":"2","exp":1655543810}
+18-06-2022 08:47 >>>> 
+18-06-2022 08:49 >>>> Requête de juste par full text éffectuée! Aucun juste correspondant user : {"userid":"14","userlevel":"2","exp":1655543810}
+18-06-2022 08:50 >>>> Requête de juste par full text éffectuée! Liste des justes obtenus. user : {"userid":"14","userlevel":"2","exp":1655543810}
