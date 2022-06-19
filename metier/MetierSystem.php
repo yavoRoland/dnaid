@@ -220,7 +220,8 @@
 						'message'=>"Echec de la modification de l'assemblée! Veuillez specifier un nom d'assemblée correct"
 					);
 				}
-				$fullText=$matricule.' '.Utilitaire::textTrim($nom).' '.Utilitaire::textTrim($pays).' '.Utilitaire::textTrim($region).' '.Utilitaire::textTrim($departement).' '.Utilitaire::textTrim($ville).' '.Utilitaire::textTrim($commune).' '.Utilitaire::textTrim($quartier).' '.Utilitaire::textTrim($description);
+				$ia=$infoAssemblee->fetch();
+				$fullText=$ia["matassemble"].' '.Utilitaire::textTrim($nom).' '.Utilitaire::textTrim($pays).' '.Utilitaire::textTrim($region).' '.Utilitaire::textTrim($departement).' '.Utilitaire::textTrim($ville).' '.Utilitaire::textTrim($commune).' '.Utilitaire::textTrim($quartier).' '.Utilitaire::textTrim($description);
 				$resultat=$this->_dao->modifierAssemblee($nom, $pays, $region, $departement, $ville, $commune, $quartier, $description, $fullText, $id);
 				if($resultat){
 					// A FAIRE: mettre le code d'execution de l'api pour la fonction modifierJusteFullText
@@ -306,12 +307,14 @@
 		public function rechercherAssembleeParFullText($text, $page){
 			try{
 				$resultat=$this->_dao->rechercherAssembleeParFullText($text, $page, SMALL_QTE);
-				if($resultat && $resultat->rowCount()>0){
+
+				if($resultat[0] && $resultat[0]->rowCount()>0){
 					return array(
 						'resultat'=>true,
 						'code'=>requete_reussi,
 						'message'=>"Requête d'assemblée par full text éffectuée! Liste des assemblées obtenues.",
-						'donnee'=>$resultat->fetchAll()
+						'donnee'=>$resultat[0]->fetchAll(),
+						'total'=>$resultat[1]->fetch()
 					);
 				}else{
 					return array(
@@ -407,7 +410,7 @@
 				do{
 					$matricule='G-'.Utilitaire::codeGenerator(6,true);
 					$groupe=$this->_dao->rechercherGroupeParMatricule($matricule);
-				}while($groupe && $groupe->rowCount>0);
+				}while($groupe && $groupe->rowCount()>0);
 
 				$serviceInfo=$this->_dao->rechercherService($service);
 				if(!$serviceInfo || $serviceInfo->rowCount()==0){
@@ -685,7 +688,7 @@
 
 		public function modifierJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $id){
 			try{
-				$infoJuste=$this->_dao->rechercherJuste($id);
+				$infoJuste=$this->_dao->rechercheProfondeJuste($id);
 				if(!$infoJuste || $infoJuste->rowCount()==0){
 					return array(
 						'resultat'=>false,
@@ -712,7 +715,7 @@
 
 				$j=$infoJuste->fetch();
 
-				$resultat=$this->_dao->modifierJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $j["photojuste"], $j["fullText"], $id);
+				$resultat=$this->_dao->modifierJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $j["photojuste"], $j["fulltextjuste"], $id);
 				if($resultat){
 					// A FAIRE: mettre le code d'execution de l'api pour la fonction modifierJusteFullText
 					if (substr(php_uname(), 0, 7) == "Windows"){
@@ -745,7 +748,7 @@
 
 		public function modifierPhotoJuste($photo, $juste){
 			try{
-				$infoJuste=$this->_dao->rechercherJuste($id);
+				$infoJuste=$this->_dao->rechercheProfondeJuste($id);
 				if(!$infoJuste || $infoJuste->rowCount()==0){
 					return array(
 						'resultat'=>false,
@@ -1016,7 +1019,7 @@
 			}
 		}
 
-		public function ListeAssembleeJuste($juste, $page){
+		public function ListeAssembleesJuste($juste, $page){
 			$resultat=$this->_dao->listeAssembleeJuste($juste, $page, STANDARD_QTE);
 			try{
 				if($resultat[0] && $resultat[0]->rowCount()>0){
@@ -1412,12 +1415,17 @@
 		public function modifierJusteFullText($juste){
 			try{
 				
-				$ji=$this->_dao->rechercherJuste($juste)->fetch();//justeInfo
+				$ji=$this->_dao->rechercheProfondeJuste($juste)->fetch();//justeInfo
 				$justeGroupeInfo=$this->_dao->listeTotalGroupeJuste($juste);//justeGroupeInfo
-				$jai=$this->_dao->listeAssembleeJuste($juste, 0 , SMALL_QTE)[0]->fetch();//justeAssembleInfo
+				$jai=$this->_dao->listeAssembleeJuste($juste, 0 , SMALL_QTE)[0];
+
 
 				$fullText=Utilitaire::textTrim($ji["nomjuste"]).' '.Utilitaire::textTrim($ji["prenomjuste"]).' '.Utilitaire::textTrim($ji["surnomjuste"]).' '.Utilitaire::textTrim($ji["phonejuste"]."").' '.Utilitaire::textTrim($ji["genrejuste"]).' '.Utilitaire::textTrim($ji["adressejuste"]).' '.Utilitaire::textTrim($ji["gradejuste"]).' '.Utilitaire::textTrim($ji["professionjuste"]).' '.Utilitaire::textTrim($ji["statutmatrijuste"]).' '.Utilitaire::textTrim($ji["ethniejuste"]);
-				$fullText =$fullText .' '.Utilitaire::textTrim($jai["fulltextassemble"]);
+				if($jai->rowCount()>0){
+					$jai=$jai->fetch();
+					$fullText =$fullText .' '.Utilitaire::textTrim($jai["fulltextassemble"]);
+				}
+				
 				if($justeGroupeInfo->rowCount()>0){
 					$jgi=$justeGroupeInfo->fetchAll();
 					for($i=0; $i<sizeof($jgi); $i++){

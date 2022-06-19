@@ -74,7 +74,7 @@
 				$total=$this->_bdd->prepare('SELECT COUNT(*) AS G_TOTAL FROM appartenir WHERE groupeappartenir=? AND statutappartnir=?');
 				$total->execute(array($groupe,$APPARTENIR_ACTIF));
 
-				$req=$this->_bdd->prepare('SELECT * FROM appartenir, juste WHERE groupeappartenir=:groupe AND statutappartenir=:statut AND justeappartenir=idjuste');
+				$req=$this->_bdd->prepare('SELECT * FROM appartenir, juste WHERE groupeappartenir=:groupe AND statutappartenir=:statut AND justeappartenir=idjuste ORDER BY nomgroupe ASC LIMIT :page,:quantite');
 				$req->bindValue(':statut',$APPARTENIR_ACTIF,PDO::PARAM_INT);
 	            $req->bindValue(':groupe',$groupe,PDO::PARAM_INT);
 	            $req->bindValue(':page',($page*$quantite), PDO::PARAM_INT);

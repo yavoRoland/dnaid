@@ -1,0 +1,54 @@
+19-06-2022 07:09 >>>> Requête REST echouée; Requête mal formée.
+19-06-2022 07:13 >>>> Connexion par login éffectuée. user : {"userid":"14","userlevel":"2","exp":1655624607}
+19-06-2022 07:14 >>>> Assemblée modifiée. user : {"userid":"14","userlevel":"2","exp":1655624607}
+19-06-2022 07:18 >>>> Assemblée modifiée. user : {"userid":"14","userlevel":"2","exp":1655624607}
+19-06-2022 07:24 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+19-06-2022 07:25 >>>> Recherche par matricule éffectuée! Assemblée trouvée. user : {"userid":"14","userlevel":"2","exp":1655624891}
+19-06-2022 07:27 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+19-06-2022 07:31 >>>> Requête d'assemblée par full text éffectuée! Liste des assemblées obtenues. user : {"userid":"14","userlevel":"2","exp":1655625331}
+19-06-2022 07:31 >>>> Requête d'assemblée par full text éffectuée! Liste des assemblées obtenues. user : {"userid":"14","userlevel":"2","exp":1655625331}
+19-06-2022 07:32 >>>> Requête d'assemblée par full text éffectuée! Liste des assemblées obtenues. user : {"userid":"14","userlevel":"2","exp":1655625331}
+19-06-2022 07:32 >>>> Requête d'assemblée par full text éffectuée! Liste des assemblées obtenues. user : {"userid":"14","userlevel":"2","exp":1655625331}
+19-06-2022 07:34 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+19-06-2022 07:35 >>>> Requête liste des assemblées! Liste des assemblées obtenues user : {"userid":"14","userlevel":"2","exp":1655625744}
+19-06-2022 07:37 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+19-06-2022 07:37 >>>> Requête liste des justes de l'assemblée! Liste des justes obtnus user : {"userid":"14","userlevel":"2","exp":1655625921}
+19-06-2022 07:37 >>>> Requête liste des justes de l'assemblée! Liste des justes obtnus user : {"userid":"14","userlevel":"2","exp":1655625921}
+19-06-2022 07:38 >>>> Requête liste des justes de l'assemblée! Liste des justes obtnus user : {"userid":"14","userlevel":"2","exp":1655625921}
+19-06-2022 07:46 >>>> groupe enregistré. user : {"userid":"14","userlevel":"2","exp":1655626103}
+19-06-2022 07:47 >>>> groupe enregistré. user : {"userid":"14","userlevel":"2","exp":1655626103}
+19-06-2022 07:48 >>>> groupe enregistré. user : {"userid":"14","userlevel":"2","exp":1655626103}
+19-06-2022 07:52 >>>> Requête REST echouée; Accès refusé. Authentification requise.
+19-06-2022 07:52 >>>> groupe enregistré. user : {"userid":"14","userlevel":"2","exp":1655626734}
+19-06-2022 07:53 >>>> Groupe modifié user : {"userid":"14","userlevel":"2","exp":1655626734}
+19-06-2022 07:54 >>>> Recherche groupe par identifiant éffectuée! Groupe trouvé user : {"userid":"14","userlevel":"2","exp":1655626984}
+19-06-2022 07:56 >>>> Recherche groupe par matricule éffectuée! Groupe touvé. user : {"userid":"14","userlevel":"2","exp":1655626984}
+19-06-2022 07:57 >>>> Requête liste des groupes! Liste des groupes obtnus user : {"userid":"14","userlevel":"2","exp":1655626984}
+19-06-2022 07:57 >>>> Requête liste des groupes! Liste des groupes obtnus user : {"userid":"14","userlevel":"2","exp":1655626984}
+19-06-2022 07:58 >>>> Requête liste des groupes! Liste des groupes obtnus user : {"userid":"14","userlevel":"2","exp":1655626984}
+19-06-2022 07:58 >>>> Requête liste des justes du groupe; Aucun justes affiliés au groupe
+19-06-2022 08:00 >>>> Requête liste des justes du groupe; Aucun justes affiliés au groupe
+19-06-2022 08:15 >>>> Requête REST echouée; code inconnu.
+19-06-2022 08:15 >>>> Requête REST echouée; code inconnu.
+19-06-2022 08:16 >>>> Modification des informations du juste éffectuée! user : {"userid":"14","userlevel":"2","exp":1655627309}
+19-06-2022 08:20 >>>> Modification des informations du juste éffectuée! user : {"userid":"14","userlevel":"2","exp":1655627309}
+19-06-2022 08:20 >>>> Modification des informations du juste éffectuée! user : {"userid":"14","userlevel":"2","exp":1655627309}
+19-06-2022 08:23 >>>> Modification des informations du juste éffectuée! user : {"userid":"14","userlevel":"2","exp":1655627309}
+19-06-2022 08:23 >>>> Modification des informations du juste éffectuée! user : {"userid":"14","userlevel":"2","exp":1655627309}
+19-06-2022 08:24 >>>> Modification des informations du juste éffectuée! user : {"userid":"14","userlevel":"2","exp":1655627309}
+19-06-2022 08:28 >>>> Modification des informations du juste éffectuée! user : {"userid":"14","userlevel":"2","exp":1655627309}
+19-06-2022 08:31 >>>> Requête de recherche de juste par identifiant échouée; juste introuvable 
+19-06-2022 08:35 >>>> Assemblée enregistré. user : {"userid":"14","userlevel":"2","exp":1655629099}
+19-06-2022 08:36 >>>> Recherche juste par identifiant effectuée; juste trouvé user : {"userid":"14","userlevel":"2","exp":1655629099}
+19-06-2022 08:37 >>>> Requête liste des justes; Liste des justes obtnus user : {"userid":"14","userlevel":"2","exp":1655629550}
+19-06-2022 08:40 >>>> Requête historique des assemblées du juste; Liste des assemblées obtenues. user : {"userid":"14","userlevel":"2","exp":1655629099}
+19-06-2022 08:41 >>>> Requête assemblée du juste; assemblée obtenue. user : {"userid":"14","userlevel":"2","exp":1655629550}
+19-06-2022 08:45 >>>> Service modifié! user : {"userid":"14","userlevel":"2","exp":1655629867}
+19-06-2022 08:46 >>>> Service modifié! user : {"userid":"14","userlevel":"2","exp":1655630136}
+19-06-2022 08:46 >>>> Service trouvé user : {"userid":"14","userlevel":"2","exp":1655630136}
+19-06-2022 08:47 >>>> Requête echouée! Service introuvable.
+19-06-2022 08:48 >>>> Service trouvé user : {"userid":"14","userlevel":"2","exp":1655630136}
+19-06-2022 08:49 >>>> Requête de recherche de service par identifiant echouée! Service introuvable.
+19-06-2022 08:49 >>>> Requête echouée! Service introuvable.
+19-06-2022 08:49 >>>> Liste des services! user : {"userid":"14","userlevel":"2","exp":1655630136}
+19-06-2022 08:50 >>>> Liste des groupes du service! user : {"userid":"14","userlevel":"2","exp":1655630136}

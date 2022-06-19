@@ -92,7 +92,7 @@
 			try{
 				$RATTACHER_ACTIF=1;
 				$total=$this->_bdd->prepare('SELECT COUNT(*) AS A_TOTAL FROM rattacher WHERE assemblerattacher=? AND statutjusterattacher=?');
-				$total->execute($assemble,$RATTACHER_ACTIF);
+				$total->execute(array($assemble,$RATTACHER_ACTIF));
 
 				$req=$this->_bdd->prepare('SELECT * FROM rattacher, juste WHERE assemblerattacher=:assemble AND statutrattacher=:statut AND justerattacher=idjuste ORDER BY nomjuste, prenomjuste ASC LIMIT :page,:quantite');
 				$req->bindValue(':statut',$RATTACHER_ACTIF, PDO::PARAM_INT);

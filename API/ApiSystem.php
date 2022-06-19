@@ -297,6 +297,7 @@
 					}
 
 					$resultat=$metier->ajouterJuste($_POST["nom"], $_POST["prenom"], $_POST["surnom"], $_POST["datenaiss"], $_POST["genre"], $_POST["etat"], $_POST["adresse"], $_POST["phone"], $_POST["grade"], $_POST["nvelNais"], $_POST["profession"], $_POST["statutMatri"], $_POST["ethnie"], $photo, $_POST["assemblee"], $_POST["dateRattache"], $_POST["fonction"]);
+					//PS certaines informations sont destinées à renseigner la table rattacher car à la creation le juste est systematiquement rattaché à une base.
 
 					reponse($resultat);
 
@@ -305,12 +306,12 @@
 				}
 			break;
 				
-			case "j1-2":
+			case "J1-2":
 
 			//Modification des informations d'un juste
 
 				if($jwtManager->checkSession()){
-					$resultat=$metier->modifierJuste($_POST["nom"], $_POST["prenom"], $_POST["surnom"], $_POST["datenaiss"], $_POST["genre"], $_POST["etat"], $_POST["adresse"], $_POST["phone"], $_POST["grade"], $_POST["nvelNais"], $_POST["profession"], $_POST["statutMatri"], $_POST["ethnie"], $id);
+					$resultat=$metier->modifierJuste($_POST["nom"], $_POST["prenom"], $_POST["surnom"], $_POST["datenaiss"], $_POST["genre"], $_POST["etat"], $_POST["adresse"], $_POST["phone"], $_POST["grade"], $_POST["nvelNais"], $_POST["profession"], $_POST["statutMatri"], $_POST["ethnie"], $_POST["juste"]);
 					reponse($resultat);
 				}else{
 					reponse();
@@ -405,7 +406,7 @@
 			//Liste des assemblées auxquelles un juste a appartenues
 
 				if($jwtManager->checkSession()){
-					$resultat=$metier->ListeAssembleeJuste($_POST["juste"], $_POST["page"]);
+					$resultat=$metier->ListeAssembleesJuste($_POST["juste"], $_POST["page"]);
 					reponse($resultat);
 				}else{
 					reponse();
