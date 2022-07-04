@@ -1,0 +1,55 @@
+@use 'colors';
+
+
+
+/*
+	HEADER
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+$header-bg : colors.$cramoisi;
+$header-color: colors.$blanc;
+$header-bg-inverse: colors.$blanc;
+$header-color-inverse: colors.$cramoisi;
+
+
+/*
+	MENU
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+$menu-bg: colors.$bleu;
+$menu-color: colors.$or;
+$menu-color-inverse: colors.$bleu;
+
+
+
+/*
+	MENU LATTERAL
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+
+$latteral-bg: colors.$bleu;
+$latteral-color: colors.$cramoisi;
+
+
+
+
+/*
+	MENU RESPONSIVE
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+$responsive-bg: colors.$bleu;
+$responsive-color: colors.$blanc;
+$responsive-inactif-color: colors.$cramoisi;
+$responsive-pied-color: colors.$pourpre;
+
+/*
+	FOOTER
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+$footer-bg: colors.$or;
+$footer-color: colors.$pourpre;

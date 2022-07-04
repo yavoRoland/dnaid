@@ -1,0 +1,19 @@
+@mixin ligne{
+	display: flex;
+	flex-direction: row;
+}
+@mixin centrer-vertical{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+@mixin centrer-horizontal($width-value){
+	width: $width-value;
+	margin: auto;
+}
+
+
+$text-L: 25px; //L= Large
+$text-M: 18px; //M= Medium
+$text-S: 12px; //S= Small

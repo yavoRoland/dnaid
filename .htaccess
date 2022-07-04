@@ -2,3 +2,6 @@ ReWriteEngine On
 
 RewriteRule ^system$ API/ApiSystem.php [L]
 RewriteRule ^test$ API/ApiTest.php [L]
+RewriteRule ^auth$ CMS/connexion.html [L]
+RewriteRule ^proto$ CMS/template.html [L]
+RewriteRule ^nouveaune$ CMS/ajouter-juste.html [L]

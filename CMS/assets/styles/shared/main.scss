@@ -1,0 +1,402 @@
+@use 'variables';
+@use 'utilitaires';
+
+@font-face{
+	font-family: orbitron;
+	src: url("../../fonts/orbitron/Orbitron-Regular.ttf"),
+	url("../../fonts/orbitron/Orbitron-Medium.ttf"),
+	url("../../fonts/orbitron/Orbitron-Bold.ttf"),
+	url("../../fonts/orbitron/Orbitron-Black.ttf");
+		
+}
+body{
+	font-family: orbitron;
+	background-color:#FFF;
+}
+
+
+/*
+	CLASSE STANDARD
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+
+.ligne-permanente{
+	@include utilitaires.ligne;
+}
+
+.ligne-temporaire{
+	@include utilitaires.ligne;
+}
+
+
+.invisible{
+	display:none;
+}
+
+/*
+	HEADER
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+#header-part-container{
+	padding: 20px;
+	padding-top: 80px;
+	padding-bottom: 10px;
+	background-color: variables.$header-bg;
+	color: variables.$header-color;
+}
+
+#header-titre-part{
+	#header-titre{
+		font-size: utilitaires.$text-L;
+		font-weight: bold;
+	}
+
+	#header-sous-titre{
+		background-color: variables.$header-bg-inverse;
+		color: variables.$header-color-inverse;
+		text-align: center;
+		font-size: utilitaires.$text-S;
+		font-style: italic;
+		border-radius: 10px;
+	}
+}
+
+#header-action-part{
+	margin-left: auto;
+	margin-right: 20px;
+}
+#header-action-user{
+	@include utilitaires.centrer-vertical;
+	margin-right: 30px;
+	font-style: italic;
+	font-size: utilitaires.$text-M;
+}
+
+.btn-deconnexion{
+	padding: 12px 15px;
+	background-color: variables.$header-bg-inverse;
+	color: variables.$header-color-inverse;
+	font-size: utilitaires.$text-L;
+	border-radius: 50px;
+	cursor: pointer;
+}
+#menu-burger-container{
+	font-size: utilitaires.$text-L;
+	cursor: pointer;
+	display: none;
+}
+
+
+
+
+/*
+	MENU
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+
+#menu-part-container{
+	margin-top: 2px;
+	padding: 20px 0px;
+	background-color: variables.$menu-bg;
+
+}
+#menu-action{
+	.menu-elt{
+		@include utilitaires.centrer-vertical;
+		margin: 0px 20px;
+		font-size: utilitaires.$text-M;
+		color: variables.$menu-color;
+	}
+}
+.menu-rechercher{
+	.search-label{
+		@include utilitaires.centrer-vertical;
+		color: variables.$menu-color;
+		font-size: utilitaires.$text-M;
+	}
+	input{
+		&:focus{
+			outline: none;
+		}
+		width: 250px;
+		font-size: 15px;
+		border: none;
+		padding: 2px 5px;
+		background-color: variables.$menu-bg;
+		color: variables.$menu-color;
+		
+	}
+	margin-left: auto;
+	border: variables.$menu-color 1px solid;
+	border-radius: 15px;
+	padding:3px 10px;
+	margin-right:10px;
+}
+
+/*
+	CORPS
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+
+#corps-part-container{
+	
+}
+
+
+/*
+	MENU-LATTERAL
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+
+#menu-latteral-part{
+	width: 18%;
+	min-height:800px;
+	background-color: variables.$latteral-bg;
+	color: variables.$latteral-color;
+}
+
+#menu-latteral-action{
+	.menu-elt{
+		margin-top:25px;
+		font-weight: bold;
+	}
+	margin-top:25px;
+	margin-left: 20px;
+}
+
+
+
+
+
+/*
+	MENU-RESPONSIVE
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+#menu-responsive-part{
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	z-index:2;
+	width: 80%;
+	min-height:800px;
+	background-color: variables.$responsive-bg;
+	color: variables.$responsive-color;
+	padding-left:25px;
+}
+#menu-responsive-container{
+	.btn-deconnexion{
+		padding:0px;
+		margin-top:50px;
+		background-color: variables.$responsive-bg;
+		font-size: utilitaires.$text-S;
+		cursor: pointer;
+		color: variables.$responsive-pied-color;
+	}
+}
+#menu-responsive-header{
+	#fermer-menu{
+		font-weight:bold;
+		padding: 8px 10px;
+		background-color: white;
+		color: red;
+		border-radius: 50px;
+		margin-left:auto; 
+		margin-right:20px;
+		cursor:pointer;
+	}
+	padding-top:20px;
+	margin-bottom:20px
+}
+#menu-responsive-user{
+	@include utilitaires.centrer-vertical;
+}
+#menu-reponsive-chp-rechercher{
+	width: 100%;
+}
+#menu-responsive-action{
+	margin-top:30px;
+}
+.menu-elt-container{
+	.menu-responsive-elt{
+		font-weight: bold;
+		font-size: utilitaires.$text-M;
+	}
+	font-size: utilitaires.$text-S;
+	margin-top: 20px;
+	color: variables.$responsive-inactif-color;
+	cursor: pointer;
+}
+.ss-menu-elt-container{
+	padding-left:20px;
+	margin: 5px 0px;
+
+}
+.ss-menu-elt{
+	margin-bottom: 5px;
+	font-size: utilitaires.$text-M;
+}
+.actif{
+
+	.ss-menu-elt-container{
+		font-size: utilitaires.$text-M;
+		color: variables.$responsive-color;
+	}
+	.menu-responsive-elt{
+		font-size: utilitaires.$text-L;
+		color: variables.$responsive-color;
+	}
+	color: variables.$responsive-color;
+}
+#menu-responsive-pied{
+	position: absolute;
+	bottom: 10px;;
+	color: variables.$responsive-pied-color;
+}
+
+
+
+
+
+/*
+	FOOTER
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+
+#footer-part-container{
+	padding-top: 20px;
+	padding-bottom: 80px;
+	justify-content: space-around;
+	background-color: variables.$footer-bg;
+	color: variables.$footer-color;
+}
+
+
+
+
+
+@media screen and (max-width: 1024px){
+
+}
+
+@media screen and (max-width: 768px){
+	#menu-part{
+		display: none;
+	}
+
+
+
+	#menu-latteral-part{
+		display: none;
+	}
+
+	#header-titre{
+		font-size: utilitaires.$text-S;
+	}
+
+	#header-action-part{
+		display: none;
+	}
+
+	#menu-burger-container{
+		display: block;
+		margin-left: auto;
+		cursor: pointer;
+	}
+
+	#corps-part-container{
+		min-height: 800px;
+	}
+
+	.ligne-temporaire{
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+	.footer-elt{
+		margin-bottom: 20px;
+	}
+}
+@media screen and (max-width: 480px){
+	#menu-part{
+		display: none;
+	}
+
+
+
+	#menu-latteral-part{
+		display: none;
+	}
+
+	.ligne-temporaire{
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+
+	#header-titre{
+		font-size: utilitaires.$text-S;
+	}
+
+	#header-action-part{
+		display: none;
+	}
+
+	#menu-burger-container{
+		display: block;
+		margin-left: auto;
+	}
+
+	#corps-part-container{
+		min-height: 800px;
+	}
+
+	.footer-elt{
+		margin-bottom: 20px;
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

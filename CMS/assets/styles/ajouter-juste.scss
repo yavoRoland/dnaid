@@ -1,0 +1,81 @@
+@use 'shared/colors';
+@use 'shared/utilitaires';
+
+
+#corps-action-container{
+	padding: 20px 40px;
+	width:100%;
+}
+
+#form-main-part{
+	width:100%;
+}
+
+#info-part{
+	width:60%;
+}
+
+#img-part{
+	#img-part-container{
+		img{
+			width: 300px;
+			height: 300px;
+			background-color: whitesmoke
+		}
+		@include utilitaires.centrer-horizontal(80%);
+
+	}
+	@include utilitaires.centrer-vertical;
+	width:40%;
+}
+
+#clear-photo{
+	margin-left: auto;
+	margin-right: 70px;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.chp-bloc{
+	.chp-label{
+		@include utilitaires.centrer-vertical;
+		width:25%;
+		padding-right:10px;
+	}
+	input{
+		width:74%;
+		font-size: utilitaires.$text-M;
+	}
+	select{
+		width:74%;
+		font-size: utilitaires.$text-L;
+		color: red;
+	}
+	.radio-group{
+		input{
+			width:10%;
+		}
+		label{
+			margin-right: 50px;
+		}
+		font-size: utilitaires.$text-M;
+	}
+	font-size: utilitaires.$text-M;
+	margin-top:50px;
+}
+
+.btn-container{
+	button{
+		font-size: utilitaires.$text-L;
+		padding:10px;
+		border-radius: 15px;
+	}
+	@include utilitaires.centrer-horizontal(10%);
+	margin-top: 50px;
+}
+
+#feed-back{
+	text-align:center;
+	margin-top:50px;
+	margin-bottom:10px;
+}

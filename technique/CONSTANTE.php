@@ -10,9 +10,9 @@
 	const ACTIF=1;
 
 	//constante etat "juste"
-	const MORT_SPIRITUEL=-1;
-	const DECEDE=0;
-	const VIVANT=1;
+	const MORT_SPIRITUEL="mort spirituel";
+	const DECEDE="décédé mort";
+	const VIVANT="vivant";
 
 	//constante quantité listing
 	const SMALL_QTE=5;

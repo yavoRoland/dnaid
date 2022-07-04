@@ -1,0 +1,362 @@
+/*
+	HEADER
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+/*
+	MENU
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+/*
+	MENU LATTERAL
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+/*
+	MENU RESPONSIVE
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+/*
+	FOOTER
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+@font-face {
+  font-family: orbitron;
+  src: url("../../fonts/orbitron/Orbitron-Regular.ttf"), url("../../fonts/orbitron/Orbitron-Medium.ttf"), url("../../fonts/orbitron/Orbitron-Bold.ttf"), url("../../fonts/orbitron/Orbitron-Black.ttf");
+}
+body {
+  font-family: orbitron;
+  background-color: #FFF;
+}
+
+/*
+	CLASSE STANDARD
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+.ligne-permanente {
+  display: flex;
+  flex-direction: row;
+}
+
+.ligne-temporaire {
+  display: flex;
+  flex-direction: row;
+}
+
+.invisible {
+  display: none;
+}
+
+/*
+	HEADER
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+#header-part-container {
+  padding: 20px;
+  padding-top: 80px;
+  padding-bottom: 10px;
+  background-color: #990000;
+  color: #FFFFFF;
+}
+
+#header-titre-part #header-titre {
+  font-size: 25px;
+  font-weight: bold;
+}
+#header-titre-part #header-sous-titre {
+  background-color: #FFFFFF;
+  color: #990000;
+  text-align: center;
+  font-size: 12px;
+  font-style: italic;
+  border-radius: 10px;
+}
+
+#header-action-part {
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+#header-action-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 30px;
+  font-style: italic;
+  font-size: 18px;
+}
+
+.btn-deconnexion {
+  padding: 12px 15px;
+  background-color: #FFFFFF;
+  color: #990000;
+  font-size: 25px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+#menu-burger-container {
+  font-size: 25px;
+  cursor: pointer;
+  display: none;
+}
+
+/*
+	MENU
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+#menu-part-container {
+  margin-top: 2px;
+  padding: 20px 0px;
+  background-color: #3d91e0;
+}
+
+#menu-action .menu-elt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px 20px;
+  font-size: 18px;
+  color: #ffbf00;
+}
+
+.menu-rechercher {
+  margin-left: auto;
+  border: #ffbf00 1px solid;
+  border-radius: 15px;
+  padding: 3px 10px;
+  margin-right: 10px;
+}
+.menu-rechercher .search-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #ffbf00;
+  font-size: 18px;
+}
+.menu-rechercher input {
+  width: 250px;
+  font-size: 15px;
+  border: none;
+  padding: 2px 5px;
+  background-color: #3d91e0;
+  color: #ffbf00;
+}
+.menu-rechercher input:focus {
+  outline: none;
+}
+
+/*
+	CORPS
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+/*
+	MENU-LATTERAL
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+#menu-latteral-part {
+  width: 18%;
+  min-height: 800px;
+  background-color: #3d91e0;
+  color: #990000;
+}
+
+#menu-latteral-action {
+  margin-top: 25px;
+  margin-left: 20px;
+}
+#menu-latteral-action .menu-elt {
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+/*
+	MENU-RESPONSIVE
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+#menu-responsive-part {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  width: 80%;
+  min-height: 800px;
+  background-color: #3d91e0;
+  color: #FFFFFF;
+  padding-left: 25px;
+}
+
+#menu-responsive-container .btn-deconnexion {
+  padding: 0px;
+  margin-top: 50px;
+  background-color: #3d91e0;
+  font-size: 12px;
+  cursor: pointer;
+  color: #9D01FD;
+}
+
+#menu-responsive-header {
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+#menu-responsive-header #fermer-menu {
+  font-weight: bold;
+  padding: 8px 10px;
+  background-color: white;
+  color: red;
+  border-radius: 50px;
+  margin-left: auto;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+#menu-responsive-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#menu-reponsive-chp-rechercher {
+  width: 100%;
+}
+
+#menu-responsive-action {
+  margin-top: 30px;
+}
+
+.menu-elt-container {
+  font-size: 12px;
+  margin-top: 20px;
+  color: #990000;
+  cursor: pointer;
+}
+.menu-elt-container .menu-responsive-elt {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.ss-menu-elt-container {
+  padding-left: 20px;
+  margin: 5px 0px;
+}
+
+.ss-menu-elt {
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.actif {
+  color: #FFFFFF;
+}
+.actif .ss-menu-elt-container {
+  font-size: 18px;
+  color: #FFFFFF;
+}
+.actif .menu-responsive-elt {
+  font-size: 25px;
+  color: #FFFFFF;
+}
+
+#menu-responsive-pied {
+  position: absolute;
+  bottom: 10px;
+  color: #9D01FD;
+}
+
+/*
+	FOOTER
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+#footer-part-container {
+  padding-top: 20px;
+  padding-bottom: 80px;
+  justify-content: space-around;
+  background-color: #ffbf00;
+  color: #9D01FD;
+}
+
+@media screen and (max-width: 768px) {
+  #menu-part {
+    display: none;
+  }
+
+  #menu-latteral-part {
+    display: none;
+  }
+
+  #header-titre {
+    font-size: 12px;
+  }
+
+  #header-action-part {
+    display: none;
+  }
+
+  #menu-burger-container {
+    display: block;
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  #corps-part-container {
+    min-height: 800px;
+  }
+
+  .ligne-temporaire {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footer-elt {
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 480px) {
+  #menu-part {
+    display: none;
+  }
+
+  #menu-latteral-part {
+    display: none;
+  }
+
+  .ligne-temporaire {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #header-titre {
+    font-size: 12px;
+  }
+
+  #header-action-part {
+    display: none;
+  }
+
+  #menu-burger-container {
+    display: block;
+    margin-left: auto;
+  }
+
+  #corps-part-container {
+    min-height: 800px;
+  }
+
+  .footer-elt {
+    margin-bottom: 20px;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
