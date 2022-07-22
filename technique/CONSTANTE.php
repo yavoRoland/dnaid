@@ -1,4 +1,6 @@
 <?php 
+	
+
 
 	const BDD='mysql:dbname=dnaid;host=127.0.0.1:3306';
 	const USER='root';
@@ -13,6 +15,7 @@
 	const MORT_SPIRITUEL="mort spirituel";
 	const DECEDE="décédé mort";
 	const VIVANT="vivant";
+	const AME="ame non juste"; //personne à qui on preche l'evangile et qui n'est pas encore né de nouveau
 
 	//constante quantité listing
 	const SMALL_QTE=5;

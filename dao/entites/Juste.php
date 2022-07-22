@@ -82,7 +82,7 @@
         public function rechercherParLogin($login){
             try{
                 $NIVEAU_LAMBDA=0;
-                $req=$this->_bdd->prepare('SELECT * FROM juste WHERE loginjuste=? AND niveaujuste>?');
+                $req=$this->_bdd->prepare('SELECT * FROM juste LEFT JOIN rattacher ON idjuste=justerattacher LEFT JOIN assemblee ON assemblerattacher=idassemble WHERE loginjuste=? AND niveaujuste>?');
                 $req->execute(array($login, $NIVEAU_LAMBDA));
                 return $req;
             }catch(Exception $e){
@@ -101,7 +101,7 @@
 
         public function liste($page,$quantite){
             try{
-                $total=$this->_bdd->query('SELECT COUNT(*) FROM juste');
+                $total=$this->_bdd->query('SELECT COUNT(*) AS J_TOTAL FROM juste');
 
                 $req=$this->_bdd->prepare('SELECT * FROM juste ORDER BY nomjuste, prenomjuste ASC LIMIT :page,:quantite');
                 $req->bindValue(':page',($page*$quantite), PDO::PARAM_INT);
@@ -120,7 +120,8 @@
                 $total=$this->_bdd->prepare('SELECT COUNT(*) AS G_TOTAL FROM appartenir WHERE justeappartenir=? AND statutappartnir=?');
                 $total->execute(array($juste,$APPARTENIR_ACTIF));
 
-                $req=$this->_bdd->prepare('SELECT * FROM appartenir, groupe WHERE justeappartenir=:juste AND statutappartnir=:statut AND groupeappartenir=idgroupe ORDER BY nomgroupe ASC LIMIT:page,:quantite');
+                $req=$this->_bdd->prepare('SELECT * FROM appartenir, groupe WHERE justeappartenir=:juste AND statutappartnir=:statut AND groupeappartenir=idgroupe ORDER BY nomgroupe ASC LIMIT :page,:quantite');
+
                 $req->bindValue(':statut',$APPARTENIR_ACTIF,PDO::PARAM_INT);
                 $req->bindValue(':juste',$juste,PDO::PARAM_INT);
                 $req->bindValue(':page',($page*$quantite), PDO::PARAM_INT);

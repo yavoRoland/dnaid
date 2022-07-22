@@ -1,0 +1,27 @@
+CMS/scripts/shared/sentinelle.js : //checktoken()
+
+
+
+
+CMS/scripts/shared/action.js -> dans "included" listener : //identification()
+
+
+
+
+
+API/ApiSystem.php 
+
+-> dans la fonction reponse :
+
+/*if(resultat["code"]>0){
+	.
+	.
+	.
+}*/
+
+
+-> dans if(isset($_POST["code"]))
+
+//if((!$check[checked]))
+PS : supprimer if(false)
+

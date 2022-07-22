@@ -21,11 +21,16 @@
 
 
 		public function checkJwt($jwt, $secret="dnaidadj2@22"){
+			if(is_null($jwt))
+				return array("message"=>"Token invalid","checked"=>false, "code"=>-8);
 			// split the jwt
-			$tokenParts = explode('.', $jwt);
+			$tokenParts = explode('.', trim($jwt));
+			if(sizeof($tokenParts)!=3)
+				return array("message"=>"Token invalid","checked"=>false, "code"=>-8);
+
 			$header = base64_decode($tokenParts[0]);
 			$payload = base64_decode($tokenParts[1]);
-			$signature_provided = $tokenParts[2];
+			$signature_provided = str_replace('"','',$tokenParts[2]);
 
 
 			// check the expiration time - note this will cause an error if there is no 'exp' claim in the jwt
@@ -38,18 +43,25 @@
 			$base64_url_payload = $this->base64url_encode($payload);
 			$signature = hash_hmac('SHA256', $base64_url_header . "." . $base64_url_payload, $secret, true);
 			$base64_url_signature = $this->base64url_encode($signature);
-
+			
 			// verify it matches the signature provided in the jwt
 			$is_signature_valid = ($base64_url_signature === $signature_provided);
-			if($is_token_expired || !$is_signature_valid){
-				print_r(array("error jwt",$jwt));
+			if($is_token_expired){
+				return array("message"=>"Token expiré", "checked"=>false, "code"=>-7);
 			}
-			return !$is_token_expired && $is_signature_valid;
+			if(!$is_signature_valid){
+				return array("message"=>"Signature token invalide","checked"=>false, "code"=>-6);
+			}
+			return array("message"=>"Authentification valide","checked"=>true);
 		}
 
 		public function getJwtPayload($jwt){
 			$tokenParts = explode('.', $jwt);
 			return base64_decode($tokenParts[1]);
+		}
+
+		public function getJwtEncodedPayload($jwt){
+			return explode('.',$jwt)[1];
 		}
 
 		private function getAuthorizationHeader(){

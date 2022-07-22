@@ -256,6 +256,7 @@
 				$resultat=$this->_dao->rechercherAssemblee($id);
 
 				if($resultat && $resultat->rowCount()>0){
+
 					return array(
 						'resultat'=>true,
 						'code'=>requete_reussi,
@@ -397,7 +398,7 @@
 
 
 		//GESTION GROUPE
-		public function ajouterGroupe($nom, $dateCreat, $service){
+		public function ajouterGroupe($nom, $dateCreat, $service){//matricule du service
 			try{
 				if(!Utilitaire::textCorrect($nom)){
 					return array(
@@ -412,7 +413,7 @@
 					$groupe=$this->_dao->rechercherGroupeParMatricule($matricule);
 				}while($groupe && $groupe->rowCount()>0);
 
-				$serviceInfo=$this->_dao->rechercherService($service);
+				$serviceInfo=$this->_dao->rechercherServiceParMatricule($service);
 				if(!$serviceInfo || $serviceInfo->rowCount()==0){
 					return array(
 						'resultat'=>false,
@@ -637,6 +638,15 @@
 					}
 				}
 
+				$infoAssemblee=$this->_dao->rechercherAssembleeParMatricule($assemblee);
+				if(!$infoAssemblee || $infoAssemblee->rowCount()==0){
+					return array(
+						'resultat'=>false,
+						'code'=>requete_echoue,
+						'message'=>"Echec de l'enregistrement du juste. L'assemblee n'existe pas."
+					);
+				}
+				$assemblee = $infoAssemblee->fetch();
 
 
 				$fullText=Utilitaire::textTrim($nom).' '.Utilitaire::textTrim($prenom).' '.Utilitaire::textTrim($surnom).' '.Utilitaire::textTrim($genre).' '.Utilitaire::textTrim($adresse).' '.Utilitaire::textTrim($grade).' '.Utilitaire::textTrim($profession).' '.Utilitaire::textTrim($statutMatri).' '.Utilitaire::textTrim($ethnie);
@@ -647,16 +657,7 @@
 				$resultat=false;
 
 				if($addJuste["resultat"]){
-					$infoAssemblee=$this->_dao->rechercherAssemblee($assemblee);
-					if(!$infoAssemblee || $infoAssemblee->rowCount()==0){
-						$this->_dao->supprimerJuste($addJuste["id"]);
-						return array(
-							'resultat'=>false,
-							'code'=>requete_echoue,
-							'message'=>"Echec de l'enregistrement du juste. L'assemblee n'existe pas."
-						);
-					}
-					$resultat=$this->_dao->ajouterRattacher($addJuste["id"], $assemblee, $fonction, ACTIF, $dateRattacher);
+					$resultat=$this->_dao->ajouterRattacher($addJuste["id"], $assemblee['idassemble'], $fonction, ACTIF, $dateRattacher);
 				}
 					
 
@@ -1034,7 +1035,7 @@
 					return array(
 						'resultat'=>false,
 						'code'=>liste_vide,
-						'message'=>"Requête historique des assemblées du juste; Aucun Assemblée affiliée"
+						'message'=>"Requête historique des assemblées du juste; Aucune Assemblée affiliée"
 					);
 				}
 			}catch(Exception $e){
@@ -1042,6 +1043,33 @@
 					'resultat'=>false,
 					'code'=>requete_echoue,
 					'message'=>"Echec de Requête historique des assemblées du juste; Une exception s'est produite!"
+				);
+			}
+		}
+
+		public function ListeGroupeJuste($juste, $page){
+			$resultat=$this->_dao->listeGroupeJuste($juste, $page, STANDARD_QTE);
+			try{
+				if($resultat[0] && $resultat[0]->rowCount()>0){
+					return array(
+						'resultat'=>true,
+						'code'=>requete_reussi,
+						'message'=>"Requête liste des groupes du juste; Liste des assemblées obtenues.",
+						'donnee'=>$resultat[0]->fetchAll(),
+						'total'=>$resultat[1]->fetch()
+					);
+				}else{
+					return array(
+						'resultat'=>false,
+						'code'=>liste_vide,
+						'message'=>"Requête liste des groupes du juste; Aucun groupe affiliée"
+					);
+				}
+			}catch(Exception $e){
+				return array(
+					'resultat'=>false,
+					'code'=>requete_echoue,
+					'message'=>"Echec de Requête liste des groupes du juste; Une exception s'est produite!"
 				);
 			}
 		}
@@ -1494,6 +1522,8 @@
 			$payload=$this->_authManager->getJwtPayload($jwt);
 			return json_decode($payload)->userid;
 		}
+
+		
 
 
 

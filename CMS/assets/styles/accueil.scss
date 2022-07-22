@@ -1,0 +1,28 @@
+@use 'shared/colors';
+@use 'shared/utilitaires';
+
+
+$titre-color: colors.$or;
+$message-color: colors.$pourpre;
+
+#corps-action-container{
+	margin:20px;
+	flex:1;
+	text-align:center;
+}
+
+#titre{
+	color:$titre-color;
+	font-size: utilitaires.$text-XXL;
+	margin-bottom:20px;
+}
+
+#message{
+	color: $message-color;
+	font-size: utilitaires.$text-L;
+	margin-bottom:60px;
+}
+
+#verset{
+
+}

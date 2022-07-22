@@ -1,0 +1,19 @@
+#corps-action-container {
+  margin: 20px;
+  flex: 1;
+  text-align: center;
+}
+
+#titre {
+  color: #ffbf00;
+  font-size: 45px;
+  margin-bottom: 20px;
+}
+
+#message {
+  color: #9D01FD;
+  font-size: 25px;
+  margin-bottom: 60px;
+}
+
+/*# sourceMappingURL=accueil.css.map */

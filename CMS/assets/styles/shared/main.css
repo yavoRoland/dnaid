@@ -23,6 +23,11 @@
 	-----------------------------------------------
 	-----------------------------------------------
 */
+/*
+	PAGINATION
+	-----------------------------------------------
+	-----------------------------------------------
+*/
 @font-face {
   font-family: orbitron;
   src: url("../../fonts/orbitron/Orbitron-Regular.ttf"), url("../../fonts/orbitron/Orbitron-Medium.ttf"), url("../../fonts/orbitron/Orbitron-Bold.ttf"), url("../../fonts/orbitron/Orbitron-Black.ttf");
@@ -43,6 +48,11 @@ body {
 }
 
 .ligne-temporaire {
+  display: flex;
+  flex-direction: row;
+}
+
+.ligne-semi-temporaire {
   display: flex;
   flex-direction: row;
 }
@@ -285,6 +295,47 @@ body {
   color: #9D01FD;
 }
 
+/*
+	PAGINATION
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+#pagination-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.pagination-btn {
+  margin: 5px;
+  padding: 10px;
+  background-color: #990000;
+  color: #FFFFFF;
+  border: solid 1px #FFFFFF;
+}
+.pagination-btn:hover {
+  cursor: pointer;
+}
+
+.page-actuelle {
+  background-color: #ffbf00;
+  color: #990000;
+}
+
+#intermdiaire {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 15px;
+  margin: 0px 15px;
+}
+
+@media screen and (max-width: 1024px) {
+  .ligne-semi-temporaire {
+    flex-direction: column;
+  }
+}
 @media screen and (max-width: 768px) {
   #menu-part {
     display: none;
@@ -321,6 +372,10 @@ body {
   .footer-elt {
     margin-bottom: 20px;
   }
+
+  .ligne-semi-temporaire {
+    flex-direction: column;
+  }
 }
 @media screen and (max-width: 480px) {
   #menu-part {
@@ -356,6 +411,10 @@ body {
 
   .footer-elt {
     margin-bottom: 20px;
+  }
+
+  .ligne-semi-temporaire {
+    flex-direction: column;
   }
 }
 

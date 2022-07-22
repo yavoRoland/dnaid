@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/dnaid/cms/assets/styles/connexion.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script type="text/javascript" src="/dnaid/CMS/assets/scripts/shared/session-manager.js"></script>
+	<script type="text/javascript" src="/dnaid/CMS/assets/scripts/shared/utilitaires.js"></script>
+	<title>Connexion</title>
+</head>
+<body>
+	<div id="corps-part">
+		<div id="corps-part-container">
+			<form id="monformulaire">
+				<div id="form-container">
+					<div id="feed-back"></div>
+					<div id="titre">Connexion</div>
+					<div class="chp-bloc ligne-temporaire">
+						<div class="chp-label"><label for="login">Identifiant</label></div>
+						<div class="chp"> <input type="text" name="login" id="login" required> </div>
+					</div>
+
+					<div class="chp-bloc ligne-temporaire">
+						<div class="chp-label"><label for="mdp">Mot de passe</label></div>
+						<div class="chp ligne-permanente" id="chp-mdp">
+							<input type="password" name="mdp" id="mdp" required>
+							<div id="visibilite-mdp"> <i id="eye" class="fas fa-eye"></i> <i id="eye-slash" class="fas fa-eye-slash invisible" class="fas fa-eye-slash"></i></div>
+							
+							<!--  -->
+						</div>
+					</div>
+
+					<div id="btn-valider-container">
+						<button id="btn-valider">Se Connecter</button>
+					</div>
+				</div>
+			</form>
+			<div id="footer">Copyright® DNAID 2022 ADJ</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript" src="/dnaid/CMS/assets/scripts/connexion.js"></script>

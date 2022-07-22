@@ -29,7 +29,9 @@ body{
 	@include utilitaires.ligne;
 }
 
-
+.ligne-semi-temporaire{
+	@include utilitaires.ligne;
+}
 .invisible{
 	display:none;
 }
@@ -277,12 +279,45 @@ body{
 	color: variables.$footer-color;
 }
 
+/*
+	PAGINATION
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+#pagination-container{
+	display:flex;
+	flex-direction:row;
+	justify-content:center;
+	margin-bottom:40px;
+}
+.pagination-btn{
+	&:hover{
+		cursor:pointer;
+	}
+	margin:5px;
+	padding:10px;
+	background-color: variables.$pagination-bg;
+	color: variables.$pagination-color;
+	border:solid 1px variables.$pagination-color;
+}
+.page-actuelle{
+	background-color: variables.$pagination-page-actuelle-bg;
+	color: variables.$pagination-page-actuelle-color;
+}
 
-
+#intermdiaire{
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	font-size:15px;
+	margin:0px 15px;
+}
 
 
 @media screen and (max-width: 1024px){
-
+	.ligne-semi-temporaire{
+		flex-direction:column;
+	}
 }
 
 @media screen and (max-width: 768px){
@@ -322,6 +357,9 @@ body{
 	.footer-elt{
 		margin-bottom: 20px;
 	}
+	.ligne-semi-temporaire{
+		flex-direction:column;
+	}
 }
 @media screen and (max-width: 480px){
 	#menu-part{
@@ -360,7 +398,9 @@ body{
 	.footer-elt{
 		margin-bottom: 20px;
 	}
-
+	.ligne-semi-temporaire{
+		flex-direction:column;
+	}
 
 }
 

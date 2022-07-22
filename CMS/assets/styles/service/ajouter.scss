@@ -1,0 +1,77 @@
+@use '../shared/colors';
+@use '../shared/utilitaires';
+
+#corps-action-container{
+	@include utilitaires.centrer-horizontal(60%);
+	min-height: 600px;
+}
+#form-container{
+	@include utilitaires.centrer-vertical;
+	min-height: 450px;
+}
+
+.chp-bloc{
+	.chp-label{
+		@include utilitaires.centrer-vertical;
+		width:15%;
+		padding-right:10px;
+	}
+	input{
+		width:80%;
+		font-size: utilitaires.$text-M;
+	}
+	font-size: utilitaires.$text-M;
+	margin-top:50px;
+}
+
+.btn-container{
+	button{
+		font-size: utilitaires.$text-L;
+		padding:10px;
+		border-radius: 15px;
+	}
+	@include utilitaires.centrer-horizontal(10%);
+	margin-top: 50px;
+}
+
+#feed-back{
+	text-align:center;
+	margin-top:50px;
+	margin-bottom:10px;
+}
+
+@media screen and (max-width: 1024px){
+
+}
+
+@media screen and (max-width: 768px){
+	.chp-bloc{
+		.chp-label{
+			width:100%;
+			text-align: center;
+		}
+		input{
+			width:100%;
+		}
+	}
+	
+	#corps-action-container{
+		@include utilitaires.centrer-horizontal(80%);
+	}
+}
+
+@media screen and (max-width: 480px){
+	.chp-bloc{
+		.chp-label{
+			width:100%;
+			text-align: center;
+		}
+		input{
+			width:100%;
+		}
+	}
+	
+	#corps-action-container{
+		@include utilitaires.centrer-horizontal(100%);
+	}
+}

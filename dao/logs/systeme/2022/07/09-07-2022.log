@@ -1,0 +1,21 @@
+09-07-2022 05:50 >>>> Requête REST echouée; Requête mal formée.
+09-07-2022 05:52 >>>> Requête REST echouée; Requête mal formée.
+09-07-2022 05:57 >>>> Requête REST echouée; Requête mal formée.
+09-07-2022 05:59 >>>> Requête de connexion de juste par login échouée; login ou mot de passe incorrect. user : 
+09-07-2022 05:59 >>>> Requête de connexion de juste par login échouée; login ou mot de passe incorrect. user : 
+09-07-2022 06:01 >>>> Requête de connexion de juste par login échouée; login ou mot de passe incorrect. user : 
+09-07-2022 06:05 >>>> Requête de connexion de juste par login échouée; login ou mot de passe incorrect.
+09-07-2022 06:07 >>>> Requête de connexion de juste par login échouée; login ou mot de passe incorrect.
+09-07-2022 06:09 >>>> Connexion par login éffectuée. user : eyJ1c2VyaWQiOiIxNCIsInVzZXJsZXZlbCI6IjIiLCJleHAiOjE2NTczNDg3OTd9
+09-07-2022 06:10 >>>> Connexion par login éffectuée. user : eyJ1c2VyaWQiOiIxNCIsInVzZXJsZXZlbCI6IjIiLCJleHAiOjE2NTczNDg4NDB9
+09-07-2022 06:11 >>>> Connexion par login éffectuée. user : eyJ1c2VyaWQiOiIxNCIsInVzZXJsZXZlbCI6IjIiLCJleHAiOjE2NTczNDg4NjV9
+09-07-2022 06:11 >>>> Connexion par login éffectuée. user : eyJ1c2VyaWQiOiIxNCIsInVzZXJsZXZlbCI6IjIiLCJleHAiOjE2NTczNDg5MDR9
+09-07-2022 06:14 >>>> Connexion par login éffectuée. user : eyJ1c2VyaWQiOiIxNCIsInVzZXJsZXZlbCI6IjIiLCJleHAiOjE2NTczNDkwOTB9
+09-07-2022 06:43 >>>> Connexion par login éffectuée. user : eyJ1c2VyaWQiOiIxNCIsInVzZXJsZXZlbCI6IjIiLCJleHAiOjE2NTczNTA3OTF9
+09-07-2022 06:43 >>>> Requête de recherche de juste par identifiant échouée; juste introuvable 
+09-07-2022 06:43 >>>> Requête de recherche de juste par identifiant échouée; juste introuvable 
+09-07-2022 06:44 >>>> Recherche juste par identifiant effectuée; juste trouvé user : eyJ1c2VyaWQiOiIxNCIsInVzZXJsZXZlbCI6IjIiLCJleHAiOjE2NTczNTA3OTF9
+09-07-2022 06:50 >>>> Connexion par login éffectuée. user : eyJ1c2VyaWQiOiIxNCIsInVzZXJsZXZlbCI6IjIiLCJleHAiOjE2NTczNTEyMjR9
+09-07-2022 07:07 >>>> Connexion par login éffectuée. user : eyJ1c2VyaWQiOiIxNCIsInVzZXJsZXZlbCI6IjIiLCJleHAiOjE2NTczNTIyMjV9
+09-07-2022 07:09 >>>> Connexion par login éffectuée. user : eyJ1c2VyaWQiOiIxNCIsInVzZXJsZXZlbCI6IjIiLCJleHAiOjE2NTczNTIzOTZ9
+09-07-2022 07:47 >>>> Connexion par login éffectuée. user : eyJ1c2VyaWQiOiIxNCIsInVzZXJsZXZlbCI6IjIiLCJleHAiOjE2NTczNTQ2NTR9
