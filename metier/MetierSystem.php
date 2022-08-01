@@ -398,7 +398,7 @@
 
 
 		//GESTION GROUPE
-		public function ajouterGroupe($nom, $dateCreat, $service){//matricule du service
+		public function ajouterGroupe($nom, $dateCreat, $description, $service){//matricule du service
 			try{
 				if(!Utilitaire::textCorrect($nom)){
 					return array(
@@ -422,7 +422,7 @@
 					);
 				}
 
-				$resultat=$this->_dao->ajouterGroupe($matricule, $nom, $dateCreat, $service);
+				$resultat=$this->_dao->ajouterGroupe($matricule, $nom, $dateCreat, $description, $service);
 				if($resultat){
 					return array(
 						'resultat'=>true,
@@ -446,7 +446,7 @@
 			}
 		}
 
-		public function modifierGroupe($nom, $dateCreat, $service, $id){
+		public function modifierGroupe($nom, $dateCreat, $description, $service, $id){
 			try{
 				$infoGroupe=$this->_dao->rechercherGroupe($id);
 				if(!$infoGroupe || $infoGroupe->rowCount()==0){
@@ -464,7 +464,7 @@
 						'message'=>"Modification impossible! Veuillez specifier un nom de groupe correct"
 					);
 				}
-				$resultat=$this->_dao->modifierGroupe($nom, $dateCreat, $service, $id);
+				$resultat=$this->_dao->modifierGroupe($nom, $dateCreat, $description, $service, $id);
 				if($resultat){
 					// A FAIRE: mettre le code d'execution de l'api pour la fonction modifierJusteFullTextParGroupe
 					if (substr(php_uname(), 0, 7) == "Windows"){

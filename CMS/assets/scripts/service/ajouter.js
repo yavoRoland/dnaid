@@ -1,3 +1,4 @@
+route="service"
 function activerEnregistrerService(){
 	document.getElementById('btn-valider').addEventListener('click',function(event){
 		event.preventDefault()

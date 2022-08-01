@@ -15,10 +15,10 @@
 		$metier=$GLOBALS["metier"];
 		$message=$resultat["message"];
 
-		/*if($resultat["code"]>0){
+		if($resultat["code"]>0){
 			$message .= " user : ".$jwtManager->getJwtEncodedPayload($jwtManager->getBearerToken());//il faudra decoder le payload dans le log pour savoir qui a executer la requete
 			$resultat["jwt"]= $metier->increaseJwtTime();
-		}*/
+		}
 
 		Utilitaire::log($message,REPERTOIRE_SYS_LOG);
 		echo json_encode($resultat,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
@@ -50,8 +50,7 @@
 			Utilitaire::log($message,REPERTOIRE_SYS_LOG);
 			echo json_encode($resultat,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 		}else{
-			//if(!$check["checked"])
-			if(false){
+			if(!$check["checked"]){
 				reponse($check);
 			}else{
 				switch($_POST['code']){
@@ -142,13 +141,13 @@
 					case "G1-1":
 					//Enregistrement ou création d'un groupe de juste (groupe de music, de théatre, nettoyage ...)
 					//On demande le matricule du service pas son id
-						$resultat=$metier->ajouterGroupe($_POST["nom"], $_POST["datecreat"], $_POST["service"]);
+						$resultat=$metier->ajouterGroupe($_POST["nom"], $_POST["datecreat"], $_POST["description"], $_POST["service"]);
 						reponse($resultat);
 					break;
 
 					case "G1-2":
 					//Modification des informations d'un groupe de juste
-						$resultat=$metier->modifierGroupe($_POST["nom"], $_POST["datecreat"], $_POST["service"], $_POST["groupe"]);
+						$resultat=$metier->modifierGroupe($_POST["nom"], $_POST["datecreat"], $_POST["description"], $_POST["service"], $_POST["groupe"]);
 						reponse($resultat);
 					break;
 

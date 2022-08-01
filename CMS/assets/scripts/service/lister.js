@@ -1,3 +1,4 @@
+route="service"
 const quantite= 15
 
 urlParams=["page"] //tableau declaré dans utilitaires.js

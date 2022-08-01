@@ -1,4 +1,4 @@
-CMS/scripts/shared/sentinelle.js : //checktoken()
+CMS/assets/scripts/shared/sentinelle.js : //checktoken()
 
 
 
@@ -20,7 +20,7 @@ API/ApiSystem.php
 }*/
 
 
--> dans if(isset($_POST["code"]))
+-> dans if(isset($_POST["code"])) :
 
 //if((!$check[checked]))
 PS : supprimer if(false)

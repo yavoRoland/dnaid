@@ -6,19 +6,19 @@
 			$this->_bdd=$bdd;
 		}
 
-		public function ajouter($matricule, $nom, $dateCreat, $service){
+		public function ajouter($matricule, $nom, $dateCreat, $description, $service){
 			try{
-				$req=$this->_bdd->prepare('INSERT INTO groupe(matgroupe, nomgroupe, datecreatgroupe, idservicegroupe) VALUES(?,?,?,?)');
-				return $req->execute(array($matricule, $nom, $dateCreat, $service));
+				$req=$this->_bdd->prepare('INSERT INTO groupe(matgroupe, nomgroupe, datecreatgroupe, descriptiongroupe, idservicegroupe) VALUES(?,?,?,?,?)');
+				return $req->execute(array($matricule, $nom, $dateCreat, $description, $service));
 			}catch(Exception $e){
 				return false;
 			}
 		}
 
-		public function modifier($nom, $dateCreat, $service, $id){
+		public function modifier($nom, $dateCreat, $description, $service, $id){
 			try{
-				$req=$this->_bdd->prepare('UPDATE groupe SET nomgroupe=?, datecreatgroupe=? ,idservicegroupe=? WHERE idgroupe=?');
-				return $req->execute(array($nom, $dateCreat, $service, $id));
+				$req=$this->_bdd->prepare('UPDATE groupe SET nomgroupe=?, datecreatgroupe=?, descriptiongroupe=?,idservicegroupe=? WHERE idgroupe=?');
+				return $req->execute(array($nom, $dateCreat, $description, $service, $id));
 			}catch(Exception $e){
 				return false;
 			}

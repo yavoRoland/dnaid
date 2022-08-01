@@ -5,6 +5,8 @@ $titre-color: colors.$or;
 $table-head-bg: colors.$cramoisi;
 $table-head-color: colors.$blanc;
 $table-bg-nuance: #f2f2f2;
+$hover-bg: colors.$or;
+$hover-color: colors.$cramoisi;
 
 #corps-action-container{
 	flex: 1;
@@ -28,9 +30,6 @@ $table-bg-nuance: #f2f2f2;
 	text-align: center;
 	font-size: utilitaires.$text-L;
 }
-.ligne{
-	cursor:pointer;
-}
 .libelle-responsive{
 	display: none;
 }
@@ -45,6 +44,13 @@ $table-bg-nuance: #f2f2f2;
 }
 .impaire{
 	background-color: $table-bg-nuance;
+}
+.ligne{
+	&:hover{
+		background-color: $hover-bg;
+		color: $hover-color;
+	}
+	cursor:pointer;
 }
 .bloc-value{
 	@include utilitaires.centrer-vertical;

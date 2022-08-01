@@ -1,4 +1,6 @@
 const includedEvent=new Event('included')
+var route=null
+
 
 function actionMenuResponsive(){
 	let menuElts= document.getElementsByClassName("menu-responsive-elt")
@@ -50,14 +52,26 @@ function identification(){
 	document.getElementById('menu-responsive-user').innerHTML=`${user.nomjuste.charAt(0)}. ${user.prenomjuste}`
 }
 
+function navigationLatterale(){
+	let latteraux=document.getElementsByClassName('latteral-elt')
+	for(var latteral of latteraux){
+		latteral.addEventListener('click',function(){
+			if(route){
+				window.location.href=`${server}${route}/${this.getAttribute('data-action')}`
+			}
+		})
+	}
+}
+
 
 
 
 document.addEventListener('included',()=>{
-	//identification();
+	identification();
 	actionMenuResponsive();
 	document.getElementById('menu-burger-container').addEventListener('click',afficherMenu);
 	document.getElementById('fermer-menu').addEventListener('click',cacherMenu)
 	actionDeconnexion()
+	navigationLatterale()
 })
 

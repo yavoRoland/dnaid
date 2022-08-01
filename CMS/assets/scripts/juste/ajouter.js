@@ -1,3 +1,4 @@
+route="juste"
 function afficherAssemblee(){
 	let userInfo=getToken(userInfoToken)
 	if(userInfo){

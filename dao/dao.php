@@ -144,20 +144,20 @@
 		/**************************************************************************/
 		/**************************************************************************/
 		//GESTION GROUPE
-		public function ajouterGroupe($matricule, $nom, $dateCreat, $service){
+		public function ajouterGroupe($matricule, $nom, $dateCreat, $description, $service){
 			if(!$this->_bdd){
 				throw new Exception('Echec de connexion à la base de données');
 			}
 			$groupe=new Groupe($this->_bdd);
-			return $groupe->ajouter($matricule, $nom, $dateCreat, $service);
+			return $groupe->ajouter($matricule, $nom, $dateCreat, $description, $service);
 		}
 
-		public function modifierGroupe($nom, $dateCreat, $service, $id){
+		public function modifierGroupe($nom, $dateCreat, $description, $service, $id){
 			if(!$this->_bdd){
 				throw new Exception('Echec de connexion à la base de données');
 			}
 			$groupe=new Groupe($this->_bdd);
-			return $groupe->modifier($nom, $dateCreat, $service, $id);
+			return $groupe->modifier($nom, $dateCreat, $description, $service, $id);
 		}
 
 		public function rechercherGroupe($id){

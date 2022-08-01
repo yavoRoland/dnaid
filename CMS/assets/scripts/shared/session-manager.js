@@ -1,11 +1,11 @@
 const userInfoToken='ADJDNAIDUSER'
 const jwtToken='ADJDNAIDTOKEN'
 const passeur='ADJPASSEUR'
+const server="http://localhost:8888/dnaid/"
 
-
-const connexionPage= 'http://localhost:8888/dnaid/auth'
-const homePage='http://localhost:8888/dnaid/home'
-const apiLink='http://localhost:8888/dnaid/system'
+const connexionPage= `${server}auth`
+const homePage=`${server}home`
+const apiLink=`${server}system`
 
 
 function getToken(cle){

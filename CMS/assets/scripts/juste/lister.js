@@ -1,3 +1,4 @@
+route="juste"
 const quantite=10;
 
 
@@ -56,7 +57,7 @@ function listerJuste(){
 				line.addEventListener('click',function(event){
 					saveToken(passeur,JSON.stringify(resultat.donnee[this.getAttribute('data-index')]))
 					setTimeout(()=>{
-						window.location.href="http://localhost:8888/dnaid/juste/detail/"+this.getAttribute('id')
+						window.location.href=`${server}juste/detail/${this.getAttribute('id')}`
 					},500)
 					
 				})

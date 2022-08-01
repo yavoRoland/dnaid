@@ -1,3 +1,4 @@
+route="groupe"
 function activerEnregisterGroupe(){
 	document.getElementById('btn-valider').addEventListener('click',function(event){
 		event.preventDefault()

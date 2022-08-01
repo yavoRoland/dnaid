@@ -1,3 +1,4 @@
+route="assemblee"
 function activerEnregisterAssemblee(){
 	document.getElementById('btn-valider').addEventListener('click',function(event){
 		event.preventDefault()

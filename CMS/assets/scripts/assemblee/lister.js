@@ -1,3 +1,4 @@
+route="assemblee"
 const quantite=10
 
 urlParams=["page"] //tableau declaré dans utilitaires.js
@@ -16,7 +17,7 @@ function listerAssemblee(){
 			resultat.donnee.forEach((elt,index)=>{
 				let pariteLigne = index % 2 == 0? "paire":"impaire"
 				lines += `
-					<div id="${elt.idassemble}" class="ligne ${pariteLigne} ligne-temporaire">
+					<div id="${elt.idassemble}" class="ligne ${pariteLigne} ligne-temporaire" data-index="${index}">
 						<div id="rang-bloc" class="info-bloc ligne-permanente">
 							<div class="libelle-responsive"> Rang: </div>
 							<div>${index}</div>
@@ -50,7 +51,11 @@ function listerAssemblee(){
 			let lignes = document.getElementsByClassName('ligne')
 			for(var line of lignes){
 				line.addEventListener('click',function(event){
-					console.log("on a clicker sur "+this.getAttribute('id'))
+					saveToken(passeur,JSON.stringify(resultat.donnee[this.getAttribute('data-index')]))
+					console.log(this.getAttribute('data-index'))
+					setTimeout(()=>{
+						window.location.href=`${server}assemblee/detail/${this.getAttribute('id')}`
+					},500)
 				})
 			}
 		}else{
