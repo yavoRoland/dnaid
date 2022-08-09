@@ -1,0 +1,254 @@
+@use '../shared/colors';
+@use '../shared/utilitaires';
+
+$lien-color: colors.$cramoisi;
+$img-bg: whitesmoke;
+$overlay-msg-color: colors.$bleu;
+$overlay-close-color: colors.$cramoisi;
+$affiche-overlay-color: colors.$pourpre;
+$affiche-overlay-bg: colors.$or;
+#corps-action-container{
+	padding: 20px 40px;
+	width:100%;
+}
+
+#form-main-part{
+	width:100%;
+}
+
+#info-part{
+	width:60%;
+}
+
+#img-part{
+	#img-part-container{
+		img{
+			width: 300px;
+			height: 300px;
+			background-color: $img-bg;
+		}
+		@include utilitaires.centrer-horizontal(80%);
+
+	}
+	@include utilitaires.centrer-vertical;
+	width:40%;
+}
+#img-part-header-container{
+	width:300px;
+}
+
+#change-photo{
+	margin-left: auto;
+	padding: 10px;
+	cursor: pointer;
+	font-size: utilitaires.$text-S;
+	color: $lien-color;
+	text-decoration: underline;
+}
+
+.chp-bloc{
+	.chp-label{
+		@include utilitaires.centrer-vertical;
+		width:25%;
+		padding-right:10px;
+	}
+	input{
+		width:74%;
+		font-size: utilitaires.$text-M;
+	}
+	select{
+		width:74%;
+		font-size: utilitaires.$text-L;
+	}
+	.radio-group{
+		input{
+			width:10%;
+		}
+		label{
+			margin-right: 50px;
+		}
+		font-size: utilitaires.$text-M;
+	}
+	font-size: utilitaires.$text-M;
+	margin-top:50px;
+}
+
+.btn-container{
+	button{
+		font-size: utilitaires.$text-L;
+		padding:10px;
+		border-radius: 15px;
+	}
+	@include utilitaires.centrer-horizontal(10%);
+	margin-top: 50px;
+}
+
+#feed-back{
+	text-align:center;
+	margin-top:50px;
+	margin-bottom:10px;
+}
+
+
+
+
+
+#overlay{
+	position: fixed; /* Sit on top of the page content */
+	/*display: none; /* Hidden by default */
+	width: 100%; /* Full width (cover the whole page) */
+	height: 100%; /* Full height (cover the whole page) */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+	z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+	/*cursor: pointer; /* Add a pointer on hover */
+}
+
+#overlay-container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: black;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  text-align: center;
+  font-size: 20px;
+  background-color: white;
+  padding: 30px 120px;
+  border-radius: 10px;
+}
+
+#overlay-image-container{
+	img {
+    width: 100%;
+    height: 100%;
+    background-color: $img-bg;
+  }
+  width: 450px;
+  height: 450px;
+  margin:10px 0px;
+}
+#overlay-message{
+	font-size:18px;
+	color: $overlay-msg-color;
+	padding:30px 0px;
+	text-align:center;
+}
+#close-overlay{
+	padding:20px 30px;
+	color: $overlay-close-color;
+	display:flex;
+	cursor:pointer;
+}
+
+#affiche-overlay{
+	cursor:pointer;
+	font-size:15px;
+	background-color: $affiche-overlay-bg;
+	color: $affiche-overlay-color;
+	padding: 10px 30px;
+	border-radius:10px;
+	boder:solid 1px $affiche-overlay-color;
+	display:flex;
+	flex-direction:row;
+	justify-content:center;
+	margin-bottom:10px;
+}
+
+@media screen and (max-width: 1024px){
+
+	#form-main-part{
+		flex-direction:column;
+	}
+	#info-part,#img-part{
+		width:98%;
+		margin-bottom:100px;
+		text-align:center;
+	}
+	
+	#img-part-container{
+		padding-top:100px;
+	}
+
+	.btn-container{
+		text-align:center;
+	}
+	#corps-action-container{
+		padding:0px;
+	}
+}
+
+@media screen and (max-width: 768px){
+	#corps-action-container{
+		text-align:center;
+	}
+	#info-part,#img-part{
+		width:100%;
+		margin-bottom:100px;
+		text-align:center;
+		margin:0px;
+	}
+	#img-part-container{
+		padding-top:100px;
+	}
+
+	.btn-container{
+		@include utilitaires.centrer-horizontal(100%);
+	}
+	#corps-action-container{
+		padding:0px;
+	}
+}
+@media screen and (max-width: 480px){
+	#info-part,#img-part{
+		width:100%;
+		margin-bottom:100px;
+		text-align:center;
+		margin:0px;
+	}
+	#img-part-container{
+		padding-top:100px;
+	}
+	.chp-bloc{
+		.chp-label{
+			width:100%;
+			padding-right:0px;
+			text-align:center;
+			font-weight:bold;
+		}
+		input{
+			width:90%;
+		}
+		select{
+			width:90%;
+		}
+		.radio-group{
+			input{
+				width:5%;
+			}
+			label{
+				margin-right: 40px;
+			}
+			justify-content:center;
+			margin-top:20px;
+
+		}
+	}
+
+	.btn-container{
+		@include utilitaires.centrer-horizontal(100%);
+	}
+	#corps-action-container{
+		padding:0px;
+	}
+
+	#overlay-image-container{
+	  width: 250px;
+	  height: 250px;
+	  margin:10px 0px;
+	}
+}

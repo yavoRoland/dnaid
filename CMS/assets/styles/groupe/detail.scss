@@ -1,0 +1,138 @@
+@use '../shared/colors';
+@use '../shared/utilitaires';
+
+$zone-border-color : colors.$or;
+
+
+$titre-color: colors.$or;
+$table-head-bg: colors.$cramoisi;
+$table-head-color: colors.$blanc;
+$nuance: #f2f2f2;
+$hover-bg: colors.$or;
+$hover-color: colors.$cramoisi;
+$lien-color: colors.$cramoisi;
+
+#corps-action-container{
+	@include utilitaires.centrer-horizontal(75%);
+	min-height:800px;
+}
+.lien-modifier{
+	@include utilitaires.centrer-vertical;
+	margin-left:auto;
+	text-decoration: underline;
+	color: $lien-color;
+	font-size: utilitaires.$text-L;
+	font-weight: bold;
+	cursor: pointer;
+}
+.zone{
+	border: solid $zone-border-color 1px;
+	margin-top: 50px;
+	margin-bottom:10px;
+	padding: 20px;
+	box-shadow: 0px 10px 10px 0px $nuance;
+}
+.zone-tete{
+	&>div{
+		.info-libelle{
+			margin-right:10px;
+		}
+		margin-bottom:10px;
+	}
+}
+
+.zone-bloc{
+	.info-libelle{
+		margin-bottom:10px;
+	}
+	width:50%;
+}
+.info-libelle{
+	font-weight:bold;
+	font-size: utilitaires.$text-M;
+}
+.info-value{
+	@include utilitaires.centrer-vertical;
+}
+
+
+#tableau-header{
+	background-color: $table-head-bg;
+	padding: 20px 0px;
+	color: $table-head-color;
+}
+.tableau-head{
+	width:25%;
+	text-align: center;
+	font-size: utilitaires.$text-M;
+}
+
+.libelle-responsive{
+	display: none;
+}
+.info-bloc{
+	div{
+		text-align: center;
+		flex:1;
+	}
+	@include utilitaires.centrer-vertical;
+	width:25%;
+	padding:10px 0px;
+}
+.impaire{
+	background-color: $nuance;
+}
+.ligne{
+	margin-top: 20px;
+	
+}
+#tableau-corps{
+	.ligne{
+		&:hover{
+			background-color: $hover-bg;
+			color: $hover-color;
+			cursor:pointer;
+		}
+	}
+}
+.bloc-value{
+	@include utilitaires.centrer-vertical;
+}
+@media screen and (max-width: 1024px){
+
+}
+
+@media screen and (max-width: 768px){
+	#tableau-header{
+		display:none;
+	}
+	.info-bloc{
+		width:100%;
+		display:flex;
+		flex-direction:row;
+	}
+	.libelle-responsive{
+		display:flex;
+	}
+	#titre{
+		margin-top:40px;
+		font-size: utilitaires.$text-XL;
+	}
+}
+@media screen and (max-width: 480px){
+	#tableau-header{
+		display:none;
+	}
+	.info-bloc{
+		width:100%;
+		display:flex;
+		flex-direction:row;
+	}
+	.libelle-responsive{
+		display:flex;
+	}
+	#titre{
+		margin-top:30px;
+		font-size: utilitaires.$text-L;
+	}
+}

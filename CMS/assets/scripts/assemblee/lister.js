@@ -52,7 +52,6 @@ function listerAssemblee(){
 			for(var line of lignes){
 				line.addEventListener('click',function(event){
 					saveToken(passeur,JSON.stringify(resultat.donnee[this.getAttribute('data-index')]))
-					console.log(this.getAttribute('data-index'))
 					setTimeout(()=>{
 						window.location.href=`${server}assemblee/detail/${this.getAttribute('id')}`
 					},500)
@@ -73,6 +72,7 @@ function listerAssemblee(){
 
 document.addEventListener('included',()=>{
 	listerAssemblee()
+	menuResponsiveActivation(route)
 })
 
 

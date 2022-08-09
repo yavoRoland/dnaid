@@ -8,7 +8,7 @@
 
 		public function ajouter($matricule, $nom, $pays, $region, $departement, $ville, $commune, $quartier, $description, $fullText){
 			try{
-				$req=$this->_bdd->prepare('INSERT INTO assemblee(matassemble, nomassemble, paysassemble, regionassemble, departassemble, villeassemble, communeassemble, quartierassemble, descriptionassemblee, fulltextassemble) VALUES(?,?,?,?,?,?,?,?,?,?)');
+				$req=$this->_bdd->prepare('INSERT INTO assemblee(matassemble, nomassemble, paysassemble, regionassemble, departassemble, villeassemble, communeassemble, quartierassemble, descriptionassemble, fulltextassemble) VALUES(?,?,?,?,?,?,?,?,?,?)');
 				return $req->execute(array($matricule, $nom, $pays, $region, $departement, $ville, $commune, $quartier, $description, $fullText));
 			}catch(Exception $e){
 				return false;
@@ -17,7 +17,7 @@
 
 		public function modifer($nom, $pays, $region, $departement, $ville, $commune, $quartier, $description, $fullText, $id){
 			try{
-				$req=$this->_bdd->prepare('UPDATE assemblee SET nomassemble=?, paysassemble=?, regionassemble=?, departassemble=?, villeassemble=?, communeassemble=?, quartierassemble=?, descriptionassemblee=?, fulltextassemble=? WHERE idassemble=?');
+				$req=$this->_bdd->prepare('UPDATE assemblee SET nomassemble=?, paysassemble=?, regionassemble=?, departassemble=?, villeassemble=?, communeassemble=?, quartierassemble=?, descriptionassemble=?, fulltextassemble=? WHERE idassemble=?');
 				return $req->execute(array($nom, $pays, $region, $departement, $ville, $commune, $quartier, $description, $fullText, $id));
 			}catch(Exception $e){
 				return false;

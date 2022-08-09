@@ -18,18 +18,18 @@ function listerService(){
 			resultat.donnee.forEach((elt, index)=>{
 				let pariteLigne = index % 2 == 0? "paire":"impaire"
 				lines+= `
-					<div id="${elt.idservice}" class="ligne ${pariteLigne} ligne-temporaire">
+					<div id="${elt.idservice}" class="ligne ${pariteLigne} ligne-temporaire" data-index="${index}">
 						<div id="rang-bloc" class="info-bloc ligne-permanente">
 							<div class="libelle-responsive"> Rang: </div>
 							<div>${index}</div>
 						</div>
 
-						<div class="info-bloc ligne-permanente">
+						<div class="info-bloc">
 							<div class="libelle-responsive"> Nom: </div>
 							<div class="bloc-value">${infoClaire(elt.nomservice)}</div>
 						</div>
 
-						<div class="info-bloc ligne-permanente">
+						<div class="info-bloc">
 							<div class="libelle-responsive"> Date de création: </div>
 							<div class="bloc-value">${infoClaire(elt.datecreatservice)}</div>
 						</div>
@@ -42,7 +42,10 @@ function listerService(){
 			let lignes = document.getElementsByClassName('ligne')
 			for(var line of lignes){
 				line.addEventListener('click',function(event){
-					console.log("on a clicker sur "+this.getAttribute('id'))
+					saveToken(passeur,JSON.stringify(resultat.donnee[this.getAttribute('data-index')]))
+					setTimeout(()=>{
+						window.location.href=`${server}service/detail/${this.getAttribute('id')}`
+					},500)
 				})
 			}
 		}else{
@@ -54,4 +57,5 @@ function listerService(){
 
 document.addEventListener('included',()=>{
 	listerService()
+	menuResponsiveActivation(route)
 })

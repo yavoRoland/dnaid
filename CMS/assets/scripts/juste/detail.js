@@ -1,13 +1,15 @@
 route="juste"
 urlParams=["juste"]//tableau declaré dans utilitaires.js
 
-function infosPasseur(){
-	let juste= false
-	try{
-		juste= JSON.parse(getToken(passeur))
-	}catch(error){
+function activerLienModifier(){
+	document.getElementById('lien-modifier-info').addEventListener('click',function(){
+		window.location.href = `${server}juste/modifier/${getParameters(urlParams).juste}`
+	})
+}
 
-	}
+function infosPasseur(){
+	let juste= getInfoByPasseur()
+	
 	if(!juste)
 		return
 
@@ -83,6 +85,7 @@ function infosPasseur(){
 
 	</div>
 	`
+	activerLienModifier()
 }
 
 function infosAssemblee(infos){
@@ -163,21 +166,21 @@ function infosGroupe(infos){
 						</div>
 
 						<div class="info-bloc ligne-permanente">
-							<div class="libelle-responsive">Prenom: </div>
+							<div class="libelle-responsive">Rôle: </div>
 							<div class="bloc-value">${infoClaire(elt.roleappartenir)}</div>
 						</div>
 
 						<div class="info-bloc ligne-permanente">
-							<div class="libelle-responsive">Téléphone: </div>
+							<div class="libelle-responsive">Date d'adhésion: </div>
 							<div class="bloc-value">${infoClaire(elt.datedebutappartenir)}</div>
 						</div>
 
 						<div class="info-bloc ligne-permanente">
-							<div class="libelle-responsive">Adresse: </div>
+							<div class="libelle-responsive">Date de retractation: </div>
 							<div class="bloc-value">${infoClaire(elt.datefinappartenir)}</div>
 						</div>
 						<div class="info-bloc ligne-permanente">
-							<div class="libelle-responsive">Adresse: </div>
+							<div class="libelle-responsive">Details: </div>
 							<div class="bloc-value">${infoClaire(elt.datefinappartenir,"Toujours membre")}</div>
 						</div>
 					</div>
@@ -196,4 +199,5 @@ document.addEventListener('included',()=>{
 	infosPasseur()
 	infosAssemblee()
 	infosGroupe()
+	menuResponsiveActivation(route)
 })

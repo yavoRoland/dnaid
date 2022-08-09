@@ -79,4 +79,5 @@ function listerJuste(){
 
 document.addEventListener('included',()=>{
 	listerJuste()
+	menuResponsiveActivation(route)
 })

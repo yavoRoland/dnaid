@@ -117,10 +117,10 @@
         public function listeGroupe($juste,$page,$quantite){
             try{
                 $APPARTENIR_ACTIF=1;
-                $total=$this->_bdd->prepare('SELECT COUNT(*) AS G_TOTAL FROM appartenir WHERE justeappartenir=? AND statutappartnir=?');
+                $total=$this->_bdd->prepare('SELECT COUNT(*) AS G_TOTAL FROM appartenir WHERE justeappartenir=? AND statutappartenir=?');
                 $total->execute(array($juste,$APPARTENIR_ACTIF));
 
-                $req=$this->_bdd->prepare('SELECT * FROM appartenir, groupe WHERE justeappartenir=:juste AND statutappartnir=:statut AND groupeappartenir=idgroupe ORDER BY nomgroupe ASC LIMIT :page,:quantite');
+                $req=$this->_bdd->prepare('SELECT * FROM appartenir, groupe WHERE justeappartenir=:juste AND statutappartenir=:statut AND groupeappartenir=idgroupe ORDER BY nomgroupe ASC LIMIT :page,:quantite');
 
                 $req->bindValue(':statut',$APPARTENIR_ACTIF,PDO::PARAM_INT);
                 $req->bindValue(':juste',$juste,PDO::PARAM_INT);

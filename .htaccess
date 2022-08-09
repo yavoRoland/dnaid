@@ -2,17 +2,33 @@ ReWriteEngine On
 
 RewriteRule ^system$ API/ApiSystem.php [L]
 RewriteRule ^test$ API/ApiTest.php [L]
+
 RewriteRule ^auth$ CMS/connexion.html [L]
 RewriteRule ^proto$ CMS/template.html [L]
 RewriteRule ^teste$ CMS/test.html [L]
 RewriteRule ^(home|index|accueil)$ CMS/accueil.html [L]
+
+RewriteRule ^assemblee/ajouter$ CMS/pages/assemblee/ajouter.html [L]
+RewriteRule ^assemblee/lister/([0-9]+)$ CMS/pages/assemblee/lister.html?page=$1 [L]
+RewriteRule ^assemblee/detail/([0-9]+)$ CMS/pages/assemblee/detail.html?assemble=$1 [L]
+RewriteRule ^assemblee/modifier/([0-9]+)$ CMS/pages/assemblee/modifier.html?assemblee=$1 [L]
+
+
 RewriteRule ^juste/ajouter$ CMS/pages/juste/ajouter.html [L]
 RewriteRule ^juste/lister/([0-9]+)$ CMS/pages/juste/lister.html?page=$1 [L]
 RewriteRule ^juste/detail/([0-9]+)$ CMS/pages/juste/detail.html?juste=$1 [L]
-RewriteRule ^assemblee/ajouter$ CMS/pages/assemblee/ajouter.html [L]
-RewriteRule ^assemblee/lister/([0-9]+)$ CMS/pages/assemblee/lister.html?page=$1 [L]
-RewriteRule ^assemblee/detail/([0-9]+)$ CMS/pages/assemblee/detail.html?juste=$1 [L]
-RewriteRule ^service/ajouter$ CMS/pages/service/ajouter.html [L]
-RewriteRule ^service/lister/([0-9]+)$ CMS/pages/service/lister.html?page=$1 [L]
+RewriteRule ^juste/modifier/([0-9]+)$ CMS/pages/juste/modifier.html?juste=$1 [L]
+RewriteRule ^juste/illustration/(.+)$ dao/illustration/juste/photo/$1 [L]
+
+
 RewriteRule ^groupe/ajouter$ CMS/pages/groupe/ajouter.html [L]
 RewriteRule ^groupe/lister/([0-9]+)$ CMS/pages/groupe/lister.html?page=$1 [L]
+RewriteRule ^groupe/detail/([0-9]+)$ CMS/pages/groupe/detail.html?groupe=$1 [L]
+RewriteRule ^groupe/modifier/([0-9]+)$ CMS/pages/groupe/modifier.html?groupe=$1 [L]
+
+
+RewriteRule ^service/ajouter$ CMS/pages/service/ajouter.html [L]
+RewriteRule ^service/lister/([0-9]+)$ CMS/pages/service/lister.html?page=$1 [L]
+RewriteRule ^service/detail/([0-9]+)$ CMS/pages/service/detail.html?service=$1 [L]
+RewriteRule ^service/modifier/([0-9]+)$ CMS/pages/service/modifier.html?service=$1 [L]
+

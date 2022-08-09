@@ -63,11 +63,27 @@ function navigationLatterale(){
 	}
 }
 
+function menuResponsiveActivation(route){
 
+	let menuElts= document.getElementsByClassName("menu-responsive-elt")
+	actifs= document.getElementsByClassName('actif')
+	for(var actif of actifs){
+		actif.classList.remove('actif')
+	}
+	ssMenuContainers= document.getElementsByClassName('ss-menu-elt-container')
+	for(smc of ssMenuContainers){
+		smc.classList.add('invisible')
+	}
+	if(route){
+		document.getElementById(`menu-${route}-elt`).classList.remove('invisible')
+		document.getElementById(`menu-${route}`).parentNode.classList.add('actif')
+	}
+	
+}
 
 
 document.addEventListener('included',()=>{
-	identification();
+	//identification();
 	actionMenuResponsive();
 	document.getElementById('menu-burger-container').addEventListener('click',afficherMenu);
 	document.getElementById('fermer-menu').addEventListener('click',cacherMenu)

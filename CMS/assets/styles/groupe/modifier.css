@@ -1,0 +1,73 @@
+#corps-action-container {
+  width: 60%;
+  margin: auto;
+}
+
+.chp-bloc {
+  font-size: 18px;
+  margin-top: 50px;
+}
+.chp-bloc .chp-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 15%;
+  padding-right: 10px;
+}
+.chp-bloc input {
+  width: 80%;
+  font-size: 18px;
+}
+.chp-bloc textarea {
+  width: 80%;
+  height: 150px;
+  font-size: 18px;
+}
+
+.btn-container {
+  width: 10%;
+  margin: auto;
+  margin-top: 50px;
+}
+.btn-container button {
+  font-size: 25px;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+#feed-back {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .chp-bloc .chp-label {
+    width: 100%;
+    text-align: center;
+  }
+  .chp-bloc input {
+    width: 100%;
+  }
+
+  #corps-action-container {
+    width: 80%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 480px) {
+  .chp-bloc .chp-label {
+    width: 100%;
+    text-align: center;
+  }
+  .chp-bloc input {
+    width: 100%;
+  }
+
+  #corps-action-container {
+    width: 100%;
+    margin: auto;
+  }
+}
+
+/*# sourceMappingURL=modifier.css.map */

@@ -1,13 +1,14 @@
 route="assemblee"
 urlParams=["assemblee"]//tableau declaré dans utilitaires.js
 
-function infosPasseur(){
-	let assemblee=false
-	try{
-		assemblee = JSON.parse(getToken(passeur))
-	}catch(error){
 
-	}
+function activerLienModifier(){
+	document.getElementById('lien-modifier-info').addEventListener('click',function(){
+		window.location.href = `${server}assemblee/modifier/${getParameters(urlParams).assemblee}`
+	})
+}
+function infosPasseur(){
+	let assemblee=getInfoByPasseur()
 	if(!assemblee)
 		return
 	let container= document.getElementById('info-generale-container')
@@ -56,8 +57,51 @@ function infosPasseur(){
 	`
 }
 
+function infosJuste(){
+	let assemblee=getParameters(urlParams).assemblee
+	var formData= new FormData()
+	formData.append('code','A2-7')
+	formData.append('assemblee',assemblee)
+	formData.append('page',0)
+	executeRequete(formData)
+	.then(resultat=>{
+		if(resultat.code==requete_reussi){
+			document.getElementById('info-juste-part').classList.remove('invisible')
+			let container=document.getElementById('tableau-corps')
+			resultat.donnee.forEach((elt,index)=>{
+				let pariteLigne= index % 2==0? "paire": "impaire"
+				container.innerHTML+=`
+					<div id="${elt.idassemble}" class="ligne ${pariteLigne} ligne-temporaire" data-index="${index}">
+						<div class="info-bloc ligne-permanente">
+							<div class="libelle-responsive">Nom & Prenoms:</div>
+							<div class="bloc-value">${infoClaire(elt.nomjuste)} ${infoClaire(elt.prenomjuste)}</div>
+						</div>
+
+						<div class="info-bloc ligne-permanente">
+							<div class="libelle-responsive">Fonction:</div>
+							<div class="bloc-value">${infoClaire(elt.fonctionrattacher)}</div>
+						</div>
+
+						<div class="info-bloc ligne-permanente">
+							<div class="libelle-responsive">Téléphone:</div>
+							<div class="bloc-value">${infoClaire(elt.phonejuste)}</div>
+						</div>
+
+						<div class="info-bloc ligne-permanente">
+							<div class="libelle-responsive">Date de rattachement:</div>
+							<div class="bloc-value">${infoClaire(elt.datedebutrattacher)}</div>
+						</div>
+					</div>
+				`
+			})
+		}
+	})
+}
+
 
 document.addEventListener('included',()=>{
-	console.log("executionnnnn")
 	infosPasseur()
+	infosJuste()
+	activerLienModifier()
+	menuResponsiveActivation(route)
 })

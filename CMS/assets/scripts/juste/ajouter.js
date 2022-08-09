@@ -1,17 +1,11 @@
 route="juste"
-function afficherAssemblee(){
-	let userInfo=getToken(userInfoToken)
-	if(userInfo){
-		let user= JSON.parse(userInfo)
-		if(user.niveaujuste>2){
-			document.getElementById('assemble-bloc').classList.remove('invisible')
 
-			if(user.assemblerattacher)
-				document.getElementById('assemble').value=user.matassemble
-		}
+function chargerAnneeNouvelleNaissance(){
+	let select = document.getElementById('nvelNais')
+	for(i=1990; i<new Date().getFullYear(); i++){
+		select.innerHTML+=`<option value="${i}">${i}</option>`
 	}
 }
-
 function chargerEthnie(){
 	fetch('../CMS/assets/data/ethnie.json')
 	.then(response=> response.json())
@@ -34,22 +28,6 @@ function chargerFonction(){
 	.catch(error=>console.log(error))
 }
 
-function activerVisualiseur(){
-	let source=document.getElementById('source')
-	let visualiseur=document.getElementById('photo')
-	source.addEventListener('change',()=>{
-		
-		var reader=new FileReader()
-		reader.addEventListener('load',()=>{
-			visualiseur.src=reader.result
-		})
-		try{
-			reader.readAsDataURL(source.files[0])
-		}catch(e){
-			console.log(e)
-		}
-	})
-}
 
 function activerClearPhoto(){
 	document.getElementById('clear-photo').addEventListener('click',function(){
@@ -59,11 +37,45 @@ function activerClearPhoto(){
 	})
 }
 
+function chargerAssemblee(page){
+	let formData=new FormData()
+	formData.append('code','A2-6')
+	formData.append('page',page)
+	executeRequete(formData)
+	.then(resultat=>{
+		if(resultat.code==requete_reussi){
+			let assembleeListe=document.getElementById('assemble-list')
+			resultat.donnee.forEach((elt,index)=>{
+				assembleeListe.innerHTML+=`<option value="${elt.idassemble}-${elt.matassemble} ${elt.nomassemble}">`
+			})
+			if(parseInt(resultat.total.A_TOTAL) < (page *10)){
+				chargerAssemblee(page+1)
+			}
+		}
+	})
+}
+
+function visibiliteAssembleeBloc(){
+	try{
+		const user=JSON.parse(getToken(userInfoToken))
+		if(user.niveaujuste){
+			if(parseInt(user.niveaujuste)==superUtilisateur){
+				document.getElementById('assemblee-bloc').classList.remove("invisible")
+				chargerAssemblee("0")
+			}
+		}
+
+
+	}catch(e){
+
+	}
+}
+
 function activerEnregistrerJuste(){
 	document.getElementById('btn-valider').addEventListener('click',function(event){
 		event.preventDefault()
 		var formData=new FormData()
-		let exceptions= ["menu-chp-rechercher","source"]
+		let exceptions= ["menu-chp-rechercher","source","assemble"]
 
 		let infos=document.getElementsByTagName('input')
 		let formulaire=document.getElementById('monformulaire')
@@ -71,36 +83,44 @@ function activerEnregistrerJuste(){
 		let feedBack=document.getElementById('feed-back')
 		let visualiseur=document.getElementById('photo')
 		feedBack.innerHTML=''
-
+		let valide=true
 		for(i=0; i<infos.length; i++){
 			
 			if(exceptions.find(elt=> elt==infos[i].getAttribute('name')))
 				continue
 
-			if(!formulaire.reportValidity())
-				break;
+			infos[i].value=valeurClaire(infos[i].value)
 
-			if(infos[i].required && infos[i].value && infos[i].value.trim().length==0){
-				infos[i].value=null
-				formulaire.reportValidity()
+			if(!formulaire.reportValidity()){
+				valide= false
 				break;
 			}
+
 
 			if(i<infos.length-1){
 				if(infos[i].getAttribute('name') == infos[i+1].getAttribute('name')){
 					if(infos[i].checked)
-						formData.append(infos[i].getAttribute('name') , valeurClaire(infos[i].value))
+						formData.append(infos[i].getAttribute('name') ,infos[i].value)
 					else
-						formData.append(infos[i+1].getAttribute('name') , valeurClaire(infos[i+1].value))
+						formData.append(infos[i+1].getAttribute('name') , infos[i+1].value)
 					i++
 					continue
 				}
 			}
-			formData.append(infos[i].getAttribute('name') , valeurClaire(infos[i].value))
+			formData.append(infos[i].getAttribute('name') , infos[i].value)
 			
 		}
-
-
+		
+		if(!valide)
+			return
+		const user=JSON.parse(getToken(userInfoToken))
+		if(user.niveaujuste){
+			if(parseInt(user.niveaujuste)==2 && document.getElementById('assemble').value){
+				formData.append('assemblee',document.getElementById('assemble').value.split('-')[0])
+			}else{
+				formData.append('assemblee',user.idassemble)
+			}
+		}
 
 		let source=document.getElementById('source')
 		if(source.files.length<0){
@@ -126,8 +146,11 @@ function activerEnregistrerJuste(){
 document.addEventListener('included',function(){
 	chargerEthnie()
 	chargerFonction()
-	activerVisualiseur()
+	chargerAnneeNouvelleNaissance()
+	visibiliteAssembleeBloc()
+	activerVisualiseur(source=document.getElementById('source'),document.getElementById('photo'))
 	activerClearPhoto()
 	activerEnregistrerJuste()
+	menuResponsiveActivation(route)
 })
 

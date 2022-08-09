@@ -9,18 +9,16 @@ function activerEnregisterAssemblee(){
 		let feedBack = document.getElementById('feed-back')
 
 		feedBack.innerHTML=""
-		
+		let exceptions=["menu-chp-rechercher"]
 		
 		for(var info of infos){
-
+			if(exceptions.find(elt=> elt==info.getAttribute("name")))
+				continue
+			info.value= valeurClaire(info.value)
+			
 			if(!formulaire.reportValidity())
 				break;
 
-			if(info.required && info.value && info.value.trim().length==0){
-				info.value=null
-				formulaire.reportValidity()
-				break;
-			}
 
 			formData.append(info.getAttribute('name') , valeurClaire(info.value))
 			
@@ -41,6 +39,6 @@ function activerEnregisterAssemblee(){
 
 
 document.addEventListener('included',function(){
-
 	activerEnregisterAssemblee()
+	menuResponsiveActivation(route)
 })

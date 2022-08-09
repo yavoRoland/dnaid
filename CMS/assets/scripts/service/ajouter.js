@@ -7,14 +7,10 @@ function activerEnregistrerService(){
 		let feedBack= document.getElementById('feed-back')
 		feedBack.innerHTML= ''
 		let nom=document.getElementById('nom')
-
+		nom.value = valeurClaire(nom.value)
 		if(formulaire.reportValidity()){
-			if(nom.value && nom.value.trim().length==0){
-				nom.value=null
-				formulaire.reportValidity()
-				return;
-			}
-			formData.append('nom', valeurClaire(nom.value))
+			
+			formData.append('nom', nom.value)
 			formData.append('datecreat',document.getElementById('datecreat').value)
 			formData.append('code','S1-1')
 
@@ -26,7 +22,7 @@ function activerEnregistrerService(){
 				feedBack.innerHTML=resultat.message
 			})
 			.catch(error=>feedBack.innerHTML=msgErreurTechnique)
-			}
+		}
 
 		
 	})
@@ -34,4 +30,5 @@ function activerEnregistrerService(){
 
 document.addEventListener('included',function(){
 	activerEnregistrerService()
+	menuResponsiveActivation(route)
 })

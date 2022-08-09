@@ -15,10 +15,10 @@
 		$metier=$GLOBALS["metier"];
 		$message=$resultat["message"];
 
-		if($resultat["code"]>0){
+		/*if($resultat["code"]>0){
 			$message .= " user : ".$jwtManager->getJwtEncodedPayload($jwtManager->getBearerToken());//il faudra decoder le payload dans le log pour savoir qui a executer la requete
 			$resultat["jwt"]= $metier->increaseJwtTime();
-		}
+		}*/
 
 		Utilitaire::log($message,REPERTOIRE_SYS_LOG);
 		echo json_encode($resultat,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
@@ -50,7 +50,8 @@
 			Utilitaire::log($message,REPERTOIRE_SYS_LOG);
 			echo json_encode($resultat,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 		}else{
-			if(!$check["checked"]){
+			//if(!$check["checked"]){
+			if(false){
 				reponse($check);
 			}else{
 				switch($_POST['code']){

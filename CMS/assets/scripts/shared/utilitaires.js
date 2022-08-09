@@ -4,6 +4,9 @@ const requete_reussi=1;
 const liste_vide=2;
 const msgErreurTechnique="Une erreur s'est produite. Vuillez reéssayez! si elle persiste, contacter l'administrateur."
 var urlParams=new Array();//chaque page liste dans l'ordre reverse les parametres qui lui sont passés via l'url dans ce tableau en le redifinissant
+const superUtilisateur=2
+const admnistrateur=1
+
 
 function getParameters(noms){//on passe a cette fonction le tableau urlParams redefinit par la page
 	let parameters={}
@@ -13,6 +16,8 @@ function getParameters(noms){//on passe a cette fonction le tableau urlParams re
 	})
 	return parameters
 }
+
+
 function afficherPagination(total,quantite){
 	let currPage=getParameters(["page"])? parseInt(getParameters(urlParams).page):1
 
@@ -68,9 +73,10 @@ function afficherPagination(total,quantite){
 		})
 	}
 }
+
 function valeurClaire(valeur){
 	if(!(valeur==null))
-		return valeur.trim()
+		return valeur.trim().length>0? valeur.trim : null
 	else
 		return valeur
 }
@@ -108,7 +114,30 @@ function executeRequete(formData, token=true){
 			xhr.setRequestHeader('Authorization',`Bearer ${getToken(jwtToken)}`)
 		xhr.send(formData)
 	})
-	return execution
+	return execution		
+}
+
+function getInfoByPasseur(){
+	let info=false
+	try{
+		info=JSON.parse(getToken(passeur))
+	}catch(e){
+	}
+	return info
+}
+
+function activerVisualiseur(source, visualiseur){
+	source.addEventListener('change',()=>{
 		
+		var reader=new FileReader()
+		reader.addEventListener('load',()=>{
+			visualiseur.src=reader.result
+		})
+		try{
+			reader.readAsDataURL(source.files[0])
+		}catch(e){
+			console.log(e)
+		}
+	})
 }
 

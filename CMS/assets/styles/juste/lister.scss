@@ -56,3 +56,54 @@ $hover-color: colors.$cramoisi;
 .bloc-value{
 	@include utilitaires.centrer-vertical;
 }
+
+@media screen and (max-width: 1024px){
+
+}
+
+@media screen and (max-width: 768px){
+	#tableau-header{
+		display:none;
+	}
+	.info-bloc{
+		width:100%;
+		display:flex;
+		flex-direction:row;
+	}
+	.libelle-responsive{
+		display:flex;
+	}
+	#titre{
+		margin-top:40px;
+		font-size: utilitaires.$text-XL;
+	}
+	.ligne{
+		padding: 15px 0px;
+	}
+	#rang-bloc{
+		display:none;
+	}
+}
+@media screen and (max-width: 480px){
+	#tableau-header{
+		display:none;
+	}
+	.info-bloc{
+		width:100%;
+		display:flex;
+		flex-direction:row;
+	}
+	.libelle-responsive{
+		display:flex;
+	}
+	#titre{
+		margin-top:30px;
+		font-size: utilitaires.$text-L;
+	}
+	.ligne{
+		padding: 15px 0px;
+	}
+	#rang-bloc{
+		display:none;
+	}
+}
