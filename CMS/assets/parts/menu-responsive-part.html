@@ -3,40 +3,46 @@
 				<div id="menu-responsive-user">Y. Roland</div>
 				<div id="fermer-menu">X</div>
 			</div>
-			<div class="ligne-permanente menu-rechercher">
-				<div class="search-label">
-					<label for="menu-chp-rechercher"> <i class="fas fa-search"></i> </label>
+			<div class="ligne-permanente">
+				<div class="ligne-permanente menu-rechercher" id="responsive-menu-rechercher">
+					<div class="search-label">
+						<label for="menu-chp-rechercher"> <i class="fas fa-search"></i> </label>
+					</div>
+					
+					<input type="text" name="menu-chp-rechercher" id="menu-reponsive-chp-rechercher" class="chp-search">
 				</div>
-				
-				<input type="text" name="menu-chp-rechercher" id="menu-reponsive-chp-rechercher">
+
+				<div class="securite">
+					<a href="http://localhost:8888/dnaid/juste/securite"><i class="fas fa-lock"></i></a>
+				</div>
 			</div>
 			<div id="menu-responsive-action">
 				<div class="menu-elt-container">
 					<div id="menu-assemblee" class="menu-responsive-elt">Assemblee</div>
 					<div id="menu-assemblee-elt" class="ss-menu-elt-container invisible">
-						<div class="ss-menu-elt"><a href="http://localhost:8888/dnaid/assemblee/ajouter">Ajouter</a></div>
-						<div class="ss-menu-elt"><a href="http://localhost:8888/dnaid/assemblee/lister/1">Lister</a></div>
+						<div class="ss-menu-elt" data-nom="ajouter"><a href="http://localhost:8888/dnaid/assemblee/ajouter">Ajouter</a></div>
+						<div class="ss-menu-elt" data-nom="lister"><a href="http://localhost:8888/dnaid/assemblee/lister/1">Lister</a></div>
 					</div>
 				</div>
 				<div class="menu-elt-container">
 					<div id="menu-groupe" class="menu-responsive-elt">Groupe</div>
 					<div id="menu-groupe-elt" class="ss-menu-elt-container invisible">
-						<div class="ss-menu-elt"><a href="http://localhost:8888/dnaid/groupe/ajouter">Ajouter</a></div>
-						<div class="ss-menu-elt"><a href="http://localhost:8888/dnaid/groupe/lister/1">Lister</a></div>
+						<div class="ss-menu-elt" data-nom="ajouter"><a href="http://localhost:8888/dnaid/groupe/ajouter">Ajouter</a></div>
+						<div class="ss-menu-elt" data-nom="lister"><a href="http://localhost:8888/dnaid/groupe/lister/1">Lister</a></div>
 					</div>
 				</div>
 				<div class="menu-elt-container">
 					<div id="menu-juste" class="menu-responsive-elt">Juste</div>
 					<div id="menu-juste-elt" class="ss-menu-elt-container invisible">
-						<div class="ss-menu-elt"><a href="http://localhost:8888/dnaid/juste/ajouter">Ajouter</a></div>
-						<div class="ss-menu-elt"><a href="http://localhost:8888/dnaid/juste/lister/1">Lister</a></div>
+						<div class="ss-menu-elt" data-nom="ajouter"><a href="http://localhost:8888/dnaid/juste/ajouter">Ajouter</a></div>
+						<div class="ss-menu-elt" data-nom="lister"><a href="http://localhost:8888/dnaid/juste/lister/1">Lister</a></div>
 					</div>
 				</div>
 				<div class="menu-elt-container">
 					<div id="menu-service" class="menu-responsive-elt">Service</div>
 					<div id="menu-service-elt" class="ss-menu-elt-container invisible">
-						<div class="ss-menu-elt"><a href="http://localhost:8888/dnaid/service/ajouter">Ajouter</a></div>
-						<div class="ss-menu-elt"><a href="http://localhost:8888/dnaid/service/lister/1">Lister</a></div>
+						<div class="ss-menu-elt" data-nom="ajouter"><a href="http://localhost:8888/dnaid/service/ajouter">Ajouter</a></div>
+						<div class="ss-menu-elt" data-nom="lister"><a href="http://localhost:8888/dnaid/service/lister/1">Lister</a></div>
 					</div>
 				</div>
 			</div>

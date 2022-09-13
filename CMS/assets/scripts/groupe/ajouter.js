@@ -3,6 +3,10 @@ route="groupe"
 
 
 function chargerService(page){
+	let service=getInfoByPasseur()
+	if(service && service.matservice)
+		document.getElementById('service').value=`${service.matservice} ${service.nomservice}`
+
 	var formData = new FormData()
 	formData.append('code','S1-5')
 	formData.append('page',page)
@@ -12,10 +16,10 @@ function chargerService(page){
 		if(resultat.code == requete_reussi){
 			let serviceListe=document.getElementById('service-list')
 			resultat.donnee.forEach((elt,index)=>{
-				serviceListe.innerHTML+=`<option value="${elt.idservice}-${elt.matservice} ${elt.nomservice}">`
+				serviceListe.innerHTML+=`<option value="${elt.matservice} ${elt.nomservice}">`
 			})
 
-			if(parseInt(resultat.total.S_TOTAL) > (page * 10)){
+			if(parseInt(resultat.total.S_TOTAL) > ((page+1) * qte_standard)){
 				chargerService(page + 1)
 			}
 		}
@@ -47,14 +51,14 @@ function activerEnregisterGroupe(){
 
 			
 
-			formData.append(info.getAttribute('name') , info.value)
+			formData.append(info.getAttribute('name') , valeurClaireForApi(info.value))
 			
 		}
 		if(!valide)
 			return
 
-		formData.append('description',valeurClaire(document.getElementById(description)))
-		formData.append('service',document.getElementById('service').value.split('-')[0])
+		formData.append('description',valeurClaireForApi(document.getElementById("description").value))
+		formData.append('service',document.getElementById('service').value.split(' ')[0])
 		formData.append('code','G1-1')
 
 		executeRequete(formData)
@@ -69,9 +73,10 @@ function activerEnregisterGroupe(){
 }
 
 
-document.addEventListener('included',function(){
 
+document.addEventListener('included',function(){
 	activerEnregisterGroupe()
 	menuResponsiveActivation(route)
 	chargerService("0")
 })
+includeHTML()

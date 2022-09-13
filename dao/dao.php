@@ -51,6 +51,14 @@
 			return $appartenir->rechercher($id);
 		}
 
+		public function rechercherAppartenirUnicite($juste, $groupe, $statut){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$appartenir=new Appartenir($this->_bdd);
+			return $appartenir->rechercherPourUnicite($juste,$groupe,$statut);
+		}
+
 		public function supprimerAppartenir($id){
 			if(!$this->_bdd){
 				throw new Exception('Echec de connexion à la base de données');
@@ -176,6 +184,14 @@
 			return $groupe->rechercherParMatricule($matricule);
 		}
 
+		public function rechercherGroupeParFullText($text, $page, $quantite){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$groupe=new Groupe($this->_bdd);
+			return $groupe->rechercherParFullText($text, $page, $quantite);
+		}
+
 		public function supprimerGroupe($id){
 			if(!$this->_bdd){
 				throw new Exception('Echec de connexion à la base de données');
@@ -213,21 +229,21 @@
 		/**************************************************************************/
 		/**************************************************************************/
 		//GESTION JUSTE
-		public function ajouterJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $fullText){
+		public function ajouterJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $origine, $datedeces, $fullText){
 			if(!$this->_bdd){
 				throw new Exception('Echec de connexion à la base de données');
 			}
 			$juste=new Juste($this->_bdd);
-			return $juste->ajouter($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $fullText);
+			return $juste->ajouter($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $origine, $datedeces, $fullText);
 		}
 
-		public function modifierJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $fullText, $id){
+		public function modifierJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $origine, $datedeces, $fullText, $id){
 			if(!$this->_bdd){
 				throw new Exception('Echec de connexion à la base de données');
 			}
 				
 			$juste=new Juste($this->_bdd);
-			return $juste->modifier($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $fullText, $id);
+			return $juste->modifier($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $origine, $datedeces, $fullText, $id);
 		}
 
 		public function modifierNiveauJuste($niveau, $login, $mdp, $id){
@@ -306,6 +322,15 @@
 			$juste=new Juste($this->_bdd);
 			return $juste->listeAssemble($id, $page, $quantite);
 		}
+		public function listeAssembleeJusteParStatut($juste,$page,$statut,$quantite){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$juste=new Juste($this->_bdd);
+			return $juste->listeAssembleParStatut($juste,$page,$statut,$quantite);
+		}
+
+		
 
 
 
@@ -333,6 +358,14 @@
 			}
 			$rattacher=new Rattacher($this->_bdd);
 			return $rattacher->rechercher($id);
+		}
+
+		public function rechercherRattacherUnicite($juste, $assemble, $statut){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$rattacher=new Rattacher($this->_bdd);
+			return $rattacher->rechercherPourUnicite($juste,$assemble,$statut);
 		}
 		public function supprimerRattacher($id){
 			if(!$this->_bdd){
@@ -377,6 +410,14 @@
 			}
 			$service=new Service($this->_bdd);
 			return $service->rechercherParMatricule($matricule);
+		}
+
+		public function rechercherServiceParFullText($text,$page,$quantite){
+			if(!$this->_bdd){
+				throw new Exception('Echec de connexion à la base de données');
+			}
+			$service=new Service($this->_bdd);
+			return $service->rechercherParFullText($text,$page,$quantite);
 		}
 
 		public function supprimerService($id){

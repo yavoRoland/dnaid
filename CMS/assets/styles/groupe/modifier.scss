@@ -53,13 +53,17 @@
 			width:100%;
 			text-align: center;
 		}
-		input{
+		input,textarea{
 			width:100%;
 		}
 	}
 	
 	#corps-action-container{
 		@include utilitaires.centrer-horizontal(80%);
+	}
+	.btn-container{
+		@include utilitaires.centrer-horizontal(100%);
+		margin-top:50px;
 	}
 }
 
@@ -69,12 +73,16 @@
 			width:100%;
 			text-align: center;
 		}
-		input{
+		input,textarea{
 			width:100%;
 		}
 	}
 	
 	#corps-action-container{
 		@include utilitaires.centrer-horizontal(100%);
+	}
+	.btn-container{
+		@include utilitaires.centrer-horizontal(100%);
+		margin-top:50px;
 	}
 }

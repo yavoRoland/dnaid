@@ -1,5 +1,4 @@
 route="groupe"
-const quantite= 15
 
 urlParams=["page"] //tableau declaré dans utilitaires.js
 
@@ -37,14 +36,14 @@ function listerGroupe(){
 			})
 			document.getElementById('tableau-corps').innerHTML=lines
 			document.getElementById('tableau').classList.remove('invisible')
-			afficherPagination(parseInt(resultat.total.G_TOTAL),quantite)
+			afficherPagination(parseInt(resultat.total.G_TOTAL),qte_huge)
 			let lignes = document.getElementsByClassName('ligne')
 			for(var line of lignes){
 				line.addEventListener('click',function(event){
 					saveToken(passeur,JSON.stringify(resultat.donnee[this.getAttribute('data-index')]))
 					setTimeout(()=>{
 						window.location.href=`${server}groupe/detail/${this.getAttribute('id')}`
-					},500)
+					},300)
 				})
 			}
 		}else{
@@ -57,3 +56,4 @@ document.addEventListener('included',()=>{
 	listerGroupe()
 	menuResponsiveActivation(route)
 })
+includeHTML()

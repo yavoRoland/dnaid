@@ -15,10 +15,10 @@
 		$metier=$GLOBALS["metier"];
 		$message=$resultat["message"];
 
-		/*if($resultat["code"]>0){
+		if($resultat["code"]>0){
 			$message .= " user : ".$jwtManager->getJwtEncodedPayload($jwtManager->getBearerToken());//il faudra decoder le payload dans le log pour savoir qui a executer la requete
 			$resultat["jwt"]= $metier->increaseJwtTime();
-		}*/
+		}
 
 		Utilitaire::log($message,REPERTOIRE_SYS_LOG);
 		echo json_encode($resultat,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
@@ -35,11 +35,8 @@
 		$check=$jwtManager->checkSession();
 
 		if($_POST["code"]=="0"){
-			$resultat=$metier->ajouterJuste($_POST["nom"], $_POST["prenom"], $_POST["surnom"], $_POST["datenaiss"], $_POST["genre"], $_POST["etat"], $_POST["adresse"], $_POST["phone"], $_POST["grade"], $_POST["nvelNais"], $_POST["profession"], $_POST["statutMatri"], $_POST["ethnie"], null);
+			$resultat=$metier->ajouterJuste($_POST["nom"], $_POST["prenom"], $_POST["surnom"], $_POST["datenaiss"], $_POST["genre"], $_POST["etat"], $_POST["adresse"], $_POST["phone"], $_POST["grade"], $_POST["nvelNais"], $_POST["profession"], $_POST["statutMatri"], $_POST["ethnie"], null,null,null,null,null,null);
 
-			echo json_encode($resultat,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
-		}elseif($_POST["code"]=="1"){
-			$resultat=$metier->modifierNiveauJuste($_POST["niveau"], $_POST["juste"]);
 			echo json_encode($resultat,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 		}elseif($_POST["code"]=="J1-5"){
 			//connexion à un compte admnistrateur à partir du login et du mot de passe
@@ -50,8 +47,8 @@
 			Utilitaire::log($message,REPERTOIRE_SYS_LOG);
 			echo json_encode($resultat,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
 		}else{
-			//if(!$check["checked"]){
-			if(false){
+			if(!$check["checked"]){
+			//if(false){
 				reponse($check);
 			}else{
 				switch($_POST['code']){
@@ -59,21 +56,23 @@
 					//GESTION APPARTENIR CODE A1-...
 					case "A1-1":
 					//Adhesion d'un juste à un groupe
-						$resultat=$metier->ajouterAppartenir($_POST["juste"],$_POST["groupe"],$_POST["role"],$_POST["statut"],$_POST["dateDebut"]);
+						$resultat=$metier->ajouterAppartenir($_POST["juste"],$_POST["groupe"],$_POST["role"],$_POST["datedebut"]);
 						reponse($resultat);
 					break;
 
 					case "A1-2":
 					//Modification des informations concernant l'adhésion d'un juste à un groupe donné
-						$resultat=$metier->modifierAppartenir($_POST["juste"],$_POST["groupe"],$_POST["role"],$_POST["statut"],$_POST["dateDebut"],$_POST["id"]);
+						$resultat=$metier->modifierAppartenir($_POST["groupe"],$_POST["role"],$_POST["statut"],$_POST["datedebut"],$_POST["description"],$_POST["id"]);
 						reponse($resultat);
 					break;
 
 					case "A1-3":
 					//Retrait d'un juste d'un groupe donné
-						$resultat=$metier->termierAppartenir($_POST["dateFin"], $_POST["description"], $_POST["id"]);
+						$resultat=$metier->termierAppartenir($_POST["datefin"], $_POST["description"], $_POST["id"]);
 						reponse($resultat);
 					break;
+
+
 
 
 
@@ -183,6 +182,12 @@
 						reponse($resultat);
 					break;
 
+					case "G1-8":
+					//Recherche des groupes de justes à partir de mots clés 
+						$resultat=$metier->rechercherGroupeParFullText($_POST["text"], $_POST["page"]);
+						reponse($resultat);
+					break;
+
 
 
 
@@ -203,7 +208,7 @@
 							);
 						}
 
-						$resultat=$metier->ajouterJuste($_POST["nom"], $_POST["prenom"], $_POST["surnom"], $_POST["datenaiss"], $_POST["genre"], $_POST["etat"], $_POST["adresse"], $_POST["phone"], $_POST["grade"], $_POST["nvelNais"], $_POST["profession"], $_POST["statutMatri"], $_POST["ethnie"], $photo, $_POST["assemblee"], $_POST["dateRattache"], $_POST["fonction"]);
+						$resultat=$metier->ajouterJuste($_POST["nom"], $_POST["prenom"], $_POST["surnom"], $_POST["datenaiss"], $_POST["genre"], $_POST["etat"], $_POST["adresse"], $_POST["phone"], $_POST["grade"], $_POST["nvelNais"], $_POST["profession"], $_POST["statutMatri"], $_POST["ethnie"], $photo, $_POST["origine"], $_POST["datedeces"], $_POST["assemblee"], $_POST["dateRattache"], $_POST["fonction"]);
 						//PS certaines informations sont destinées à renseigner la table rattacher car à la creation le juste est systematiquement rattaché à une base.
 
 						reponse($resultat);
@@ -211,7 +216,7 @@
 						
 					case "J1-2":
 					//Modification des informations d'un juste
-						$resultat=$metier->modifierJuste($_POST["nom"], $_POST["prenom"], $_POST["surnom"], $_POST["datenaiss"], $_POST["genre"], $_POST["etat"], $_POST["adresse"], $_POST["phone"], $_POST["grade"], $_POST["nvelNais"], $_POST["profession"], $_POST["statutMatri"], $_POST["ethnie"], $_POST["juste"]);
+						$resultat=$metier->modifierJuste($_POST["nom"], $_POST["prenom"], $_POST["surnom"], $_POST["datenaiss"], $_POST["genre"], $_POST["etat"], $_POST["adresse"], $_POST["phone"], $_POST["grade"], $_POST["anneenvelnaiss"], $_POST["profession"], $_POST["statutmatri"], $_POST["ethnie"], $_POST["origine"], $_POST["datedeces"], $_POST["juste"]);
 						reponse($resultat);
 					break;
 
@@ -221,7 +226,7 @@
 						if(isset($_FILES["photo"])){
 							$photo=array(
 								"donnee"=>$_FILES["photo"],
-								'extension'=>$_POST["ext"]
+								'extension'=>$_POST["extension"]
 							);
 						}
 						$resultat=$metier->modifierPhotoJuste($photo, $_POST["juste"]);
@@ -249,7 +254,7 @@
 					case "J1-8":
 
 					//Determination de l'assemblée à laquelle appartient un juste
-						$resultat=$metier->assembleeJuste($_POST["juste"]);
+						$resultat=$metier->listeAssembleeJusteParStatut($_POST["juste"],$_POST["page"],$_POST["statut"]);
 						reponse($resultat);
 					break;
 
@@ -284,6 +289,17 @@
 						reponse($resultat);
 					break;
 
+					case "J1-14":
+					//Modifier le mot de passe
+						$resultat = $metier->modifierMDPJuste($_POST["ancien"], $_POST["nouveau"], $_POST["juste"]);
+						reponse($resultat);
+					break;
+
+					case "J1-15":
+						$resultat=$metier->modifierNiveauJuste($_POST["niveau"], $_POST["juste"]);
+						reponse($resultat);
+					break;
+
 
 
 
@@ -294,7 +310,7 @@
 					//GESTION RATTACHER CODE R1-...
 					case "R1-1":
 					//Affiliation d'un juste à une assemblée de juste donnée
-						$resultat=$metier->ajouterRattacher($_POST["juste"], $_POST["assemblee"], $_POST["fonction"], $_POST["statut"], $_POST["dateDebut"]);
+						$resultat=$metier->ajouterRattacher($_POST["juste"], $_POST["assemblee"], $_POST["fonction"], $_POST["datedebut"]);
 						reponse($resultat);
 					break;
 
@@ -306,9 +322,16 @@
 
 					case "R1-3":
 					//Départ d'un juste d'une assemblée pour une autre (ou décès ou excomuniation)
-						$resultat=$metier->terminerRattacher($_POST["dateFin"], $_POST["description"], $_POST["id"]);
+						$resultat=$metier->terminerRattacher($_POST["datefin"], $_POST["description"], $_POST["id"]);
 						reponse($resultat);
 					break;
+
+					case "R1-4":
+						$resultat=$metier->muterRattacher($_POST['id'],$_POST['datemutation'],$_POST['description'],$_POST['assemblee'],$_POST['fonction']);
+						reponse($resultat);
+					break;
+
+					
 
 
 
@@ -349,6 +372,12 @@
 					case "S1-6":
 					//Liste paginée des groupes associés à un service
 						$resultat=$metier->listeGroupeService($_POST["service"], $_POST["page"]);
+						reponse($resultat);
+					break;
+
+					case "S1-7":
+					//Recherche des informations d'un service à partir de mots clés ("fulltext")
+						$resultat=$metier->rechercherServiceParFullText($_POST["text"],$_POST["page"]);
 						reponse($resultat);
 					break;
 

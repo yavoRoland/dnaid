@@ -13,11 +13,11 @@ function chargerService(page){
 			let serviceListe=document.getElementById('service-list')
 			resultat.donnee.forEach((elt,index)=>{
 				if(elt.idservice==groupe.idservicegroupe)
-					document.getElementById('service').value=`${elt.idservice}-${elt.matservice} ${elt.nomservice}`
-				serviceListe.innerHTML+=`<option value="${elt.idservice}-${elt.matservice} ${elt.nomservice}">`
+					document.getElementById('service').value=`${elt.matservice} ${elt.nomservice}`
+				serviceListe.innerHTML+=`<option value="${elt.matservice} ${elt.nomservice}">`
 			})
 
-			if(parseInt(resultat.total.S_TOTAL) > (page * 10)){
+			if(parseInt(resultat.total.S_TOTAL) > ((page+1) * qte_standard)){
 				chargerService(page + 1)
 			}
 		}
@@ -46,7 +46,7 @@ function activerModifierGroupe(){
 		let feedBack= document.getElementById('feed-back')
 		let change = false
 		let valide=true
-
+		var formData=new FormData()
 		for(var info of infos){
 			if(exceptions.find(elt=> elt==info.getAttribute("name")))
 				continue
@@ -58,7 +58,7 @@ function activerModifierGroupe(){
 				break
 			}
 
-			formData.append(info.getAttribute('name') , info.value)
+			formData.append(info.getAttribute('name') , valeurClaireForApi(info.value))
 
 			if(info.value != groupe[`${info.getAttribute('name')}groupe`])
 				change=true
@@ -72,8 +72,8 @@ function activerModifierGroupe(){
 
 		if(!change)
 			return
-		formData.append('description',valeurClaire(document.getElementById(description)))
-		formData.append('service',document.getElementById('service').value.split('-')[0])
+		formData.append('description',valeurClaireForApi(document.getElementById(description)))
+		formData.append('service',document.getElementById('service').value.split(' ')[0])
 		formData.append('groupe',groupe.idgroupe)
 		formData.append('code',"G1-2")
 			
@@ -98,4 +98,6 @@ document.addEventListener('included',()=>{
 	menuResponsiveActivation(route)
 	chargerService(0)
 	chargerInfos()
+	activerModifierGroupe()
 })
+includeHTML()

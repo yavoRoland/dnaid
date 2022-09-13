@@ -44,6 +44,24 @@
 			}
 		}
 
+		public function rechercherParFullText($text, $page, $quantite){
+			try{
+				$total=$this->_bdd->prepare('SELECT COUNT(*) AS G_TOTAL FROM groupe WHERE MATCH(matgroupe, nomgroupe,descriptiongroupe) AGAINST(:text IN BOOLEAN MODE)');
+				$total->bindValue(':text',$text, PDO::PARAM_STR);
+				$total->execute();
+
+				$req=$this->_bdd->prepare('SELECT *, MATCH(matgroupe, nomgroupe,descriptiongroupe) AGAINST (:search IN BOOLEAN MODE) AS CPT FROM groupe WHERE MATCH(matgroupe, nomgroupe,descriptiongroupe) AGAINST (:search IN BOOLEAN MODE) ORDER BY CPT DESC LIMIT :page, :quantite');
+
+				$req->bindValue(':search',$text,PDO::PARAM_STR);
+                $req->bindValue(':page',($page*$quantite),PDO::PARAM_INT);
+                $req->bindValue(':quantite',$quantite,PDO::PARAM_INT);
+                $req->execute();
+                return array($req,$total);
+			}catch(Exception $e){
+				return false;
+			}
+		}
+
 		public function supprimer($id){
 			try{
 				$req=$this->_bdd->prepare('DELETE FROM groupe WHERE idgroupe=?');

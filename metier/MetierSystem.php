@@ -16,7 +16,7 @@
 
 
 		//GESTION APPARTENIR
-		public function ajouterAppartenir($juste,$groupe,$role,$statut,$dateDebut){
+		public function ajouterAppartenir($juste,$groupe,$role,$dateDebut){
 			try{
 				$infoJuste=$this->_dao->rechercherJuste($juste);
 				if(!$infoJuste || $infoJuste->rowCount()==0){
@@ -27,7 +27,7 @@
 					);
 				}
 
-				$infoGroupe=$this->_dao->rechercherGroupe($groupe);
+				$infoGroupe=$this->_dao->rechercherGroupeParMatricule($groupe);
 				if(!$infoGroupe || $infoGroupe->rowCount()==0){
 					return array(
 						'resultat'=>false,
@@ -35,13 +35,22 @@
 						'message'=>"Impossible d'ajouter l'appartenance! Juste inexistant."
 					);
 				}
+				$infoGroupe=$infoGroupe->fetch();
+				$infoUnicite=$this->_dao->rechercherAppartenirUnicite($juste,$infoGroupe["idgroupe"],ACTIF);
+				if($infoUnicite && $infoUnicite->rowCount()>0){
+					return array(
+						'resultat'=>false,
+						'code'=>requete_echoue,
+						'message'=>"Impossible d'ajouter l'appartenance! Le juste appartient déjà à ce groupe."
+					);
+				}
 
-				$resultat=$this->_dao->ajouterAppartenir($juste,$groupe,$role,$statut,$dateDebut);
+				$resultat=$this->_dao->ajouterAppartenir($juste,$infoGroupe["idgroupe"],$role,ACTIF,$dateDebut);
 				if($resultat){
 					if (substr(php_uname(), 0, 7) == "Windows"){
-						Utilitaire::ExecuterScript(WIN_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($id,"J1-12",$this->_authManager->getBearerToken()));
+						Utilitaire::ExecuterScript(WIN_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($juste,"J1-12",$this->_authManager->getBearerToken()));
 					}else{
-						Utilitaire::ExecuterScript(UNIX_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($id,"J1-12",$this->_authManager->getBearerToken())); 
+						Utilitaire::ExecuterScript(UNIX_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($juste,"J1-12",$this->_authManager->getBearerToken())); 
 					}
 					return array(
 						'resultat'=>true,
@@ -64,7 +73,7 @@
 			}
 		}
 
-		public function modifierAppartenir($juste,$groupe,$role,$statut,$dateDebut,$id){
+		public function modifierAppartenir($groupe,$role,$statut,$dateDebut,$description,$id){
 			try{
 				$infoAppartenir=$this->_dao->rechercherAppartenir($id);
 				if(!$infoAppartenir || $infoAppartenir->rowCount()==0){
@@ -75,16 +84,16 @@
 					);
 				}
 
-				$infoJuste=$this->_dao->rechercherJuste($juste);
+				/*$infoJuste=$this->_dao->rechercherJuste($juste);
 				if(!$infoJuste || $infoJuste->rowCount()==0){
 					return array(
 						'resultat'=>false,
 						'code'=>requete_echoue,
 						'message'=>"Impossible de modifier l'appartenance! Juste inexistant."
 					);
-				}
+				}*/
 
-				$infoGroupe=$this->_dao->rechercherGroupe($groupe);
+				$infoGroupe=$this->_dao->rechercherGroupeParMatricule($groupe);
 				if(!$infoGroupe || $infoGroupe->rowCount()==0){
 					return array(
 						'resultat'=>false,
@@ -92,13 +101,26 @@
 						'message'=>"Impossible de modifier l'appartenance! Juste inexistant."
 					);
 				}
+				$infoGroupe=$infoGroupe->fetch();
+				$infoUnicite=$this->_dao->rechercherAppartenirUnicite($juste,$infoGroupe["idgroupe"],ACTIF);
+				if($infoUnicite && $infoUnicite->rowCount()>0){//si le juste appartient déja a ce groupe dans un enregistrement
+					$infoUnicite=$infoUnicite->fetch();
+					if($infoUnicite["idappartenir"]!=$id){//si l'enregistrement en question est autre que celui que nous modifions cela implique qu'il pourrait y avoir deux enregistrement actif indiquant que le juste appartient a ce groupe
+						return array(
+							'resultat'=>false,
+							'code'=>requete_echoue,
+							'message'=>"Impossible d'ajouter l'appartenance! Le juste appartient déjà à ce groupe."
+						);
+					}
+						
+				}
 				$a=$infoAppartenir->fetch();
-				$resultat=$this->_dao->modifierAppartenir($juste,$groupe,$role,$statut,$dateDebut,$a["datefinappartenir"], $a["descriptionappartenir"],$id);
+				$resultat=$this->_dao->modifierAppartenir($a['justeappartenir'],$infoGroupe['idgroupe'],$role,$statut,$dateDebut,$a["datefinappartenir"], $description,$id);
 				if($resultat){
 					if (substr(php_uname(), 0, 7) == "Windows"){
-						Utilitaire::ExecuterScript(WIN_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($id,"J1-12",$this->_authManager->getBearerToken()));
+						Utilitaire::ExecuterScript(WIN_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($a['justeappartenir'],"J1-12",$this->_authManager->getBearerToken()));
 					}else{
-						Utilitaire::ExecuterScript(UNIX_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($id,"J1-12",$this->_authManager->getBearerToken())); 
+						Utilitaire::ExecuterScript(UNIX_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($a['justeappartenir'],"J1-12",$this->_authManager->getBearerToken())); 
 					}
 					return array(
 						'resultat'=>true,
@@ -132,7 +154,7 @@
 					);
 				}
 				$a=$infoAppartenir->fetch();
-				$resultat=$this->_dao->modifierAppartenir($a["justeappartenir"],$a["groupeappartenir"],$a["roleappartenir"],$a["statutappartenir"],$a["datedebutappartenir"],$dateFin,trim($description),$id);
+				$resultat=$this->_dao->modifierAppartenir($a["justeappartenir"],$a["groupeappartenir"],$a["roleappartenir"],INACTIF,$a["datedebutappartenir"],$dateFin,trim($description),$id);
 				if($resultat){
 					return array(
 						'resultat'=>true,
@@ -179,6 +201,7 @@
 				}while($assemblee && $assemblee->rowCount()>0);
 
 				$fullText=$matricule.' '.Utilitaire::textTrim($nom).' '.Utilitaire::textTrim($pays).' '.Utilitaire::textTrim($region).' '.Utilitaire::textTrim($departement).' '.Utilitaire::textTrim($ville).' '.Utilitaire::textTrim($commune).' '.Utilitaire::textTrim($quartier).' '.Utilitaire::textTrim($description);
+				$fullText=Utilitaire::epuration($fullText);
 				$resultat=$this->_dao->ajouterAssemblee($matricule, $nom, $pays, $region, $departement, $ville, $commune, $quartier, $description, $fullText);
 				if($resultat){
 					return array(
@@ -222,6 +245,7 @@
 				}
 				$ia=$infoAssemblee->fetch();
 				$fullText=$ia["matassemble"].' '.Utilitaire::textTrim($nom).' '.Utilitaire::textTrim($pays).' '.Utilitaire::textTrim($region).' '.Utilitaire::textTrim($departement).' '.Utilitaire::textTrim($ville).' '.Utilitaire::textTrim($commune).' '.Utilitaire::textTrim($quartier).' '.Utilitaire::textTrim($description);
+				$fullText=Utilitaire::epuration($fullText);
 				$resultat=$this->_dao->modifierAssemblee($nom, $pays, $region, $departement, $ville, $commune, $quartier, $description, $fullText, $id);
 				if($resultat){
 					// A FAIRE: mettre le code d'execution de l'api pour la fonction modifierJusteFullText
@@ -307,7 +331,7 @@
 
 		public function rechercherAssembleeParFullText($text, $page){
 			try{
-				$resultat=$this->_dao->rechercherAssembleeParFullText($text, $page, SMALL_QTE);
+				$resultat=$this->_dao->rechercherAssembleeParFullText(Utilitaire::epuration($text), $page, STANDARD_QTE);
 
 				if($resultat[0] && $resultat[0]->rowCount()>0){
 					return array(
@@ -421,8 +445,8 @@
 						'message'=>"Echec d'enregistrement de groupe! Service inexistant."
 					);
 				}
-
-				$resultat=$this->_dao->ajouterGroupe($matricule, $nom, $dateCreat, $description, $service);
+				$serviceInfo=$serviceInfo->fetch();
+				$resultat=$this->_dao->ajouterGroupe($matricule, $nom, $dateCreat, $description, $serviceInfo["idservice"]);
 				if($resultat){
 					return array(
 						'resultat'=>true,
@@ -464,7 +488,18 @@
 						'message'=>"Modification impossible! Veuillez specifier un nom de groupe correct"
 					);
 				}
-				$resultat=$this->_dao->modifierGroupe($nom, $dateCreat, $description, $service, $id);
+
+				$serviceInfo=$this->_dao->rechercherServiceParMatricule($service);
+				if(!$serviceInfo || $serviceInfo->rowCount()==0){
+					return array(
+						'resultat'=>false,
+						'code'=>requete_echoue,
+						'message'=>"Echec de modification du groupe! Service inexistant."
+					);
+				}
+				$serviceInfo=$serviceInfo->fetch();
+
+				$resultat=$this->_dao->modifierGroupe($nom, $dateCreat, $description, $serviceInfo["idservice"], $id);
 				if($resultat){
 					// A FAIRE: mettre le code d'execution de l'api pour la fonction modifierJusteFullTextParGroupe
 					if (substr(php_uname(), 0, 7) == "Windows"){
@@ -545,6 +580,34 @@
 			}
 		}
 
+		public function rechercherGroupeParFullText($text, $page){
+			try{
+				$resultat=$this->_dao->rechercherGroupeParFullText($text, $page, STANDARD_QTE);
+
+				if($resultat[0] && $resultat[0]->rowCount()>0){
+					return array(
+						'resultat'=>true,
+						'code'=>requete_reussi,
+						'message'=>"Requête de groupe par full text éffectuée! Liste des groupe obtenus.",
+						'donnee'=>$resultat[0]->fetchAll(),
+						'total'=>$resultat[1]->fetch()
+					);
+				}else{
+					return array(
+						'resultat'=>false,
+						'code'=>liste_vide,
+						'message'=>"Requête de groupe par full text éffectuée! Aucun groupe correspondant"
+					);
+				}
+			}catch(Exception $e){
+				return array(
+					'resultat'=>false,
+					'code'=>requete_echoue,
+					'message'=>"Echec de requête de groupe par full text ; Une exception s'est produite!"
+				);
+			}
+		}
+
 		public function listeGroupe($page){
 			try{
 				$resultat=$this->_dao->listeGroupe($page, STANDARD_QTE);
@@ -609,7 +672,7 @@
 
 
 		//GESTION JUSTE
-		public function ajouterJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $assemblee, $dateRattacher,$fonction){
+		public function ajouterJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $origine, $datedeces, $assemblee, $dateRattacher,$fonction){
 			try{
 				if(!Utilitaire::textCorrect($nom)){
 					return array(
@@ -649,9 +712,10 @@
 				$assemblee = $infoAssemblee->fetch();
 
 
-				$fullText=Utilitaire::textTrim($nom).' '.Utilitaire::textTrim($prenom).' '.Utilitaire::textTrim($surnom).' '.Utilitaire::textTrim($genre).' '.Utilitaire::textTrim($adresse).' '.Utilitaire::textTrim($grade).' '.Utilitaire::textTrim($profession).' '.Utilitaire::textTrim($statutMatri).' '.Utilitaire::textTrim($ethnie);
+				$fullText=Utilitaire::textTrim($nom).' '.Utilitaire::textTrim($prenom).' '.Utilitaire::textTrim($surnom).' '.Utilitaire::textTrim($genre).' '.Utilitaire::textTrim($adresse).' '.Utilitaire::textTrim($grade).' '.Utilitaire::textTrim($profession).' '.Utilitaire::textTrim($statutMatri).' '.Utilitaire::textTrim($ethnie).' '.Utilitaire::textTrim($origine);
+				$fullText=Utilitaire::epuration($fullText);
 
-				$addJuste=$this->_dao->ajouterJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photoJuste, $fullText);
+				$addJuste=$this->_dao->ajouterJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photoJuste, $origine, $datedeces, $fullText);
 				
 
 				$resultat=false;
@@ -659,9 +723,8 @@
 				if($addJuste["resultat"]){
 					$resultat=$this->_dao->ajouterRattacher($addJuste["id"], $assemblee['idassemble'], $fonction, ACTIF, $dateRattacher);
 				}
-					
-
 				if($addJuste["resultat"] && $resultat){
+
 					return array(
 						'resultat'=>true,
 						'code'=>requete_reussi,
@@ -687,7 +750,7 @@
 			}
 		}
 
-		public function modifierJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $id){
+		public function modifierJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $origine, $datedeces, $id){
 			try{
 				$infoJuste=$this->_dao->rechercheProfondeJuste($id);
 				if(!$infoJuste || $infoJuste->rowCount()==0){
@@ -716,7 +779,7 @@
 
 				$j=$infoJuste->fetch();
 
-				$resultat=$this->_dao->modifierJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $j["photojuste"], $j["fulltextjuste"], $id);
+				$resultat=$this->_dao->modifierJuste($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $j["photojuste"], $origine, $datedeces, $j["fulltextjuste"], $id);
 				if($resultat){
 					// A FAIRE: mettre le code d'execution de l'api pour la fonction modifierJusteFullText
 					if (substr(php_uname(), 0, 7) == "Windows"){
@@ -749,7 +812,7 @@
 
 		public function modifierPhotoJuste($photo, $juste){
 			try{
-				$infoJuste=$this->_dao->rechercheProfondeJuste($id);
+				$infoJuste=$this->_dao->rechercheProfondeJuste($juste);
 				if(!$infoJuste || $infoJuste->rowCount()==0){
 					return array(
 						'resultat'=>false,
@@ -773,7 +836,7 @@
 					);
 				}
 				$j=$infoJuste->fetch();
-				$resultat=$this->_dao->modifierJuste($j["nomjuste"], $j["prenomjuste"], $j["surnomjuste"], $j["datenaissjuste"], $j["genrejuste"], $j["etatjuste"], $j["adressejuste"], $j["phonejuste"], $j["gradejuste"], $j["anneenvelnaissjuste"], $j["professionjuste"], $j["statutmatrijuste"], $j["ethniejuste"], $photoJuste, $j["fulltextjuste"], $id);
+				$resultat=$this->_dao->modifierJuste($j["nomjuste"], $j["prenomjuste"], $j["surnomjuste"], $j["datenaissjuste"], $j["genrejuste"], $j["etatjuste"], $j["adressejuste"], $j["phonejuste"], $j["gradejuste"], $j["anneenvelnaissjuste"], $j["professionjuste"], $j["statutmatrijuste"], $j["ethniejuste"], $photoJuste, $j["originejuste"],$j["datedecesjuste"], $j["fulltextjuste"], $juste);
 				if($resultat){
 					if(!is_null($j["photojuste"]) && $j["photojuste"]!=''){
 						Utilitaire::supprimerFichier($j["photojuste"], REPERTOIRE_PHOTO_JUSTE);
@@ -799,16 +862,74 @@
 			}
 		}
 
+		public function modifierMDPJuste($ancien, $nouveau, $id){
+			try{
+				$juste=$this->_dao->rechercheProfondeJuste($id);
+				if(!$juste || $juste->rowCount()==0){
+					return array(
+						'resultat'=>false,
+						'code'=>requete_echoue,
+						'message'=>"Requête de modification de mot de passe échouée; juste introuvable."
+					);
+				}
+				$j=$juste->fetch();
+
+				if(strlen($j["loginjuste"])==0 || $j["niveaujuste"]<=JUSTE_LAMBDA){
+					return array(
+						'resultat'=>false,
+						'code'=>acces_refuse,
+						'message'=>"Requête de modification de mot de passe échouée; Accès interdit."
+					);
+				}
+				if(!password_verify($ancien, $j['mdpjuste'])){
+					return array(
+						'resultat'=>false,
+						'code'=>requete_echoue,
+						'message'=>"Requête de modification de mot de passe échouée; mot de passe incorrect."
+					);
+				}
+				$mdp=password_hash($nouveau, PASSWORD_BCRYPT);
+				$resultat=$this->_dao->modifierNiveauJuste($j['niveaujuste'], $j['loginjuste'], $mdp, $id);
+				if($resultat){
+					return array(
+						'resultat'=>true,
+						'code'=>requete_reussi,
+						'message'=>'Mot de passe du juste modifié!',
+					);
+				}else{
+					return array(
+						'resultat'=>false,
+						'code'=>requete_echoue,
+						'message'=>"Echec de modification du mot de passe du juste "
+					);
+				}
+			}catch(Exception $e){
+				return array(
+					'resultat'=>false,
+					'code'=>requete_echoue,
+					'message'=>"Echec de modification du mot de passe du juste ; Une exception s'est produite!"
+				);
+			}
+		}
+
 		public function modifierNiveauJuste($niveau, $juste){
 			try{
+				$justeInfo=$this->_dao->rechercheProfondeJuste($juste);
+				if(!$justeInfo || $justeInfo->rowCount()==0){
+					return array(
+						'resultat'=>false,
+						'code'=>requete_echoue,
+						'message'=>"Requête de modification du niveau du juste échouée; juste introuvable."
+					);
+				}
 				$justeInfo=null;
-				$login=null;
-				$mdp=null;
-				$clearMdp=null;
+				$login="";
+				$mdp="";
+				$clearMdp="";
 				if($niveau>JUSTE_LAMBDA){
 					do{
 						$login='J-'.Utilitaire::codeGenerator(6,true);
-						$justeInfo=$this->_dao->rechercherJusteParLogin($login);
+						$justeInfo=$this->_dao->rechercherJusteParLogin($login);//on s'assure que le login n'est pas deja attribué
 					}while($justeInfo && $justeInfo->rowCount()>0);
 					$clearMdp=Utilitaire::codeGenerator(6);
 					$mdp=password_hash($clearMdp, PASSWORD_BCRYPT);
@@ -821,7 +942,8 @@
 						'message'=>'Niveau du juste modifié!',
 						'donnee'=>array(
 							'login'=>$login,
-							'mot de passe'=> $clearMdp
+							'mdp'=> $clearMdp,
+							'niveau'=>$niveau
 						)
 					);
 				}else{
@@ -842,6 +964,14 @@
 
 		public function connexionParLoginJuste($login, $mdp){
 			try{
+				if(strlen(trim($login))==0){
+					return array(
+						'resultat'=>false,
+						'code'=>acces_refuse,
+						'message'=>"Requête de connexion de juste par login échouée; Accès interdit."
+					);
+				}
+				
 				$juste=$this->_dao->rechercherJusteParLogin($login);
 				if(!$juste || $juste->rowCount()==0){
 					return array(
@@ -850,7 +980,16 @@
 						'message'=>"Requête de connexion de juste par login échouée; login ou mot de passe incorrect."
 					);
 				}
+
 				$j=$juste->fetch();
+				if($j["niveaujuste"]<=JUSTE_LAMBDA){
+					return array(
+						'resultat'=>false,
+						'code'=>acces_refuse,
+						'message'=>"Requête de connexion de juste par login échouée; Accès interdit."
+					);
+				}
+
 				if(!password_verify($mdp, $j['mdpjuste'])){
 					return array(
 						'resultat'=>false,
@@ -941,7 +1080,7 @@
 
 		public function rechercherJusteParFulltext($text, $page){
 			try{
-				$resultat=$this->_dao->rechercherJusteParFulltext($text, $page, STANDARD_QTE);
+				$resultat=$this->_dao->rechercherJusteParFulltext(Utilitaire::epuration($text), $page, STANDARD_QTE);
 
 				if($resultat[0] && $resultat[0]->rowCount()>0){
 					return array(
@@ -967,8 +1106,8 @@
 			}
 		}
 
-		public function assembleeJuste($juste){
-			$resultat=$this->_dao->listeAssembleeJuste($juste, 0, SMALL_QTE);
+		public function listeAssembleeJusteParStatut($juste,$page,$statut){
+			$resultat=$this->_dao->listeAssembleeJusteParStatut($juste, $page, $statut, STANDARD_QTE);
 			try{
 				if($resultat && $resultat[0]->rowCount()>0){
 					return array(
@@ -1084,6 +1223,7 @@
 
 
 		//GESTION RATTACHER
+		
 		public function ajouterRattacher($juste, $assemblee, $fonction, $statut, $dateDebut){
 			try{
 				$infoJuste=$this->_dao->rechercheProfondeJuste($juste);
@@ -1095,7 +1235,7 @@
 					);
 				}
 
-				$infoAssemblee=$this->_dao->rechercherAssemblee($assemblee);
+				$infoAssemblee=$this->_dao->rechercherAssembleeParMatricule($assemblee);
 				if(!$infoAssemblee || $infoAssemblee->rowCount()==0){
 					return array(
 						'resultat'=>false,
@@ -1103,13 +1243,23 @@
 						'message'=>"Rattachement impossible! Assemblee inexistante."
 					);
 				}
+				$infoAssemblee=$infoAssemblee->fetch();
+				$infoUnicite=$this->_dao->rechercherRattacherUnicite($juste,$infoAssemblee["idassemble"], ACTIF);
+				if($infoUnicite && $infoUnicite->rowCount()>0){
+					return array(
+						'resultat'=>false,
+						'code'=>requete_echoue,
+						'message'=>"Rattachement impossible! Le juste appartient déjà à cette assemblée."
+					);
+				}
+				
 
-				$resultat=$this->_dao->ajouterRattacher($juste, $assemblee, $fonction, $statut, $dateDebut);
+				$resultat=$this->_dao->ajouterRattacher($juste, $infoAssemblee["idassemble"], $fonction, $statut, $dateDebut);
 				if($resultat){
 					if (substr(php_uname(), 0, 7) == "Windows"){
-						Utilitaire::ExecuterScript(WIN_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($id,"J1-12",$this->_authManager->getBearerToken()));
+						Utilitaire::ExecuterScript(WIN_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($juste,"J1-12",$this->_authManager->getBearerToken()));
 					}else{
-						Utilitaire::ExecuterScript(UNIX_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($id,"J1-12",$this->_authManager->getBearerToken())); 
+						Utilitaire::ExecuterScript(UNIX_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($juste,"J1-12",$this->_authManager->getBearerToken())); 
 					}
 					return array(
 						'resultat'=>true,
@@ -1152,7 +1302,7 @@
 					);
 				}
 
-				$infoAssemblee=$this->_dao->rechercherAssemblee($assemblee);
+				$infoAssemblee=$this->_dao->rechercherAssembleeParMatricule($assemblee);
 				if(!$infoAssemblee || $infoAssemblee->rowCount()==0){
 					return array(
 						'resultat'=>false,
@@ -1160,15 +1310,26 @@
 						'message'=>"Modification de rattachement impossible! Assemblee inexistante."
 					);
 				}
-
+				$infoAssemblee=$infoAssemblee->fetch();
+				$infoUnicite=$this->_dao->rechercherRattacherUnicite($juste,$infoAssemblee["idassemble"], ACTIF);
+				if($infoUnicite && $infoUnicite->rowCount()>0){//s'il existe un enregistrement indiquant que le juste appartient deja à cette assemblée
+					$infoUnicite=$infoUnicite->fetch();
+					if($infoUnicite["idrattacher"]!=$id){//si l'enregistrement est autre que celui que nous voulons modifier, cela implique qu'on aura deux enregistrement actifs indiquant que le juste appartient à cette assemblée
+						return array(
+							'resultat'=>false,
+							'code'=>requete_echoue,
+							'message'=>"Rattachement impossible! Le juste appartient déjà à cette assemblée."
+						);
+					}		
+				}
 				$rattacher=$infoRattacher->fetch();
-				$resultat=$this->_dao->modifierRattacher($juste, $assemblee, $fonction, $statut, $rattacher["datedebutrattacher"], $rattacher["datefinrattacher"], $rattacher["descriptionrattacher"], $id);
+				$resultat=$this->_dao->modifierRattacher($juste, $infoAssemblee["idassemble"], $fonction, $statut, $rattacher["datedebutrattacher"], $rattacher["datefinrattacher"], $rattacher["descriptionrattacher"], $id);
 
 				if($resultat){
 					if (substr(php_uname(), 0, 7) == "Windows"){
-						Utilitaire::ExecuterScript(WIN_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($id,"J1-12",$this->_authManager->getBearerToken()));
+						Utilitaire::ExecuterScript(WIN_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($juste,"J1-12",$this->_authManager->getBearerToken()));
 					}else{
-						Utilitaire::ExecuterScript(UNIX_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($id,"J1-12",$this->_authManager->getBearerToken())); 
+						Utilitaire::ExecuterScript(UNIX_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($juste,"J1-12",$this->_authManager->getBearerToken())); 
 					}
 					return array(
 						'resultat'=>true,
@@ -1193,7 +1354,7 @@
 
 		public function terminerRattacher($dateFin, $description, $id){
 			try{
-				$infoRattacher=$this->_bdd->rechercherRattacher($id);
+				$infoRattacher=$this->_dao->rechercherRattacher($id);
 				if(!$infoRattacher || $infoRattacher->rowCount()==0){
 					return array(
 						'resultat'=>false,
@@ -1203,7 +1364,7 @@
 				}
 
 				$r=$infoRattacher->fetch();
-				$resultat=$this->_dao->modifierRattacher($r["justerattacher"], $r["assemblerattacher"], $r["fonctionrattacher"], $r["statutrattacher"], $r["datedebutrattacher"], $dateFin, trim($description), $id);
+				$resultat=$this->_dao->modifierRattacher($r["justerattacher"], $r["assemblerattacher"], $r["fonctionrattacher"], INACTIF, $r["datedebutrattacher"], $dateFin, trim($description), $id);
 				if($resultat){
 					return array(
 						'resultat'=>true,
@@ -1225,6 +1386,72 @@
 				);
 			}
 		}
+
+		public function muterRattacher($oldId,$dateMutation,$description,$assemblee,$fonction){
+			try{
+				$infoRattacher=$this->_dao->rechercherRattacher($oldId);
+				if(!$infoRattacher || $infoRattacher->rowCount()==0){
+					return array(
+						'resultat'=>false,
+						'code'=>requete_echoue,
+						'message'=>"Mutation impossible! Rattachement inexistant."
+					);
+				}
+				$infoAssemblee=$this->_dao->rechercherAssembleeParMatricule($assemblee);
+				if(!$infoAssemblee || $infoAssemblee->rowCount()==0){
+					return array(
+						'resultat'=>false,
+						'code'=>requete_echoue,
+						'message'=>"Mutation impossible! Assemblee inexistante."
+					);
+				}
+				$infoAncien=$infoRattacher->fetch();
+				$infoAssemblee=$infoAssemblee->fetch();
+				$infoUnicite=$this->_dao->rechercherRattacherUnicite($infoAncien['justerattacher'],$infoAssemblee["idassemble"], ACTIF);
+				if($infoUnicite && $infoUnicite->rowCount()>0){//si il existe deja un enregistrement actif indiquant que le juste apppartient à cette même assemblée
+					return array(
+						'resultat'=>false,
+						'code'=>requete_echoue,
+						'message'=>"Mutation impossible! Le juste appartient déjà à cette assemblée."
+					);	
+				}
+				
+				$terminerAncien=$this->_dao->modifierRattacher($infoAncien['justerattacher'], $infoAncien['assemblerattacher'], $infoAncien['fonctionrattacher'], INACTIF, $infoAncien["datedebutrattacher"], $dateMutation, $description, $oldId);
+				if($terminerAncien){
+					$resultat=$this->_dao->ajouterRattacher($infoAncien['justerattacher'], $infoAssemblee["idassemble"], $fonction, ACTIF, $dateMutation);
+					if($resultat){
+						if (substr(php_uname(), 0, 7) == "Windows"){
+							Utilitaire::ExecuterScript(WIN_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($infoAncien['justerattacher'],"J1-12",$this->_authManager->getBearerToken()));
+						}else{
+							Utilitaire::ExecuterScript(UNIX_UPDATE_JUSTE_FULL_TEXT_SCRIPT,array($infoAncien['justerattacher'],"J1-12",$this->_authManager->getBearerToken())); 
+						}
+						return array(
+							'resultat'=>true,
+							'code'=>requete_reussi,
+							'message'=>'Mutation effectuée!'
+						);
+					}else{
+						$this->_dao->modifierRattacher($infoAncien['justerattacher'], $infoAncien['assemblerattacher'], $infoAncien['fonctionrattacher'], $infoAncien['statutrattacher'], $infoAncien["datedebutrattacher"], $infoAncien['datefinrattacher'], $infoAncien['descriptionrattacher'], $oldId);
+
+						return array(
+							'resultat'=>false,
+							'code'=>requete_echoue,
+							'message'=>"Echec de mutation du rattachement. Enregistrement du nouveau rattachement impossible!"
+						);
+					}
+				}else{
+					return array(
+						'resultat'=>false,
+						'code'=>requete_echoue,
+						'message'=>"Echec de mutation du rattachement. interruption du précédent rattachement impossible!"
+					);
+				}
+			}catch(Exception $e){
+
+			}
+		}
+
+
 
 
 
@@ -1376,6 +1603,33 @@
 			}
 		}
 
+		public function rechercherServiceParFullText($text,$page){
+			try{
+				$resultat=$this->_dao->rechercherServiceParFullText($text, $page, STANDARD_QTE);
+
+				if($resultat[0] && $resultat[0]->rowCount()>0){
+					return array(
+						'resultat'=>true,
+						'code'=>requete_reussi,
+						'message'=>"Requête de service par full text éffectuée! Liste des service obtenus.",
+						'donnee'=>$resultat[0]->fetchAll(),
+						'total'=>$resultat[1]->fetch()
+					);
+				}else{
+					return array(
+						'resultat'=>false,
+						'code'=>liste_vide,
+						'message'=>"Requête de service par full text éffectuée! Aucun service correspondant"
+					);
+				}
+			}catch(Exception $e){
+				return array(
+					'resultat'=>false,
+					'code'=>requete_echoue,
+					'message'=>"Echec de requête de service par full text ; Une exception s'est produite!"
+				);
+			}
+		}
 
 		public function listeService($page){
 			try{
@@ -1448,7 +1702,7 @@
 				$jai=$this->_dao->listeAssembleeJuste($juste, 0 , SMALL_QTE)[0];
 
 
-				$fullText=Utilitaire::textTrim($ji["nomjuste"]).' '.Utilitaire::textTrim($ji["prenomjuste"]).' '.Utilitaire::textTrim($ji["surnomjuste"]).' '.Utilitaire::textTrim($ji["phonejuste"]."").' '.Utilitaire::textTrim($ji["genrejuste"]).' '.Utilitaire::textTrim($ji["adressejuste"]).' '.Utilitaire::textTrim($ji["gradejuste"]).' '.Utilitaire::textTrim($ji["professionjuste"]).' '.Utilitaire::textTrim($ji["statutmatrijuste"]).' '.Utilitaire::textTrim($ji["ethniejuste"]);
+				$fullText=Utilitaire::textTrim($ji["nomjuste"]).' '.Utilitaire::textTrim($ji["prenomjuste"]).' '.Utilitaire::textTrim($ji["surnomjuste"]).' '.Utilitaire::textTrim($ji["phonejuste"]."").' '.Utilitaire::textTrim($ji["genrejuste"]).' '.Utilitaire::textTrim($ji["adressejuste"]).' '.Utilitaire::textTrim($ji["gradejuste"]).' '.Utilitaire::textTrim($ji["professionjuste"]).' '.Utilitaire::textTrim($ji["statutmatrijuste"]).' '.Utilitaire::textTrim($ji["ethniejuste"]).' '.Utilitaire::textTrim($ji["originejuste"]);
 				if($jai->rowCount()>0){
 					$jai=$jai->fetch();
 					$fullText =$fullText .' '.Utilitaire::textTrim($jai["fulltextassemble"]);
@@ -1460,13 +1714,14 @@
 						$fullText= $fullText .' '.$jgi[$i]["nomgroupe"].' '.$jgi[$i]["nomservice"];
 					}
 				}
-				$resultat=$this->_dao->modifierJuste($ji["nomjuste"], $ji["prenomjuste"], $ji["surnomjuste"], $ji["datenaissjuste"], $ji["genrejuste"], $ji["etatjuste"], $ji["adressejuste"], $ji["phonejuste"], $ji["gradejuste"], $ji["anneenvelnaissjuste"], $ji["professionjuste"], $ji["statutmatrijuste"], $ji["ethniejuste"], $ji["photojuste"], $fullText, $juste);
+				$fullText=Utilitaire::epuration($fullText);
+				$resultat=$this->_dao->modifierJuste($ji["nomjuste"], $ji["prenomjuste"], $ji["surnomjuste"], $ji["datenaissjuste"], $ji["genrejuste"], $ji["etatjuste"], $ji["adressejuste"], $ji["phonejuste"], $ji["gradejuste"], $ji["anneenvelnaissjuste"], $ji["professionjuste"], $ji["statutmatrijuste"], $ji["ethniejuste"], $ji["photojuste"], $ji["originejuste"], $ji["datedecesjuste"], $fullText, $juste);
 				
 				return true;
 				
 
 			}catch(Exception $e){
-				$resultat=$this->_dao->modifierJuste($ji["nomjuste"], $ji["prenomjuste"], $ji["surnomjuste"], $ji["datenaissjuste"], $ji["genrejuste"], $ji["etatjuste"], $ji["adressejuste"], $ji["phonejuste"], $ji["gradejuste"], $ji["anneenvelnaissjuste"], $ji["professionjuste"], $ji["statutmatrijuste"], $ji["ethniejuste"], $ji["photojuste"], FULL_TEXT_ERROR, $juste);
+				$resultat=$this->_dao->modifierJuste($ji["nomjuste"], $ji["prenomjuste"], $ji["surnomjuste"], $ji["datenaissjuste"], $ji["genrejuste"], $ji["etatjuste"], $ji["adressejuste"], $ji["phonejuste"], $ji["gradejuste"], $ji["anneenvelnaissjuste"], $ji["professionjuste"], $ji["statutmatrijuste"], $ji["ethniejuste"], $ji["photojuste"], $ji["originejuste"], $ji["datedecesjuste"], FULL_TEXT_ERROR, $juste);
 				return false;
 			}
 

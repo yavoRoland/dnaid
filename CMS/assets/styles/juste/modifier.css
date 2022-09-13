@@ -185,29 +185,14 @@
 @media screen and (max-width: 768px) {
   #corps-action-container {
     text-align: center;
+    padding: 0px;
   }
 
-  #info-part, #img-part {
-    width: 100%;
-    margin-bottom: 100px;
-    text-align: center;
-    margin: 0px;
-  }
-
-  #img-part-container {
-    padding-top: 100px;
-  }
-
-  .btn-container {
-    width: 100%;
+  #form-main-part {
+    width: 90%;
     margin: auto;
   }
 
-  #corps-action-container {
-    padding: 0px;
-  }
-}
-@media screen and (max-width: 480px) {
   #info-part, #img-part {
     width: 100%;
     margin-bottom: 100px;
@@ -217,6 +202,10 @@
 
   #img-part-container {
     padding-top: 100px;
+  }
+
+  #img-part-header-container {
+    width: 100%;
   }
 
   .chp-bloc .chp-label {
@@ -226,10 +215,10 @@
     font-weight: bold;
   }
   .chp-bloc input {
-    width: 90%;
+    width: 100%;
   }
   .chp-bloc select {
-    width: 90%;
+    width: 100%;
   }
   .chp-bloc .radio-group {
     justify-content: center;
@@ -245,10 +234,68 @@
   .btn-container {
     width: 100%;
     margin: auto;
+    margin-top: 50px;
   }
 
+  #overlay-image-container {
+    width: 250px;
+    height: 250px;
+    margin: 10px 0px;
+  }
+}
+@media screen and (max-width: 480px) {
   #corps-action-container {
+    text-align: center;
     padding: 0px;
+  }
+
+  #form-main-part {
+    width: 90%;
+    margin: auto;
+  }
+
+  #info-part, #img-part {
+    width: 100%;
+    margin-bottom: 100px;
+    text-align: center;
+    margin: 0px;
+  }
+
+  #img-part-container {
+    padding-top: 100px;
+  }
+
+  #img-part-header-container {
+    width: 100%;
+  }
+
+  .chp-bloc .chp-label {
+    width: 100%;
+    padding-right: 0px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .chp-bloc input {
+    width: 100%;
+  }
+  .chp-bloc select {
+    width: 100%;
+  }
+  .chp-bloc .radio-group {
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .chp-bloc .radio-group input {
+    width: 5%;
+  }
+  .chp-bloc .radio-group label {
+    margin-right: 40px;
+  }
+
+  .btn-container {
+    width: 100%;
+    margin: auto;
+    margin-top: 50px;
   }
 
   #overlay-image-container {

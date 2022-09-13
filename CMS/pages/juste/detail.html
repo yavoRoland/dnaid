@@ -3,8 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="/dnaid/cms/assets/styles/shared/main.css">
-	<link rel="stylesheet" type="text/css" href="/dnaid/cms/assets/styles/juste/detail.css">
+	<link rel="stylesheet" type="text/css" href="/dnaid/CMS/assets/styles/shared/main.css">
+	<link rel="stylesheet" type="text/css" href="/dnaid/CMS/assets/styles/juste/detail.css">
+	
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<title>Detail juste</title>
@@ -31,31 +32,87 @@
 
 			<div id="corps-action-container">
 				<div id="info-personnelle-part" class="zone">
-					<div class="ligne-temporaire">
+					<div class="ligne-temporaire-inverse">
 						<h2>Informations personnelles</h2>
-						<label class="lien-modifier" id="lien-modifier-info">Modifier</label>
+
+						<!--label class="lien conditionee" id="lien-modifier-info" data-nom="modifier-juste">Modifier</label-->
+						<label class="toggler info-perso-toggler" id="info-perso-actions-toggler" data-target="info-perso-actions">
+							<i class="fas fa-angle-down"></i>
+						</label>
+						<div class="actions invisible" id="info-perso-actions">
+							<div class="actions-elt closer info-perso-closer" data-target="info-perso-actions" >
+								<i class="fas fa-angle-up"></i>
+							</div>
+							<div class="actions-elt parent-killer conditionee toggler" id="lien-modifier-info" data-nom="modifier-juste">
+								Modifier
+							</div>
+
+							<div class="actions-elt  toggler efface" id="lien-reinit-mdp">
+								Reinitialiser mot de passe
+							</div>
+						</div>
+					</div>
+					<div >
+						<div  class="ligne-permanente user-mode-btn efface" id="admin-mode-btn" data-niveau="1" data-alter="lambda-mode-btn">
+							
+							<div class="icon-container">
+								<object type="image/svg+xml" data="/dnaid/CMS/assets/images/arrow_to_up.svg" class="icon"> </object>
+							</div>
+							<div class="icon-text">Administrateur</div>
+						</div>
+
+						<div class="ligne-permanente user-mode-btn efface" id="lambda-mode-btn" data-niveau="0" data-alter="admin-mode-btn">
+							<div class="icon-container">
+								<object type="image/svg+xml" data="/dnaid/CMS/assets/images/arrow_to_down.svg" class="icon"> </object>
+							</div>
+							<div class="icon-text">Lambda</div>
+						</div>
 					</div>
 					<div id="info-personnelle-container"></div>
 				</div>
 
-				<div id="info-assemblee-part" class="invisible zone">
-					<h2>Assemblée</h2>
-					<div id="info-assemblee-container"></div>
+					
+
+				<div id="info-assemblee-part" class="zone">
+					<div class="ligne-permanente">
+						<h2>Assemblée</h2>
+						<label class="toggler assemblee-toggler" id="assemblee-actions-toggler" data-target="assemblee-actions">
+							<i class="fas fa-angle-down"></i>
+						</label>
+						<div class="actions invisible" id="assemblee-actions">
+							<div class="actions-elt closer assemblee-closer"  data-target="assemblee-actions"><i class="fas fa-angle-up"></i></div>
+							<div class="actions-elt toggler parent-killer assemblee-toggler conditionee" data-parent="assemblee-actions" data-target="changer-assemblee-overlay" data-nom="muter-juste">Muter</div>
+							<div class="actions-elt toggler parent-killer assemblee-toggler conditionee" data-parent="assemblee-actions" data-target="modifier-assemblee-overlay" data-nom="modifier-juste-assemblee">Modifier</div>
+							<div class="actions-elt toggler parent-killer assemblee-toggler conditionee" data-parent="assemblee-actions" data-target="ostraciser-overlay" data-nom="ostraciser-juste">Ostraciser</div>
+						</div>
+					</div>
+					<div id="info-assemblee-msg-vide" class="message-vide invisible">
+						Cette personne n'appartient à aucune assemblée
+					</div>
+					<div id="info-assemblee-container" class="invisible"></div>
+					<span class="lien-list lien" id="liste-complete-assemblee" data-link="juste/assemblees">Historique</span>
 				</div>
 
-				<div id="info-groupe-part" class="invisible zone">
-					<h2>Groupes</h2>
-					<div id="info-groupe-container">
+				<div id="info-groupe-part" class="zone">
+					<div class="ligne-temporaire-inverse">
+						<h2>Groupes</h2>
+						<label class="toggler lien groupe-toggler conditionee" id="nouvelle-adhesion-action" data-target="adherer-groupe-overlay" data-nom="adhesion-juste-groupe">Nouvelle adhesion</label>
+					</div>
+					<div id="info-groupe-msg-vide" class="message-vide invisible">
+						Cet(te) juste n'appartient à aucun groupe
+					</div>
+					<div id="info-groupe-container" class="invisible">
 						<div id="tableau">
 							<div id="tableau-header" class="ligne-permanente">
 								<div class="tableau-head">Nom</div>
 								<div class="tableau-head">Rôle</div>
 								<div class="tableau-head">Date d'adhésion</div>
 								<div class="tableau-head">Date de retrait</div>
-								<div class="tableau-head">Description</div>
+								<div class="tableau-head">Actions</div>
 							</div>
 							<div id="tableau-corps"></div>
 						</div>
+						<span class="lien-list lien" id="liste-complete-groupe" data-link="juste/groupes">Liste complète</span>
 					</div>
 				</div>
 
@@ -66,9 +123,196 @@
 
 
 
-	<div id="footer-part" w3-include-html="/dnaid/CMS/assets/parts/footer-part.html">
-		
+	<div id="footer-part" w3-include-html="/dnaid/CMS/assets/parts/footer-part.html"></div>
+
+
+
+	<div class="invisible overlay" id="changer-assemblee-overlay">
+		<div class="overlay-container">
+			<div class="close-overlay closer" data-target="changer-assemblee-overlay">X</div>
+			<form id="changer-assemblee-form">
+				<div class="form-control">
+					<div class="control-label"> <label>Assemblée de destination</label></div>
+					<input class="changer-assemblee-control" type="text" name="assemblee" placeholder="Matricule de l'assemblée de destination" list="destination-list" trois-en-un>
+					<datalist id="destination-list" class="assemblee-data-list"></datalist>
+				</div>
+				<div class="form-control">
+					<div class="control-label"> <label>Fonction</label></div>
+					<input class="changer-assemblee-control" type="text" name="fonction" placeholder="Fonction du juste dans la nouvelle assemblée" list="fonction-list">
+					<datalist id="fonction-list" class="fonction-data-list"></datalist>
+				</div>
+				<div class="form-control">
+					<div class="control-label"> <label>Date de mutation</label></div>
+					<input type="date" name="datemutation" class="changer-assemblee-control">
+				</div>
+				<div class="form-control">
+					<div class="control-label"><label>Raisons de la mutation</label></div>
+					<textarea rows="4" name="description" class="changer-assemblee-control"></textarea>
+				</div>
+				<input type="hidden" name="id" data-source="idrattacher" class="changer-assemblee-control">
+				<div class="btn-container">
+					<button class="overlay-btn" data-id="changer-assemblee" data-code="R1-4"> Valider </button>
+				</div>
+			</form>
+			
+			
+			<div class="overlay-message" id="changer-assemblee-message"></div>
+		</div>
 	</div>
+
+	<div class="invisible overlay" id="modifier-assemblee-overlay" load-data>
+		<div class="overlay-container">
+			<div class="close-overlay closer" data-target="modifier-assemblee-overlay">X</div>
+			<form id="modifier-assemblee-form">
+				<div class="form-control">
+					<div class="control-label"><label>Matricule Assemblée</label></div>
+					<input type="text" name="assemblee" placeholder="Matricule de l'assemblée" list="assemblee-list" class="modifier-assemblee-control" trois-en-un data-source="matassemble">
+					<datalist id="assemblee-list" class="assemblee-data-list"></datalist>
+				</div>
+				<div class="form-control">
+					<div class="control-label"> <label>Fonction</label></div>
+					<input class="modifier-assemblee-control" type="text" name="fonction" placeholder="Fonction du juste dans l'assemblée" list="modifier-fonction-list" data-source="fonctionrattacher">
+					<datalist id="modifier-fonction-list" class="fonction-data-list"></datalist>
+				</div>
+				<div class="form-control">
+					<div class="control-label"> <label>Date de rattachement</label></div>
+					<input type="date" name="datedebut" class="modifier-assemblee-control" data-source="datedebutrattacher" >
+				</div>
+
+				<input type="hidden" name="juste" data-source="justerattacher" class="modifier-assemblee-control">
+
+				<div class="btn-container">
+					<button class="overlay-btn" data-id="modifier-assemblee" data-code="R1-2"> Valider </button>
+				</div>
+
+
+			</form>
+			<div class="overlay-message" id="modifier-assemblee-message"></div>
+		</div>
+	</div>
+
+
+	<div class="invisible overlay" id="ostraciser-overlay">
+		<div class="overlay-container">
+			<div class="close-overlay closer" data-target="ostraciser-overlay">X</div>
+			<form id="ostraciser-form">
+				<div class="form-control">
+					<div class="control-label"><label>Raisons de l'ostracisation</label></div>
+					<textarea rows="4" name="description" class="ostraciser-control"></textarea>
+				</div>
+				<div class="form-control">
+					<div class="control-label"> <label>Date de d'ostracisation</label></div>
+					<input type="date" name="datefin" class="ostraciser-control">
+				</div>
+				<input type="hidden" name="id" class="ostraciser-control" data-source="idrattacher">
+				<div class="btn-container">
+					<button class="overlay-btn" data-id="ostraciser" data-code="R1-3"> Valider </button>
+				</div>
+			</form>
+			<div class="overlay-message" id="ostraciser-message"></div>
+		</div>
+	</div>
+
+
+
+	<div class="invisible overlay" id="adherer-groupe-overlay">
+		<div class="overlay-container">
+			<div class="close-overlay closer groupe-closer" data-target="adherer-groupe-overlay">X</div>
+			<form id="adherer-groupe-form">
+				<div class="form-control">
+					<div class="control-label"> <label>Matricule groupe</label></div>
+					<input type="text" name="groupe" placeholder="Matricule du groupe" list="groupe-list" class="adherer-groupe-control" trois-en-un>
+					<datalist id="groupe-list" class="groupe-data-list"></datalist>
+				</div>
+				<div class="form-control">
+					<div class="control-label"> <label>Rôle</label></div>
+					<input type="text" name="role" class="adherer-groupe-control">
+				</div>
+				<div class="form-control">
+					<div class="control-label"> <label>Date d'adhésion</label></div>
+					<input type="date" name="datedebut" class="adherer-groupe-control">
+				</div>
+
+				<input type="hidden" name="juste" class="adherer-groupe-control" data-source="idjuste">
+				<div class="btn-container">
+					<button class="overlay-btn" data-id="adherer-groupe" data-code="A1-1"> Valider </button>
+				</div>
+			</form>
+			<div class="overlay-message" id="adherer-groupe-message"></div>
+		</div>
+	</div>
+
+
+	<div class="invisible overlay" id="detail-groupe-overlay">
+		<div class="overlay-container">
+			<div class="close-overlay closer" data-target="detail-groupe-overlay">X</div>
+			<div class="centreur" id="information-groupe-detail">
+				ceci est le text d'information sur l'appartenance du groupe
+			</div>
+			<div class="overlay-message"></div>
+		</div>
+	</div>
+
+
+	<div class="invisible overlay" id="retrait-groupe-overlay" load-data>
+		<div class="overlay-container">
+			<div class="close-overlay closer" data-target="retrait-groupe-overlay">X</div>
+			<form id="retrait-groupe-form">
+				<div class="form-control">
+					<div class="control-label"><label>Raisons du retrait</label></div>
+					<textarea rows="4" name="description" class="retrait-groupe-control" data-source="descriptionappartenir"></textarea>
+				</div>
+				<div class="form-control">
+					<div class="control-label"> <label>Date de retrait</label></div>
+					<input type="date" name="datefin" class="retrait-groupe-control">
+				</div>
+				<input type="hidden" name="id" class="retrait-groupe-control" data-source="idappartenir">
+				<div class="btn-container">
+					<button class="overlay-btn" data-id="retrait-groupe" data-code="A1-3"> Valider </button>
+				</div>
+			</form>
+			<div class="overlay-message" id="retrait-groupe-message"></div>
+		</div>
+	</div>
+
+	<div class="invisible overlay" id="modifier-groupe-overlay" load-data>
+		<div class="overlay-container">
+			<div class="close-overlay closer" data-target="modifier-groupe-overlay">X</div>
+			<form id="modifier-groupe-form">
+				<div class="form-control">
+					<div class="control-label"> <label>Matricule groupe</label></div>
+					<input type="text" name="groupe" placeholder="Matricule du groupe" list="groupe-list-modifier" class="modifier-groupe-control" trois-en-un data-source="matgroupe">
+					<datalist id="groupe-list-modifier" class="groupe-data-list"></datalist>
+				</div>
+				<div class="form-control">
+					<div class="control-label"> <label>Rôle</label></div>
+					<input type="text" name="role" class="modifier-groupe-control" data-source="roleappartenir">
+				</div>
+				<div class="form-control">
+					<div class="control-label"> <label>Statut</label></div>
+					<select name="statut" class="modifier-groupe-control" data-source="statutappartenir">
+						<option value="1">Activer</option>
+						<option value="0">Suspendre</option>
+					</select>
+				</div>
+				<div class="form-control">
+					<div class="control-label"><label>Description</label></div>
+					<textarea rows="4" name="description" class="modifier-groupe-control" data-source="descriptionappartenir"></textarea>
+				</div>
+				<div class="form-control">
+					<div class="control-label"> <label>Date d'adhesion</label></div>
+					<input type="date" name="datedebut" class="modifier-groupe-control" data-source="datedebutappartenir">
+				</div>
+				<input type="hidden" name="id" data-source="idappartenir" class="modifier-groupe-control">
+				<div class="btn-container">
+					<button class="overlay-btn" data-id="modifier-groupe" data-code="A1-2"> Modifier </button>
+				</div>
+			</form>
+			<div class="overlay-message" id="modifier-groupe-message"></div>
+		</div>
+	</div>
+	
+	<div id="chargement-overlay" class="efface" w3-include-html="/dnaid/CMS/assets/parts/chargement-part.html"></div>
 </body>
 </html>
 

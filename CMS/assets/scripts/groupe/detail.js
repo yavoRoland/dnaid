@@ -87,7 +87,7 @@ function infosJuste(){
 			resultat.donnee.forEach((elt,index)=>{
 				let pariteLigne=index % 2==0?"paire":"impaire"
 				container.innerHTML+=`
-					<div id="${elt.idassemble}" class="ligne ${pariteLigne} ligne-temporaire" data-index="${index}">
+					<div id="${elt.idjuste}" class="ligne ${pariteLigne} ligne-temporaire ligne-juste" data-index="${index}">
 						<div class="info-bloc ligne-permanente">
 							<div class="libelle-responsive">Nom & Prenoms:</div>
 							<div class="bloc-value">${infoClaire(elt.nomjuste)} ${infoClaire(elt.prenomjuste)}</div>
@@ -110,18 +110,29 @@ function infosJuste(){
 					</div>
 				`
 			})
+			let lignes=document.getElementsByClassName('ligne-juste')
+			for(var ligne of lignes){
+				ligne.addEventListener('click',function(){
+					saveToken(passeur,JSON.stringify(resultat.donnee[this.getAttribute('data-index')]))
+					setTimeout(()=>{
+						window.location.href=`${server}juste/detail/${this.getAttribute('id')}`
+					},300)
+				})
+			}
 		}
 	})
 }
 
+
 document.addEventListener('included',()=>{
-	console.log("executionnnnn")
 	infosPasseur()
 	infosService()
 	infosJuste()
 	menuResponsiveActivation(route)
 	activerLienModifier()
+	activeLienList(getParameters(urlParams).groupe)
 })
+includeHTML()
 
 
 

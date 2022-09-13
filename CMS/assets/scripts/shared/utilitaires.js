@@ -6,6 +6,11 @@ const msgErreurTechnique="Une erreur s'est produite. Vuillez reéssayez! si elle
 var urlParams=new Array();//chaque page liste dans l'ordre reverse les parametres qui lui sont passés via l'url dans ce tableau en le redifinissant
 const superUtilisateur=2
 const admnistrateur=1
+const lambda=0
+
+const qte_small=5
+const qte_standard=10
+const qte_huge=15
 
 
 function getParameters(noms){//on passe a cette fonction le tableau urlParams redefinit par la page
@@ -76,9 +81,12 @@ function afficherPagination(total,quantite){
 
 function valeurClaire(valeur){
 	if(!(valeur==null))
-		return valeur.trim().length>0? valeur.trim : null
+		return valeur.trim().length>0? valeur.trim() : null
 	else
 		return valeur
+}
+function valeurClaireForApi(valeur){
+	return valeur??''
 }
 
 function infoClaire(info, msg="non défini"){
@@ -89,22 +97,32 @@ function executeRequete(formData, token=true){
 	let execution= new Promise((resolve, reject)=>{
 		var xhr= new XMLHttpRequest(); 
 		xhr.addEventListener("progress",(detail)=>{
-			console.log("en progression")
+			//console.log("en progression")
 		},false)
 
 		xhr.addEventListener("load",(detail)=>{
+			//console.log(detail.target.response)
 			let resultat=JSON.parse(detail.target.response)
-			resolve(resultat)
+			if(resultat.code == -8 || resultat.code == -7 || resultat.code == -6 ){
+				clearSession()
+				window.location.replace(connexionPage)
+				resolve(null)
+			}else{
+				if(resultat.jwt)
+					saveToken(jwtToken,JSON.stringify(resultat.jwt))
+				resolve(resultat)
+			}
+			
 
 		},false)
 
 		xhr.addEventListener("error",(detail)=>{
-			console.log("grosse erreur")
+			//console.log("grosse erreur")
 			reject(detail)
 		},false)
 
 		xhr.addEventListener("abort",(detail)=>{
-			console.log("annulée")
+			//console.log("annulée")
 			reject(detail)
 		},false)
 		
@@ -139,5 +157,14 @@ function activerVisualiseur(source, visualiseur){
 			console.log(e)
 		}
 	})
+}
+
+function remplissageAuto(){
+	let champs= document.getElementsByTagName('input')
+	for(var champ of champs){
+		if(champ.type=="text"){
+			champ.value=champ.getAttribute('name')	
+		}
+	}
 }
 

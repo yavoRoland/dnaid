@@ -1,9 +1,9 @@
 		<div class="ligne-permanente" id="menu-part-container">
 			<div class="ligne-permanente" id="menu-action">
-				<div class="menu-elt"><a href="http://localhost:8888/dnaid/assemblee/lister/1">Assemblee</a></div>
-				<div class="menu-elt"><a href="http://localhost:8888/dnaid/groupe/lister/1">Groupe</a></div>
-				<div class="menu-elt"><a href="http://localhost:8888/dnaid/juste/lister/1">Juste</a></div>
-				<div class="menu-elt"><a href="http://localhost:8888/dnaid/service/lister/1">Service</a></div>
+				<div id="menu-assemblee" class="menu-elt"><a href="http://localhost:8888/dnaid/assemblee/lister/1">Assemblee</a></div>
+				<div id="menu-groupe" class="menu-elt"><a href="http://localhost:8888/dnaid/groupe/lister/1">Groupe</a></div>
+				<div id="menu-juste" class="menu-elt"><a href="http://localhost:8888/dnaid/juste/lister/1">Juste</a></div>
+				<div id="menu-service" class="menu-elt"><a href="http://localhost:8888/dnaid/service/lister/1">Service</a></div>
 			</div>
 
 			<div class="ligne-permanente menu-rechercher">
@@ -11,6 +11,11 @@
 					<label for="menu-chp-rechercher"> <i class="fas fa-search"></i> </label>
 				</div>
 				
-				<input type="text" name="menu-chp-rechercher">
+				<input type="text" name="menu-chp-rechercher" class="chp-search">
+			</div>
+
+			<div class="securite" title="Modification de mot de passe">
+				<a href="http://localhost:8888/dnaid/juste/securite"><i class="fas fa-lock"></i></a>
 			</div>
 		</div>
+

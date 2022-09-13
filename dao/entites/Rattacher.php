@@ -7,6 +7,7 @@
 
 		public function ajouter($juste, $assemble, $fonction, $statut, $dateDebut){
 			try{
+				
 				$req=$this->_bdd->prepare('INSERT INTO rattacher(justerattacher, assemblerattacher, fonctionrattacher, statutrattacher, datedebutrattacher) VALUES(?,?,?,?,?)');
 				return $req->execute(array($juste, $assemble, $fonction, $statut, $dateDebut));
 			}catch(Exception $e){
@@ -28,6 +29,16 @@
 			try{
 				$req=$this->_bdd->prepare('SELECT * FROM rattacher WHERE idrattacher=?');
 				$req->execute(array($id));
+				return $req;
+			}catch(Exception $e){
+				return false;
+			}
+		}
+
+		public function rechercherPourUnicite($juste,$assemble,$statut){
+			try{
+				$req=$this->_bdd->prepare('SELECT * FROM rattacher WHERE justerattacher=? AND assemblerattacher=? AND statutrattacher=?');
+				$req->execute(array($juste,$assemble,$statut));
 				return $req;
 			}catch(Exception $e){
 				return false;

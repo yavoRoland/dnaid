@@ -10,7 +10,7 @@ function activerEnregistrerService(){
 		nom.value = valeurClaire(nom.value)
 		if(formulaire.reportValidity()){
 			
-			formData.append('nom', nom.value)
+			formData.append('nom', valeurClaireForApi(nom.value))
 			formData.append('datecreat',document.getElementById('datecreat').value)
 			formData.append('code','S1-1')
 
@@ -32,3 +32,4 @@ document.addEventListener('included',function(){
 	activerEnregistrerService()
 	menuResponsiveActivation(route)
 })
+includeHTML()

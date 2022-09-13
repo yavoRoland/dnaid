@@ -3,11 +3,12 @@ urlParams=["assemblee"]//tableau declaré dans utilitaires.js
 var conservateur=null
 
 function chargerInfos(){
+
 	let assemblee = getInfoByPasseur()
 	if(!assemblee)
 		return
-
 	for(var property in assemblee){
+		console.log(property.replace('assemble',''))
 		let elt=document.getElementById(`${property.replace('assemble','')}`)
 		if(elt)
 			elt.value= assemblee[property]
@@ -42,10 +43,13 @@ function activerModifierAssemblee(){
 			if(info.value != assemblee[`${info.getAttribute('name')}assemble`])
 				change=true
 
-			formData.append(info.getAttribute('name') , info.value)
-			conservateur[`${info.getAttribute('name')}assemble`]
+			formData.append(info.getAttribute('name') , valeurClaireForApi(info.value))
+			conservateur[`${info.getAttribute('name')}assemble`]=valeurClaireForApi(info.value)
 		}
-
+		let desc=document.getElementById('description')
+		formData.append('description',valeurClaireForApi(valeurClaire(desc.value)))
+		if(desc.value!= assemblee.descriptionassemble)
+			change=true
 		if(!change)
 			return
 
@@ -53,9 +57,11 @@ function activerModifierAssemblee(){
 			return
 		formData.append('code','A2-2')
 		formData.append('assemblee',assemblee.idassemble)
+		
 		executeRequete(formData)
 		.then(resultat=>{
 			if(resultat.code==requete_reussi){
+				conservateur.descriptionassemble=valeurClaireForApi(valeurClaire(desc.value))
 				saveToken(passeur,JSON.stringify(conservateur))
 			}
 			feedBack.innerHTML=resultat.message
@@ -66,4 +72,6 @@ function activerModifierAssemblee(){
 document.addEventListener('included',function(){
 	chargerInfos()
 	menuResponsiveActivation(route)
+	activerModifierAssemblee()
 })
+includeHTML()

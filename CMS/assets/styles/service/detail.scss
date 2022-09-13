@@ -16,15 +16,7 @@ $lien-color: colors.$cramoisi;
 	@include utilitaires.centrer-horizontal(75%);
 	min-height:800px;
 }
-.lien-modifier{
-	@include utilitaires.centrer-vertical;
-	margin-left:auto;
-	text-decoration: underline;
-	color: $lien-color;
-	font-size: utilitaires.$text-L;
-	font-weight: bold;
-	cursor: pointer;
-}
+
 .zone{
 	border: solid $zone-border-color 1px;
 	margin-top: 50px;

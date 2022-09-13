@@ -46,7 +46,7 @@
     width: 100%;
     text-align: center;
   }
-  .chp-bloc input {
+  .chp-bloc input, .chp-bloc textarea {
     width: 100%;
   }
 
@@ -54,19 +54,31 @@
     width: 80%;
     margin: auto;
   }
+
+  .btn-container {
+    width: 100%;
+    margin: auto;
+    margin-top: 50px;
+  }
 }
 @media screen and (max-width: 480px) {
   .chp-bloc .chp-label {
     width: 100%;
     text-align: center;
   }
-  .chp-bloc input {
+  .chp-bloc input, .chp-bloc textarea {
     width: 100%;
   }
 
   #corps-action-container {
     width: 100%;
     margin: auto;
+  }
+
+  .btn-container {
+    width: 100%;
+    margin: auto;
+    margin-top: 50px;
   }
 }
 

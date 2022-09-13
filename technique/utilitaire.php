@@ -48,8 +48,8 @@
 				$nom="";
 				do{
 					$nom=sha1(uniqid().time()).'.'.$extension;
-				}while(file_exists($repertoire.$nom.'.'.$extension));
-				move_uploaded_file($fichier['tmp_name'], $repertoire.$nom.'.'.$extension);
+				}while(file_exists($repertoire.$nom));
+				move_uploaded_file($fichier['tmp_name'], $repertoire.$nom);
 				return $nom;
 			}catch(Exception $e){
 				return false;
@@ -101,6 +101,12 @@
 			}catch(Exception $e){
 				return false;
 			}
+		}
+
+		public static function epuration($text){
+			$aRemplacer=array('â','à','ä','é','è','ê','ë','ô','ö','ù','û','ü','î','ï','ç','-','_');
+			$remplacant=array('a','a','a','e','e','e','e','o','o','u','u','u','i','i','c',' ',' ');
+			return str_replace($aRemplacer ,$remplacant, $text);
 		}
 	}
 

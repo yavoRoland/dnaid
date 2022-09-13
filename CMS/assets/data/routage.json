@@ -1,0 +1,29 @@
+{
+	"carte":{
+			"assemblee":{
+				"ajouter":{"niveau":2}, 
+				"modifier-assemblee":{"niveau":1,"temoin":true},
+				"ajouter-assemblee-juste":{"niveau":1,"temoin":true}
+			},
+			"groupe":{
+				"ajouter":{"niveau":2}, 
+				"modifier-groupe":{"niveau":2}
+			},
+			"juste":{
+				"ajouter":{"niveau":0},
+				"modifier-juste":{"niveau":1,"temoin":true},
+				"muter-juste":{"niveau":1,"temoin":true},
+				"modifier-juste-assemblee":{"niveau":2},
+				"ostraciser-juste":{"niveau":1,"temoin":true},
+				"adhesion-juste-groupe":{"niveau":1,"temoin":true},
+				"detail-juste-groupe":{"niveau":0},
+				"modifier-juste-groupe":{"niveau":1,"temoin":true},
+				"retirer-juste-groupe":{"niveau":1, "temoin":true}
+			},
+			"service":{
+				"ajouter":{"niveau":2},
+				"modifier-service":{"niveau":2},
+				"ajouter-service-groupe":{"niveau":2}
+			}
+		}
+}

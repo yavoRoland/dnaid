@@ -8,6 +8,18 @@ function chargerAnneeNouvelleNaissance(){
 		select.innerHTML+=`<option value="${i}">${i}</option>`
 	}
 }
+function visibiliteDateDeces(valeur){
+	let dateDeces= document.getElementById('datedeces')
+		let blocDateDeces=document.getElementById('datedeces-bloc')
+		if(valeur=="décédé mort"){
+			blocDateDeces.classList.remove('invisible')
+			dateDeces.setAttribute('required','required')
+		}else{
+			dateDeces.value=null
+			dateDeces.removeAttribute('required')
+			blocDateDeces.classList.add('invisible')
+		}
+}
 function activerModifierPhoto(){
 	document.getElementById('btn-modifier').addEventListener('click',function(event){
 		event.preventDefault()
@@ -18,7 +30,7 @@ function activerModifierPhoto(){
 			return
 		}
 		let juste= getInfoByPasseur()
-		let imagePart=image.value.split
+		let imagePart=image.value.split('.')
 		var formData= new FormData()
 		formData.append('photo',image.files[0])
 		formData.append('extension', imagePart[imagePart.length - 1])
@@ -64,28 +76,34 @@ function activerModifierJuste(){
 			for(var elt of elts){
 				if(elt.nodeName== "INPUT"){
 					if(elt.getAttribute('type') == "text" || elt.getAttribute('type') == "date"){
-						elt.value=valeurClaire(elt.value)
-						formData.append(elt.getAttribute('name'),elt.value)
-						conservateur[property]=elt.value
 
-						if(elt.value != juste[property])
+						elt.value=valeurClaire(elt.value)
+						formData.append(elt.getAttribute('name'),valeurClaireForApi(elt.value))
+
+						if(elt.value != juste[property]){
 							change=true
+						}
+						conservateur[property]=elt.value
 					}
 
 					if(elt.getAttribute('type') == "radio"){
 						if(elt.checked){
 							formData.append(elt.getAttribute('name'),elt.value)
-							conservateur[property]=elt.value
+							
 							if(elt.value != juste[property])
 								change=true
+
+							conservateur[property]=elt.value
 						}
 					}
 				}
 				if(elt.nodeName== "SELECT"){
 					formData.append(elt.getAttribute('name'), elt.value)
-					conservateur[property]=elt.value
+					
 					if(elt.value !=juste[property])
 						change=true
+
+					conservateur[property]=elt.value
 				}
 			}
 		}
@@ -93,6 +111,7 @@ function activerModifierJuste(){
 			return
 		if(!change)
 			return
+
 		formData.append('code','J1-2')
 		formData.append('juste',juste.idjuste)
 		executeRequete(formData)
@@ -102,9 +121,6 @@ function activerModifierJuste(){
 			}
 			feedBack.innerHTML=resultat.message
 		})
-
-
-
 	})
 }
 
@@ -113,20 +129,23 @@ function chargerInfos(){
 
 	if(!juste)
 		return
-
+	if(juste.datedecesjuste!=null){
+		document.getElementById('datedeces').classList.add('invisible')
+	}
+	visibiliteDateDeces(juste.datedecesjuste)
 	for(var property in juste){
 		let elts= document.getElementsByName(property.replace('juste',''))
 		if(elts.length>0){
 			for(var elt of elts){
-				//console.log(property+":"+elt.nodeName.toString()+"=>"+elt.getAttribute('type'))
 				if(elt.nodeName == "INPUT" && juste[property]){
 					if(elt.getAttribute('type') == "text")
 						elt.value=valeurClaire(juste[property])
 					if(elt.getAttribute('type') == "date"){
 						elt.value=juste[property]
 					}
+					
 
-					if(elt.getAttribute('type')== "radio" && elt.value == juste[property]){
+					if(elt.getAttribute('type')== "radio" && elt.value.trim().toLowerCase() == juste[property].trim().toLowerCase()){
 						elt.setAttribute("checked",true)
 					}
 				}
@@ -142,7 +161,7 @@ function chargerInfos(){
 		document.getElementById('photo').src=`${server}juste/illustration/${juste.photojuste}`
 		document.getElementById('overlay-img').src=`${server}juste/illustration/${juste.photojuste}`
 	}else{
-		document.getElementById('photo').src=`${server}juste/illustration/null.png`
+		document.getElementById('photo').src=`../../dao/illustration/juste/photo/null.png`
 	}			
 }
 
@@ -166,6 +185,13 @@ function activeVisibiliteOverlay(){
 		document.getElementById('overlay').classList.add('invisible')
 	})
 }
+function activerVisibiliteDateDeces(){
+	document.getElementById('etat').addEventListener('change',function(){
+		visibiliteDateDeces(this.value)
+	})
+}
+
+
 
 
 
@@ -173,11 +199,11 @@ document.addEventListener('included',function(){
 	chargerAnneeNouvelleNaissance()
 	chargerEthnie()
 	activeVisibiliteOverlay()
+	visibiliteDateDeces()
 	chargerInfos()
-
 	menuResponsiveActivation(route)
-
 	activerModifierJuste()
 	activerModifierPhoto()
 	activerVisualiseur(document.getElementById('image'),document.getElementById('overlay-img'))
 })
+includeHTML()

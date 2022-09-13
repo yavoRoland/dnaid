@@ -30,7 +30,7 @@ function activerModifierService(){
 		}
 
 		var formData = new FormData()
-		formData.append('nom', nom.value)
+		formData.append('nom', valeurClaireForApi(nom.value))
 		formData.append('datecreat',dateCreat.value)
 		formData.append('service',service.idservice)
 		formData.append('code',"S1-2")
@@ -55,3 +55,4 @@ document.addEventListener('included',()=>{
 	chargerInfos()
 	activerModifierService()
 })
+includeHTML()

@@ -24,19 +24,34 @@ a{
 	-----------------------------------------------
 */
 
-.ligne-permanente{
+.ligne-permanente,.ligne-temporaire,.ligne-temporaire-inverse,.ligne-semi-temporaire{
 	@include utilitaires.ligne;
 }
 
-.ligne-temporaire{
-	@include utilitaires.ligne;
-}
-
-.ligne-semi-temporaire{
-	@include utilitaires.ligne;
-}
 .invisible{
 	display:none;
+}
+
+.lien-list{
+	font-size: utilitaires.$text-S;
+	margin-top: 50px;
+}
+.lien{
+	@include utilitaires.centrer-vertical;
+	margin-left:auto;
+	text-decoration: underline;
+	color: variables.$lien-color;
+	font-size: utilitaires.$text-M;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.securite{
+	@include utilitaires.centrer-vertical;
+	color: variables.$menu-color;
+	font-size: utilitaires.$text-L;
+	margin:0px 20px; 
+	cursor:pointer;
 }
 
 /*
@@ -116,6 +131,10 @@ a{
 		color: variables.$menu-color;
 		cursor: pointer;
 	}
+	.active{
+		color: white;
+		font-size: utilitaires.$text-L;
+	}
 }
 .menu-rechercher{
 	.search-label{
@@ -141,6 +160,10 @@ a{
 	padding:3px 10px;
 	margin-right:10px;
 }
+
+
+
+
 
 /*
 	CORPS
@@ -206,6 +229,9 @@ a{
 		color: variables.$responsive-pied-color;
 	}
 }
+#responsive-menu-rechercher{
+	flex:1;
+}
 #menu-responsive-header{
 	#fermer-menu{
 		font-weight:bold;
@@ -249,7 +275,6 @@ a{
 	font-size: utilitaires.$text-M;
 }
 .actif{
-
 	.ss-menu-elt-container{
 		font-size: utilitaires.$text-M;
 		color: variables.$responsive-color;
@@ -318,6 +343,66 @@ a{
 	margin:0px 15px;
 }
 
+/*
+	CHARGEMENT
+	-----------------------------------------------
+	-----------------------------------------------
+*/
+#chargement-overlay{
+	position: fixed; /* Sit on top of the page content */
+	/*display: none; /* Hidden by default */
+	width: 100%; /* Full width (cover the whole page) */
+	height: 100%; /* Full height (cover the whole page) */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+	z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+	/*cursor: pointer; /* Add a pointer on hover */
+}
+
+#chargement-overlay-container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: black;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  text-align: center;
+  font-size: 20px;
+  background-color: white;
+  padding: 30px 80px;
+  border-radius: 10px;
+  width:40%;
+  overflow:scroll;
+}
+#chargement-msg-container{
+	#chargement-msg{
+		padding:50px 0px;
+	}
+	padding:50px 0px;
+}
+.loader {
+	@include utilitaires.centrer-horizontal(50%);
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.efface{
+	display:none;
+}
 
 @media screen and (max-width: 1024px){
 	.ligne-semi-temporaire{
@@ -359,11 +444,17 @@ a{
 		justify-content: center;
 		text-align: center;
 	}
+	.ligne-temporaire-inverse{
+		flex-direction: column-reverse;
+	}
 	.footer-elt{
 		margin-bottom: 20px;
 	}
 	.ligne-semi-temporaire{
 		flex-direction:column;
+	}
+	.lien{
+		font-size: utilitaires.$text-M;
 	}
 }
 @media screen and (max-width: 480px){
@@ -381,6 +472,9 @@ a{
 		flex-direction: column;
 		justify-content: center;
 		text-align: center;
+	}
+	.ligne-temporaire-inverse{
+		flex-direction: column-reverse;
 	}
 
 	#header-titre{
@@ -405,6 +499,9 @@ a{
 	}
 	.ligne-semi-temporaire{
 		flex-direction:column;
+	}
+	.lien{
+		font-size: utilitaires.$text-M;
 	}
 
 }

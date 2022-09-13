@@ -20,10 +20,10 @@ function activerEnregisterAssemblee(){
 				break;
 
 
-			formData.append(info.getAttribute('name') , valeurClaire(info.value))
+			formData.append(info.getAttribute('name') , valeurClaireForApi(info.value))
 			
 		}
-		formData.append('description', valeurClaire(document.getElementById('description').value))
+		formData.append('description', valeurClaireForApi(document.getElementById('description').value))
 		formData.append('code','A2-1')
 
 		executeRequete(formData)
@@ -38,7 +38,9 @@ function activerEnregisterAssemblee(){
 }
 
 
+
 document.addEventListener('included',function(){
 	activerEnregisterAssemblee()
 	menuResponsiveActivation(route)
 })
+includeHTML()

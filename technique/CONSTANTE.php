@@ -7,7 +7,7 @@
 	const MDP='';
 
 	//constante de gestion des etats "appartenir" et "rattacher"
-	const EJECTE=-1;
+	const INACTIF=-1;
 	const SUSPENDU=0;
 	const ACTIF=1;
 
@@ -29,7 +29,7 @@
 	const liste_vide=2;
 
 	//repertoire des ressources
-	const REPERTOIRE_PHOTO_JUSTE='../dao/illustration/juste/photo';
+	const REPERTOIRE_PHOTO_JUSTE='../dao/illustration/juste/photo/';
 	const REPERTOIRE_SYS_LOG='../dao/logs/systeme';
 
 	const FULL_TEXT_ERROR="Full Text Error";

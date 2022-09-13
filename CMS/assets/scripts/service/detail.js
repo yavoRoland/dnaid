@@ -43,7 +43,7 @@ function infosGroupe(){
 			resultat.donnee.forEach((elt,index)=>{
 				let pariteLigne= index % 2==0? "paire": "impaire"
 				container.innerHTML+=`
-					<div id="${elt.idservice}" class="ligne ${pariteLigne} ligne-temporaire" data-index="${index}">
+					<div id="${elt.idgroupe}" class="ligne ${pariteLigne} ligne-temporaire ligne-groupe" data-index="${index}">
 						<div class="info-bloc ligne-permanente">
 							<div class="libelle-responsive">Matricule: </div>
 							<div class="bloc-value">${infoClaire(elt.matgroupe)}</div>
@@ -61,6 +61,16 @@ function infosGroupe(){
 					</div>
 				`
 			})
+
+			let lignes=document.getElementsByClassName('ligne-groupe')
+			for(var ligne of lignes){
+				ligne.addEventListener('click',function(){
+					saveToken(passeur,JSON.stringify(resultat.donnee[this.getAttribute('data-index')]))
+					setTimeout(()=>{
+						window.location.href=`${server}groupe/detail/${this.getAttribute('id')}`
+					},300)
+				})
+			}
 		}
 	})
 }
@@ -70,4 +80,6 @@ document.addEventListener('included',()=>{
 	infosGroupe()
 	menuResponsiveActivation(route)
 	activerLienModifier()
+	activeLienList(getParameters(urlParams).service)
 })
+includeHTML()

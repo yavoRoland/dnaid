@@ -1,5 +1,4 @@
 route="assemblee"
-const quantite=10
 
 urlParams=["page"] //tableau declaré dans utilitaires.js
 
@@ -47,14 +46,14 @@ function listerAssemblee(){
 			})
 			document.getElementById('tableau-corps').innerHTML=lines
 			document.getElementById('tableau').classList.remove('invisible')
-			afficherPagination(parseInt(resultat.total.A_TOTAL),quantite)
+			afficherPagination(parseInt(resultat.total.A_TOTAL),qte_standard)
 			let lignes = document.getElementsByClassName('ligne')
 			for(var line of lignes){
 				line.addEventListener('click',function(event){
 					saveToken(passeur,JSON.stringify(resultat.donnee[this.getAttribute('data-index')]))
 					setTimeout(()=>{
 						window.location.href=`${server}assemblee/detail/${this.getAttribute('id')}`
-					},500)
+					},300)
 				})
 			}
 		}else{
@@ -63,16 +62,16 @@ function listerAssemblee(){
 		}
 	})
 	.catch(error=>{
-		document.getElementById('message-vide').innerHTML
+		document.getElementById('message-vide').innerHTML=error
 		document.getElementById('message-vide').classList.remove('invisible')
 	})
 }
-
 
 
 document.addEventListener('included',()=>{
 	listerAssemblee()
 	menuResponsiveActivation(route)
 })
+includeHTML()
 
 

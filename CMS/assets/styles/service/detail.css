@@ -4,18 +4,6 @@
   min-height: 800px;
 }
 
-.lien-modifier {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: auto;
-  text-decoration: underline;
-  color: #990000;
-  font-size: 25px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
 .zone {
   border: solid #ffbf00 1px;
   margin-top: 50px;

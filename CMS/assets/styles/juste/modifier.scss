@@ -182,28 +182,18 @@ $affiche-overlay-bg: colors.$or;
 	}
 }
 
+
+
+
+
 @media screen and (max-width: 768px){
 	#corps-action-container{
 		text-align:center;
-	}
-	#info-part,#img-part{
-		width:100%;
-		margin-bottom:100px;
-		text-align:center;
-		margin:0px;
-	}
-	#img-part-container{
-		padding-top:100px;
-	}
-
-	.btn-container{
-		@include utilitaires.centrer-horizontal(100%);
-	}
-	#corps-action-container{
 		padding:0px;
 	}
-}
-@media screen and (max-width: 480px){
+	#form-main-part{
+		@include utilitaires.centrer-horizontal(90%);
+	}
 	#info-part,#img-part{
 		width:100%;
 		margin-bottom:100px;
@@ -212,6 +202,9 @@ $affiche-overlay-bg: colors.$or;
 	}
 	#img-part-container{
 		padding-top:100px;
+	}
+	#img-part-header-container{
+		width:100%;
 	}
 	.chp-bloc{
 		.chp-label{
@@ -221,10 +214,71 @@ $affiche-overlay-bg: colors.$or;
 			font-weight:bold;
 		}
 		input{
-			width:90%;
+			width:100%;
 		}
 		select{
-			width:90%;
+			width:100%;
+		}
+		.radio-group{
+			input{
+				width:5%;
+			}
+			label{
+				margin-right: 40px;
+			}
+			justify-content:center;
+			margin-top:20px;
+
+		}
+	}
+	.btn-container{
+		@include utilitaires.centrer-horizontal(100%);
+		margin-top:50px;
+	}
+
+	#overlay-image-container{
+	  width: 250px;
+	  height: 250px;
+	  margin:10px 0px;
+	}
+}
+
+
+
+
+
+@media screen and (max-width: 480px){
+	#corps-action-container{
+		text-align:center;
+		padding:0px;
+	}
+	#form-main-part{
+		@include utilitaires.centrer-horizontal(90%);
+	}
+	#info-part,#img-part{
+		width:100%;
+		margin-bottom:100px;
+		text-align:center;
+		margin:0px;
+	}
+	#img-part-container{
+		padding-top:100px;
+	}
+	#img-part-header-container{
+		width:100%;
+	}
+	.chp-bloc{
+		.chp-label{
+			width:100%;
+			padding-right:0px;
+			text-align:center;
+			font-weight:bold;
+		}
+		input{
+			width:100%;
+		}
+		select{
+			width:100%;
 		}
 		.radio-group{
 			input{
@@ -241,10 +295,10 @@ $affiche-overlay-bg: colors.$or;
 
 	.btn-container{
 		@include utilitaires.centrer-horizontal(100%);
+		margin-top:50px;
+		
 	}
-	#corps-action-container{
-		padding:0px;
-	}
+	
 
 	#overlay-image-container{
 	  width: 250px;

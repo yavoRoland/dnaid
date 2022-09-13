@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" type="text/css" href="/dnaid/cms/assets/styles/shared/main.css">
-	<link rel="stylesheet" type="text/css" href="/dnaid/cms/assets/styles/juste/ajouter.css">
+	<link rel="stylesheet" type="text/css" href="/dnaid/CMS/assets/styles/shared/main.css">
+	<link rel="stylesheet" type="text/css" href="/dnaid/CMS/assets/styles/juste/ajouter.css">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<title>Nouveau juste</title>
@@ -62,20 +62,25 @@
 								<div class="chp-bloc ligne-temporaire">
 									<div class="chp-label"> <label>Genre</label></div>
 									<div class="radio-group ligne-permanente">
-										<input checked type="radio" name="genre" value="homme" id="homme maculin garçon"> <label for="homme">Homme</label>
-										<input type="radio" name="genre" value="femme feminin fille" id="femme"> <label for="femme">Femme</label>
+										<input checked type="radio" name="genre" value="homme masculin garçon" id="homme masculin garçon"> <label for="homme">Homme</label>
+										<input type="radio" name="genre" value="femme feminin fille" id="femme feminin fille"> <label for="femme">Femme</label>
 									</div>
 									
 								</div>
 
 								<div class="chp-bloc ligne-temporaire">
 									<div class="chp-label"> <label>Etat</label></div>
-									<select name="grade" id="grade">
+									<select name="etat" id="etat">
 										<option selected value="vivant">Vivant</option>
-										<option value="décédé mort">Décedé</option>
+										<option value="decede mort">Décedé</option>
 										<option value="ame non juste">Âme non juste</option>
 										<option value="mort spirituel">Mort spirituelle</option>
 									</select>
+								</div>
+
+								<div class="chp-bloc ligne-temporaire invisible" id="datedeces-bloc">
+									<div class="chp-label"> <label>Date de décès</label></div>
+									<input type="date" name="datedeces" id="datedeces">
 								</div>
 
 								<div class="chp-bloc ligne-temporaire">
@@ -98,9 +103,7 @@
 
 								<div class="chp-bloc ligne-temporaire">
 									<div class="chp-label"> <label>Année de nouvelle naissance</label></div>
-									<select name="nvelNais" id="nvelNais">
-										
-									</select>
+									<select name="nvelNais" id="nvelNais"></select>
 								</div>
 
 								<div class="chp-bloc ligne-temporaire">
@@ -112,7 +115,7 @@
 									<div class="chp-label"> <label>Statut matrimonial</label></div>
 									<div class="radio-group ligne-permanente">
 										<input checked type="radio" name="statutMatri" value="celibataire" id="celibataire"> <label for="celibataire">Célibataire</label>
-										<input type="radio" name="statutMatri" value="marie couple" id="marie"> <label for="marie">Marié(e)</label>
+										<input type="radio" name="statutMatri" value="marie couple" id="marie couple"> <label for="marie">Marié(e)</label>
 									</div>
 								</div>
 
@@ -120,6 +123,11 @@
 									<div class="chp-label"> <label>Ethnie</label></div>
 									<input type="text" name="ethnie" id="ethnie" list="ethnie-list">
 									<datalist id="ethnie-list"></datalist>
+								</div>
+
+								<div class="chp-bloc ligne-temporaire">
+									<div class="chp-label"> <label>Origine</label></div>
+									<input type="text" name="origine" id="origine" placeholder="Pays, Region, Departement, Ville, Village, Groupe ethnique">
 								</div>
 
 								
@@ -131,7 +139,7 @@
 
 								<div class="chp-bloc ligne-temporaire invisible" id="assemblee-bloc">
 									<div class="chp-label"> <label>Assemblee</label></div>
-									<input type="text" name="assemble" id="assemble" list="assemble-list" placeholder="Matricule de l'assemblée">
+									<input type="text" name="assemble" id="assemble" list="assemble-list" placeholder="Matricule de l'assemblée" trois-en-un>
 									<datalist id="assemble-list"></datalist>
 								</div>
 
@@ -173,9 +181,9 @@
 
 
 
-	<div id="footer-part" w3-include-html="/dnaid/CMS/assets/parts/footer-part.html">
-		
-	</div>
+	<div id="footer-part" w3-include-html="/dnaid/CMS/assets/parts/footer-part.html"></div>
+	
+	<div id="chargement-overlay" class="efface" w3-include-html="/dnaid/CMS/assets/parts/chargement-part.html"></div>
 </body>
 </html>
 

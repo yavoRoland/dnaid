@@ -6,10 +6,14 @@
      	}
 
 
-     	public function ajouter($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $fullText){
+     	public function ajouter($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo,$origine, $datedeces, $fullText){
      		try{
-     			$req=$this->_bdd->prepare('INSERT INTO juste(nomjuste, prenomjuste, surnomjuste, datenaissjuste, genrejuste, etatjuste, adressejuste, phonejuste, gradejuste, anneenvelnaissjuste, professionjuste, statutmatrijuste, ethniejuste, photojuste, fulltextjuste) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
-     			$resultat= $req->execute(array($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $fullText));
+                if(strlen($datedeces)==0){
+                    $datedeces=NULL;
+                }
+
+     			$req=$this->_bdd->prepare('INSERT INTO juste(nomjuste, prenomjuste, surnomjuste, datenaissjuste, genrejuste, etatjuste, adressejuste, phonejuste, gradejuste, anneenvelnaissjuste, professionjuste, statutmatrijuste, ethniejuste, photojuste, originejuste, datedecesjuste, fulltextjuste) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+     			$resultat= $req->execute(array($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $origine, $datedeces, $fullText));
 
                 return array(
                     "resultat"=>$resultat,
@@ -20,11 +24,14 @@
      		}
      	}
 
-        public function modifier($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $fullText, $id){
+        public function modifier($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $origine,$datedeces, $fullText, $id){
             try{
-                $req=$this->_bdd->prepare('UPDATE juste SET nomjuste=?, prenomjuste=?, surnomjuste=?, datenaissjuste=?, genrejuste=?, etatjuste=?, adressejuste=?, phonejuste=?, gradejuste=?, anneenvelnaissjuste=?, professionjuste=?, statutmatrijuste=?, ethniejuste=?,photojuste=?, fulltextjuste=? WHERE idjuste=?');
+                if(strlen($datedeces)==0){
+                    $datedeces=NULL;
+                }
+                $req=$this->_bdd->prepare('UPDATE juste SET nomjuste=?, prenomjuste=?, surnomjuste=?, datenaissjuste=?, genrejuste=?, etatjuste=?, adressejuste=?, phonejuste=?, gradejuste=?, anneenvelnaissjuste=?, professionjuste=?, statutmatrijuste=?, ethniejuste=?,photojuste=?, originejuste=?, datedecesjuste=?, fulltextjuste=? WHERE idjuste=?');
 
-                return $req->execute(array($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $fullText, $id));
+                return $req->execute(array($nom, $prenom, $surnom, $datenaiss, $genre, $etat, $adresse, $phone, $grade, $nvelNais, $profession, $statutMatri, $ethnie, $photo, $origine, $datedeces, $fullText, $id));
             }catch(Exception $e){
                 return false;
             }
@@ -53,8 +60,8 @@
 
         public function rechercheProfonde($id){
             try{
-                $req=$this->_bdd->prepare('SELECT * FROM juste LEFT JOIN rattacher ON idjuste=justerattacher LEFT JOIN assemblee ON assemblerattacher=idassemble WHERE idjuste=?');
-                $req->execute(array($id));
+                $req=$this->_bdd->prepare('SELECT * FROM juste LEFT JOIN rattacher ON idjuste=justerattacher LEFT JOIN assemblee ON assemblerattacher=idassemble WHERE idjuste=? AND statutrattacher=?');
+                $req->execute(array($id,1));
                 return $req;
             }catch(Exception $e){
                 return false;
@@ -152,6 +159,26 @@
                 $req=$this->_bdd->prepare('SELECT * FROM rattacher, assemblee WHERE justerattacher=:juste AND assemblerattacher=idassemble ORDER BY datedebutrattacher DESC LIMIT :page,:quantite');
                 
                 $req->bindValue(':juste',$juste,PDO::PARAM_INT);
+                $req->bindValue(':page',($page*$quantite), PDO::PARAM_INT);
+                $req->bindValue(':quantite',$quantite, PDO::PARAM_INT);
+                $req->execute();
+
+                return array($req, $total);
+            }catch(Exception $e){
+                return false;
+            }
+        }
+
+        public function listeAssembleParStatut($juste,$page,$statut,$quantite){
+            try{
+                $total=$this->_bdd->prepare('SELECT COUNT(*) AS A_TOTAL FROM rattacher WHERE justerattacher=? AND statutrattacher=?');
+                $total->execute(array($juste,$statut));
+
+
+                $req=$this->_bdd->prepare('SELECT * FROM rattacher, assemblee WHERE justerattacher=:juste AND assemblerattacher=idassemble AND statutrattacher=:statut ORDER BY datedebutrattacher DESC LIMIT :page,:quantite');
+                
+                $req->bindValue(':juste',$juste,PDO::PARAM_INT);
+                $req->bindValue(':statut',$statut,PDO::PARAM_INT);
                 $req->bindValue(':page',($page*$quantite), PDO::PARAM_INT);
                 $req->bindValue(':quantite',$quantite, PDO::PARAM_INT);
                 $req->execute();

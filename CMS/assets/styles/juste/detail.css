@@ -4,18 +4,6 @@
   min-height: 800px;
 }
 
-.lien-modifier {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: auto;
-  text-decoration: underline;
-  color: #990000;
-  font-size: 25px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
 .zone {
   border: solid #ffbf00 1px;
   margin-top: 50px;
@@ -24,11 +12,40 @@
   box-shadow: 0px 10px 10px 0px #f2f2f2;
 }
 
+#info-personnelle-container .zone-tete {
+  text-align: center;
+}
+
 .zone-tete > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 30px;
   margin-bottom: 10px;
 }
 .zone-tete > div .info-libelle {
   margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.user-mode-btn {
+  cursor: pointer;
+  color: #9D01FD;
+  margin-bottom: 25px;
+}
+.user-mode-btn .icon-container {
+  width: 20px;
+  height: 22px;
+}
+.user-mode-btn .icon-container .icon {
+  width: 100%;
+  height: 100%;
+}
+.user-mode-btn .icon-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 5px;
 }
 
 .zone-bloc {
@@ -47,6 +64,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.photo-identite {
+  width: 150px;
+  height: 150px;
+  background: whitesmoke;
+  border: 5px solid whitesmoke;
 }
 
 #tableau-header {
@@ -97,7 +121,146 @@
   justify-content: center;
 }
 
+#info-assemblee-part, #info-personnelle-part {
+  position: relative;
+}
+
+#assemblee-actions-toggler, #info-perso-actions-toggler {
+  position: absolute;
+  right: 20px;
+  font-size: 30px;
+  color: #9D01FD;
+  padding: 10px 40px;
+}
+
+.toggler, .closer {
+  cursor: pointer;
+}
+
+#assemblee-actions, #info-perso-actions {
+  position: absolute;
+  right: 20px;
+  z-index: 20;
+  background: #FFFFFF;
+  padding: 10px 40px;
+  box-shadow: 1px 1px 5px #9D01FD;
+}
+#assemblee-actions .closer, #info-perso-actions .closer {
+  text-align: right;
+  font-size: 30px;
+  color: #9D01FD;
+}
+
+.actions-elt {
+  margin-bottom: 10px;
+}
+
+.groupe-actions-bloc {
+  position: relative;
+}
+
+.groupe-actions {
+  position: absolute;
+  top: 0;
+  z-index: 22;
+  background: #FFFFFF;
+  box-shadow: 1px 1px 5px #9D01FD;
+  width: 100%;
+}
+.groupe-actions .closer {
+  text-align: right;
+  color: #9D01FD;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.form-control {
+  margin-bottom: 50px;
+}
+.form-control input, .form-control textarea, .form-control select {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 18px;
+  padding: 10px;
+  border: #990000 1px solid;
+  outline: none;
+}
+
+.overlay-btn, #chargement-btn-closer {
+  font-size: 25px;
+  cursor: pointer;
+  background: linear-gradient(#990000, #9D01FD);
+  padding: 10px 20px;
+  color: #FFFFFF;
+}
+
+/**********************************OVERLAY*******************************************************/
+.overlay {
+  position: fixed;
+  /* Sit on top of the page content */
+  /*display: none; /* Hidden by default */
+  width: 100%;
+  /* Full width (cover the whole page) */
+  height: 100%;
+  /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Black background with opacity */
+  z-index: 2;
+  /* Specify a stack order in case you're using a different order for other elements */
+  /*cursor: pointer; /* Add a pointer on hover */
+}
+
+.overlay-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: black;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 20px;
+  background-color: white;
+  padding: 30px 80px;
+  border-radius: 10px;
+  width: 40%;
+}
+
+.centreur {
+  display: flex;
+  flex-diretion: row;
+  justify-content: center;
+}
+
+.overlay-message {
+  font-size: 18px;
+  color: red;
+  padding: 30px 0px;
+  text-align: center;
+}
+
+.close-overlay {
+  padding: 20px 30px;
+  color: #990000;
+  display: flex;
+  cursor: pointer;
+}
+
+/**********************************OVERLAY*******************************************************/
 @media screen and (max-width: 768px) {
+  #corps-action-container {
+    width: 90%;
+    margin: auto;
+  }
+
+  .zone-bloc {
+    width: 100%;
+  }
+
   #tableau-header {
     display: none;
   }
@@ -116,8 +279,34 @@
     margin-top: 40px;
     font-size: 35px;
   }
+
+  .overlay-container {
+    width: 60%;
+  }
+
+  h2 {
+    max-width: 75%;
+  }
+
+  #info-perso-actions-toggler {
+    padding: 30px 20px;
+  }
+
+  #photo-identite-container {
+    width: 50%;
+    margin: auto;
+  }
 }
 @media screen and (max-width: 480px) {
+  #corps-action-container {
+    width: 100%;
+    margin: auto;
+  }
+
+  .zone-bloc {
+    width: 100%;
+  }
+
   #tableau-header {
     display: none;
   }
@@ -135,6 +324,23 @@
   #titre {
     margin-top: 30px;
     font-size: 25px;
+  }
+
+  .overlay-container {
+    width: 60%;
+  }
+
+  h2 {
+    max-width: 75%;
+  }
+
+  #info-perso-actions-toggler {
+    padding: 30px 20px;
+  }
+
+  #photo-identite-container {
+    width: 50%;
+    margin: auto;
   }
 }
 

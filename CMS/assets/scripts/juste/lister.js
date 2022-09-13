@@ -1,5 +1,4 @@
 route="juste"
-const quantite=10;
 
 
 urlParams=["page"]//tableau declaré dans utilitaires.js
@@ -50,7 +49,7 @@ function listerJuste(){
 			})
 			document.getElementById('tableau-corps').innerHTML=lines
 			document.getElementById('tableau').classList.remove('invisible')
-			afficherPagination(parseInt(resultat.total.J_TOTAL),quantite)
+			afficherPagination(parseInt(resultat.total.J_TOTAL),qte_standard)
 
 			let lignes = document.getElementsByClassName('ligne')
 			for(var line of lignes){
@@ -58,7 +57,7 @@ function listerJuste(){
 					saveToken(passeur,JSON.stringify(resultat.donnee[this.getAttribute('data-index')]))
 					setTimeout(()=>{
 						window.location.href=`${server}juste/detail/${this.getAttribute('id')}`
-					},500)
+					},300)
 					
 				})
 			}
@@ -76,8 +75,8 @@ function listerJuste(){
 
 
 
-
 document.addEventListener('included',()=>{
 	listerJuste()
 	menuResponsiveActivation(route)
 })
+includeHTML()

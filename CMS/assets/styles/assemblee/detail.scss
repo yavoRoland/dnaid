@@ -118,6 +118,12 @@ $lien-color: colors.$cramoisi;
 		margin-top:40px;
 		font-size: utilitaires.$text-XL;
 	}
+	.zone-bloc{
+		.info-libelle{
+			margin-bottom:10px;
+		}
+		width:100%;
+	}
 }
 @media screen and (max-width: 480px){
 	#tableau-header{
@@ -134,5 +140,11 @@ $lien-color: colors.$cramoisi;
 	#titre{
 		margin-top:30px;
 		font-size: utilitaires.$text-L;
+	}
+	.zone-bloc{
+		.info-libelle{
+			margin-bottom:10px;
+		}
+		width:100%;
 	}
 }

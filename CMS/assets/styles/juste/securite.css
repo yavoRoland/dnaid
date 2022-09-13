@@ -1,0 +1,92 @@
+.latteral-elt {
+  display: none;
+}
+
+#corps-action-container {
+  width: 60%;
+  margin: auto;
+  min-height: 600px;
+}
+
+#form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 450px;
+}
+
+.chp-bloc {
+  font-size: 18px;
+  margin-top: 50px;
+}
+.chp-bloc .chp-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
+  padding-right: 10px;
+}
+.chp-bloc input {
+  width: 70%;
+  font-size: 18px;
+}
+
+.btn-container {
+  width: 10%;
+  margin: auto;
+  margin-top: 50px;
+}
+.btn-container button {
+  font-size: 25px;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+#feed-back {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .chp-bloc .chp-label {
+    width: 100%;
+    text-align: center;
+  }
+  .chp-bloc input {
+    width: 100%;
+  }
+
+  #corps-action-container {
+    width: 80%;
+    margin: auto;
+  }
+
+  .btn-container {
+    width: 100%;
+    margin: auto;
+    margin-top: 50px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .chp-bloc .chp-label {
+    width: 100%;
+    text-align: center;
+  }
+  .chp-bloc input {
+    width: 100%;
+  }
+
+  #corps-action-container {
+    width: 100%;
+    margin: auto;
+  }
+
+  .btn-container {
+    width: 100%;
+    margin: auto;
+    margin-top: 50px;
+  }
+}
+
+/*# sourceMappingURL=securite.css.map */

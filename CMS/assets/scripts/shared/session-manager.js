@@ -17,16 +17,15 @@ function saveToken(cle,token){
 }
 
 function checkToken(){
-	console.log(getToken(jwtToken))
 	if(!getToken(jwtToken)){
 		window.location.replace(connexionPage)
 	}
 }
 
 function clearSession(){
-	sessionStorage.removeItem(userInfoToken)
-	sessionStorage.removeItem(jwtToken)
-	sessionStorage.removeItem(passeur)
+	try{sessionStorage.removeItem(userInfoToken)}catch(e){}
+	try{sessionStorage.removeItem(jwtToken)}catch(e){}
+	try{sessionStorage.removeItem(passeur)}catch(e){}
 }
 
 

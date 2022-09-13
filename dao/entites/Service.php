@@ -46,6 +46,23 @@
 			}
 		}
 
+		public function rechercherParFullText($text,$page,$quantite){
+			try{
+				$total=$this->_bdd->prepare('SELECT COUNT(*) AS S_TOTAL FROM service WHERE MATCH (matservice, nomservice) AGAINST(:text IN BOOLEAN MODE)');
+				$total->bindValue(':text',$text, PDO::PARAM_STR);
+				$total->execute();
+
+				$req=$this->_bdd->prepare('SELECT *, MATCH(matservice, nomservice) AGAINST (:search IN BOOLEAN MODE) AS CPT FROM service WHERE MATCH(matservice, nomservice) AGAINST(:search IN BOOLEAN MODE) ORDER BY CPT DESC LIMIT :page,:quantite');
+				$req->bindValue(':search',$text,PDO::PARAM_STR);
+                $req->bindValue(':page',($page*$quantite),PDO::PARAM_INT);
+                $req->bindValue(':quantite',$quantite,PDO::PARAM_INT);
+                $req->execute();
+                return array($req,$total);
+			}catch(Exception $e){
+				return false;
+			}
+		}
+
 		public function supprimer($id){
 			try{
 				$req=$this->_bdd->prepare('DELETE FROM service WHERE idservice=?');

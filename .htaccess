@@ -1,17 +1,28 @@
 ReWriteEngine On
 
 RewriteRule ^system$ API/ApiSystem.php [L]
-RewriteRule ^test$ API/ApiTest.php [L]
+RewriteRule ^init$ API/ApiInit.php [L]
 
 RewriteRule ^auth$ CMS/connexion.html [L]
 RewriteRule ^proto$ CMS/template.html [L]
-RewriteRule ^teste$ CMS/test.html [L]
 RewriteRule ^(home|index|accueil)$ CMS/accueil.html [L]
 
 RewriteRule ^assemblee/ajouter$ CMS/pages/assemblee/ajouter.html [L]
 RewriteRule ^assemblee/lister/([0-9]+)$ CMS/pages/assemblee/lister.html?page=$1 [L]
 RewriteRule ^assemblee/detail/([0-9]+)$ CMS/pages/assemblee/detail.html?assemble=$1 [L]
 RewriteRule ^assemblee/modifier/([0-9]+)$ CMS/pages/assemblee/modifier.html?assemblee=$1 [L]
+RewriteRule ^assemblee/justes/([0-9]+)/([0-9]+)$ CMS/pages/assemblee/justes.html?assemble=$1&page=$2 [L]
+RewriteRule ^assemblee/rechercher/([0-9]+)$ CMS/pages/assemblee/rechercher.html?page=$1 [L]
+
+
+
+RewriteRule ^groupe/ajouter$ CMS/pages/groupe/ajouter.html [L]
+RewriteRule ^groupe/lister/([0-9]+)$ CMS/pages/groupe/lister.html?page=$1 [L]
+RewriteRule ^groupe/detail/([0-9]+)$ CMS/pages/groupe/detail.html?groupe=$1 [L]
+RewriteRule ^groupe/modifier/([0-9]+)$ CMS/pages/groupe/modifier.html?groupe=$1 [L]
+RewriteRule ^groupe/justes/([0-9]+)/([0-9]+)$ CMS/pages/groupe/justes.html?groupe=$1&page=$2 [L]
+RewriteRule ^groupe/rechercher/([0-9]+)$ CMS/pages/groupe/rechercher.html?page=$1 [L]
+
 
 
 RewriteRule ^juste/ajouter$ CMS/pages/juste/ajouter.html [L]
@@ -19,16 +30,17 @@ RewriteRule ^juste/lister/([0-9]+)$ CMS/pages/juste/lister.html?page=$1 [L]
 RewriteRule ^juste/detail/([0-9]+)$ CMS/pages/juste/detail.html?juste=$1 [L]
 RewriteRule ^juste/modifier/([0-9]+)$ CMS/pages/juste/modifier.html?juste=$1 [L]
 RewriteRule ^juste/illustration/(.+)$ dao/illustration/juste/photo/$1 [L]
+RewriteRule ^juste/assemblees/([0-9]+)/([0-9]+)$ CMS/pages/juste/assemblees.html?juste=$1&page=$2 [L]
+RewriteRule ^juste/groupes/([0-9]+)/([0-9]+)$ CMS/pages/juste/groupes.html?juste=$1&page=$2 [L]
+RewriteRule ^juste/securite$ CMS/pages/juste/securite.html [L]
+RewriteRule ^juste/rechercher/([0-9]+)$ CMS/pages/juste/rechercher.html?page=$1 [L]
 
-
-RewriteRule ^groupe/ajouter$ CMS/pages/groupe/ajouter.html [L]
-RewriteRule ^groupe/lister/([0-9]+)$ CMS/pages/groupe/lister.html?page=$1 [L]
-RewriteRule ^groupe/detail/([0-9]+)$ CMS/pages/groupe/detail.html?groupe=$1 [L]
-RewriteRule ^groupe/modifier/([0-9]+)$ CMS/pages/groupe/modifier.html?groupe=$1 [L]
 
 
 RewriteRule ^service/ajouter$ CMS/pages/service/ajouter.html [L]
 RewriteRule ^service/lister/([0-9]+)$ CMS/pages/service/lister.html?page=$1 [L]
 RewriteRule ^service/detail/([0-9]+)$ CMS/pages/service/detail.html?service=$1 [L]
 RewriteRule ^service/modifier/([0-9]+)$ CMS/pages/service/modifier.html?service=$1 [L]
+RewriteRule ^service/groupes/([0-9]+)/([0-9]+)$ CMS/pages/service/groupes.html?service=$1&page=$2 [L]
+RewriteRule ^service/rechercher/([0-9]+)$ CMS/pages/service/rechercher.html?page=$1 [L]
 

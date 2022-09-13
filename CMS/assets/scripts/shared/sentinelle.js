@@ -1,1 +1,1 @@
-//checkToken()
+checkToken()
